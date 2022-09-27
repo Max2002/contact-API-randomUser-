@@ -10,7 +10,6 @@ export default function Button({ type, className, children, onClick }) {
 
 Button.defaultProps = {
   className: '',
-  onClick: () => {},
 };
 
 Button.propTypes = {
