@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import { Button as ButtonRB } from 'react-bootstrap';
 
 export default function Button({ type, className, children, onClick }) {
   return (
-    <button className={className} type={type} onClick={onClick}>
+    <ButtonRB className={className} type={type} onClick={onClick}>
       {children}
-    </button>
+    </ButtonRB>
   );
 }
 

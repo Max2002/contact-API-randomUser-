@@ -1,4 +1,4 @@
-import Header from './sections/header/Header';
+import Header from './sections/header';
 import './assets/styles/general.scss';
 
 export default function App() {
