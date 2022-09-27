@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import Button from '../../components/button';
 import SignIn from '../signIn';
-import LogoSvg, { SignInSvg } from '../../assets/icons/index';
+import { LogoSvg, SignInSvg } from '../../assets/icons';
 import st from './header.module.scss';
 
 export default function Header() {
@@ -17,7 +17,7 @@ export default function Header() {
         <ul className={st.menuNav}>
           <li className={st.menuNavItem}>Home</li>
         </ul>
-        <div className={st.signIn}>
+        <div>
           <Button type="button" className={st.signInBtn} onClick={handleSignIn}>
             <SignInSvg />
             <span>Sign In</span>
