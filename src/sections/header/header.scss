@@ -1,0 +1,47 @@
+@import '../../assets/styles/fonts';
+
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  padding: 20px 40px;
+  background: #fff;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .33%);
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 40px;
+    width: 100%;
+
+    .menu_nav {
+      display: flex;
+      align-items: center;
+
+      .menu-nav_item {
+        font-size: 14px;
+        color: rgba(0,0,0,.65);
+        font-family: $fontSegoeUi;
+      }
+    }
+
+    .signIn {
+      .signIn_btn {
+        display: flex;
+        align-items: center;
+        color: #1890ff;
+        font-size: 14px;
+        font-family: $fontSegoeUi;
+
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
