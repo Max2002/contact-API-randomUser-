@@ -1,0 +1,97 @@
+@import '../../assets/styles/variables';
+
+.modalWindow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $white;
+  z-index: 999;
+  width: 520px;
+}
+
+.form {
+  padding: 25px;
+}
+
+.title {
+  padding: 16px 24px;
+  border-bottom: 2px solid $colorFOrLineBorder;
+  font-weight: 500;
+  font-size: $fontSizeLarge;
+  color: $modelWindowTitle;
+}
+
+.formButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.formButtonsSignIn {
+  width: 75%;
+  color: $white;
+  background: $mainColor;
+  border-color: $mainColor;
+  font-size: $fontSizeLarge;
+  border-radius: 2px;
+  text-align: center;
+  padding: 10px 15px;
+  font-weight: 400;
+}
+
+.formButtonsClose {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $colorForCLose;
+  padding: 4px 15px;
+  font-weight: 400;
+  font-size: $fontSizeStandard;
+
+  svg {
+    margin-top: 2px;
+  }
+
+  span {
+    margin-left: 8px;
+  }
+}
+
+.svg {
+  left: 15px;
+
+  path {
+    fill: $colorForSvg;
+  }
+}
+
+.passIcon {
+  cursor: pointer;
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .modalWindow {
+    width: 450px;
+  }
+
+  .formButtons {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .formButtonsSignIn {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .modalWindow {
+    width: 250px;
+  }
+}

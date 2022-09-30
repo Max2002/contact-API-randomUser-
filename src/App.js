@@ -1,4 +1,4 @@
-import Header from './sections/header';
+import Header from './sections/Header';
 import './assets/styles/general.scss';
 import st from './app.module.scss';
 

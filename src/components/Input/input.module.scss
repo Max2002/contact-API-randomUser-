@@ -1,0 +1,85 @@
+@import '../../assets/styles/variables';
+
+.wrapper {
+  height: 85px;
+}
+
+input {
+  width: 100%;
+  font-size: $fontSizeLarge;
+  border-radius: 2px;
+  padding: 10px 0 10px 35px;
+}
+
+input::placeholder {
+  color: $colorForPlaceholder;
+}
+
+.field {
+  border: 1px solid $borderForInput;
+
+  &:hover {
+    border: 1px solid $mainColor;
+  }
+  &:focus {
+    border: 1px solid $mainColor;
+    box-shadow: 0 0 3px $mainColor;
+  }
+}
+
+.isError {
+  border: 1px solid $colorForInputError;
+
+  &:focus {
+    box-shadow: 0 0 3px $colorForInputError;
+  }
+}
+
+.wrapperField {
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.inputMessage {
+  color: $colorForMessageInput;
+  font-size: $fontSizeForMessage;
+}
+
+.wrapperIconPass {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+
+  svg {
+    position: unset;
+    top: 0;
+    transform: unset;
+  }
+}
+
+.error {
+  color: $colorForError;
+}
+
+.iconError {
+  color: $colorErrorIcon;
+  right: 10px;
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  input {
+    font-size: $fontSizeStandard;
+  }
+  .inputMessage {
+    font-size: $fontSizeSmall;
+  }
+}

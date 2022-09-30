@@ -20,8 +20,20 @@ a {
 }
 
 button {
+  font-family: $fontSegoeUi;
   cursor: pointer;
   outline: none;
   border: none;
   background: none;
+}
+
+input {
+  outline: none;
+  font-family: $fontSegoeUi;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: $fontSizeSmall;
+  }
 }
