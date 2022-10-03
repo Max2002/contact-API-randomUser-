@@ -3,7 +3,6 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { validationEmail, validationPassword } from '../../utils/validation';
-import st from './styles.module.scss';
 import { Field, Button } from '../../components';
 import {
   CloseSvg,
@@ -13,6 +12,7 @@ import {
   VisiblePassSvg,
 } from '../../assets/icons';
 import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
+import st from './styles.module.scss';
 
 const initialValues = {
   email: '',
@@ -24,9 +24,8 @@ export default function SignIn({ handleSignIn }) {
   const dispatch = useDispatch();
   const handleVisiblePass = () => setIsVisiblePass(!isVisiblePass);
 
-  const validationForm = (values) => {
+  const validationForm = ({ email, password }) => {
     const errors = {};
-    const { email, password } = values;
 
     if (email === '') {
       errors.email = 'Email is required!';

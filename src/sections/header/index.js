@@ -3,17 +3,16 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
-import { Portal } from '../../components';
+import { Portal, Menu } from '../../components';
 import SignIn from '../SignIn';
 import { LogoSvg } from '../../assets/icons';
 import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
-import st from './styles.module.scss';
 import {
   fullNameSelector,
   getAvatar,
   getStatus,
 } from '../../redux/selectors/getMyProfile';
-import Menu from '../../components/Menu';
+import st from './styles.module.scss';
 
 const welcomeUserSelector = createSelector(
   [fullNameSelector, getAvatar, getStatus],
