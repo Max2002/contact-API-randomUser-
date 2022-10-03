@@ -36,15 +36,11 @@ export default function Field(props) {
         />
         {renderIconError()}
       </div>
-      {isTouched ? (
-        <ErrorMessage
-          name={name}
-          className={st.error}
-          component={FormControl.Feedback}
-        />
-      ) : (
-        <div className={st.inputMessage}>Type any valid {name}</div>
-      )}
+      <ErrorMessage
+        name={name}
+        className={st.error}
+        component={FormControl.Feedback}
+      />
     </div>
   );
 }
