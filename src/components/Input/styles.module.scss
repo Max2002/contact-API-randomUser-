@@ -1,4 +1,5 @@
 @import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
 
 .wrapper {
   height: 85px;
@@ -39,9 +40,7 @@ input::placeholder {
   position: relative;
 
   svg {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    @include position-svg;
   }
 }
 
@@ -51,11 +50,8 @@ input::placeholder {
 }
 
 .wrapperIconPass {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  @include center-flex;
+  @include position-svg;
   right: 10px;
 
   svg {

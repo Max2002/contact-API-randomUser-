@@ -1,3 +1,1 @@
-import { GET_AUTH_USER } from './actionGetAuthUser';
-
-export { GET_AUTH_USER };
+export { MY_PROFILE_FETCHING, MY_PROFILE_FETCHED, ERROR } from './getMyProfile';

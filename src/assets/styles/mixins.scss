@@ -1,0 +1,59 @@
+@import "variables";
+
+/* Flex mixins */
+@mixin standard-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin center-flex {
+  display: flex;
+  align-items: center;
+}
+
+/* Position mixins */
+@mixin standard-position-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin position-svg {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin for-body-font-size ($width) {
+  @media (max-width: $width) {
+    font-size: $fontSizeSmall;
+  }
+}
+
+@mixin phone-menu-justify ($width) {
+  @media (max-width: $width) {
+    justify-content: end;
+  }
+}
+
+@mixin hover-dropdown ($width) {
+  @media (max-width: $width) {
+    height: 350%;
+    transition: .5s;
+  }
+}
+
+@mixin sm-modal-window ($width) {
+  @media (max-width: $width) {
+    width: 250px;
+  }
+}
+
+@mixin md-modal-window ($width) {
+  @media (max-width: $width) {
+    width: 450px;
+  }
+}

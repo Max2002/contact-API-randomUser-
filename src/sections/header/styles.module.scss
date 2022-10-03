@@ -1,0 +1,49 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+
+.header {
+  @include standard-flex;
+  width: 100%;
+  @include standard-position-fixed;
+  bottom: unset;
+  padding: 20px 40px;
+  background: $white;
+  box-shadow: 0 0 10px 0 $boxShadowHeader;
+}
+
+.menu {
+  @include standard-flex;
+  margin-left: 30px;
+  flex-basis: 95%;
+
+  @include phone-menu-justify(768px);
+}
+
+.menuIsAuth {
+  justify-content: end;
+}
+
+.menuNav {
+  @include standard-flex;
+}
+
+.menuNavItem {
+  color: $colorForTextHeader;
+  font-size: $fontSizeStandard;
+}
+
+.menuNavItem:first-child {
+  margin-right: 15px;
+}
+
+.blurBlock {
+  display: none;
+  @include standard-position-fixed;
+  background: $black;
+  opacity: .5;
+  z-index: 998;
+}
+
+.isBlur {
+  display: block;
+}

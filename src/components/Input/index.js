@@ -2,27 +2,31 @@ import { ErrorMessage, useField } from 'formik';
 import { FormControl } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { IconErrorSvg } from '../../assets/icons';
-import st from './input.module.scss';
+import st from './styles.module.scss';
 
 export default function Field(props) {
-  const { name, type, placeholder, svg, passIcon } = props;
+  const { name, type, placeholder, icon, passIcon } = props;
   const [field, meta] = useField({ name });
   const { touched, error } = meta;
   const isTouched = touched && error;
-  const iconError =
-    type === 'password' || type === 'text' ? (
-      <div className={st.wrapperIconPass}>
-        {passIcon}
-        {isTouched && <IconErrorSvg className={st.iconError} />}
-      </div>
-    ) : (
-      isTouched && <IconErrorSvg className={st.iconError} />
-    );
+
+  const renderIconError = () => {
+    if (type === 'password' || type === 'text') {
+      return (
+        <div className={st.wrapperIconPass}>
+          {passIcon}
+          {isTouched && <IconErrorSvg className={st.iconError} />}
+        </div>
+      );
+    }
+
+    return isTouched && <IconErrorSvg className={st.iconError} />;
+  };
 
   return (
     <div className={st.wrapper}>
       <div className={st.wrapperField}>
-        {svg}
+        {icon}
         <FormControl
           {...field}
           className={isTouched ? st.isError : st.field}
@@ -30,10 +34,14 @@ export default function Field(props) {
           name={name}
           placeholder={placeholder}
         />
-        {iconError}
+        {renderIconError()}
       </div>
       {isTouched ? (
-        <ErrorMessage name={name} className={st.error} component="div" />
+        <ErrorMessage
+          name={name}
+          className={st.error}
+          component={FormControl.Feedback}
+        />
       ) : (
         <div className={st.inputMessage}>Type any valid {name}</div>
       )}
@@ -50,6 +58,6 @@ Field.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  svg: PropTypes.node.isRequired,
+  icon: PropTypes.node.isRequired,
   passIcon: PropTypes.node,
 };

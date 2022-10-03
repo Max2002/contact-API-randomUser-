@@ -1,4 +1,5 @@
 @import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
 
 .modalWindow {
   position: absolute;
@@ -8,6 +9,9 @@
   background: $white;
   z-index: 999;
   width: 520px;
+
+  @include md-modal-window(768px);
+  @include sm-modal-window(576px);
 }
 
 .form {
@@ -23,9 +27,7 @@
 }
 
 .formButtons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include standard-flex;
   margin-top: 20px;
   width: 100%;
 }
@@ -43,9 +45,7 @@
 }
 
 .formButtonsClose {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include standard-flex;
   color: $colorForCLose;
   padding: 4px 15px;
   font-weight: 400;
@@ -74,10 +74,6 @@
 }
 
 @media (max-width: 768px) {
-  .modalWindow {
-    width: 450px;
-  }
-
   .formButtons {
     flex-direction: column;
     justify-content: center;
@@ -86,12 +82,5 @@
   .formButtonsSignIn {
     width: 100%;
     margin-bottom: 20px;
-  }
-
-}
-
-@media (max-width: 576px) {
-  .modalWindow {
-    width: 250px;
   }
 }
