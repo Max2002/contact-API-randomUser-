@@ -34,6 +34,11 @@
   @include standard-flex;
   margin-top: 20px;
   width: 100%;
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .formButtonsSignIn {
@@ -46,6 +51,11 @@
   text-align: center;
   padding: 10px 15px;
   font-weight: 400;
+
+  @include media-breakpoint-down(md) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
 
 .formButtonsClose {
@@ -69,17 +79,5 @@
 
   path {
     fill: $colorForSvg;
-  }
-}
-
-@media (max-width: 768px) {
-  .formButtons {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .formButtonsSignIn {
-    width: 100%;
-    margin-bottom: 20px;
   }
 }
