@@ -29,7 +29,7 @@
 }
 
 .menuNavItem {
-  color: $colorForTextHeader;
+  color: $colorForText;
   font-size: $fontSizeStandard;
 }
 
@@ -63,7 +63,7 @@
 .welcomeUser {
   position: relative;
   @include center-flex;
-  color: $colorForTextHeader;
+  color: $colorForText;
 
   &:hover {
     color: $mainColor;

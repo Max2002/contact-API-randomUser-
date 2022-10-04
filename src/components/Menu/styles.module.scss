@@ -4,7 +4,7 @@
 .listItem {
   @include center-flex;
   padding: 10px 20px;
-  color: $colorForTextHeader;
+  color: $colorForText;
   font-size: $fontSizeStandard;
 
   a, span {
@@ -19,5 +19,5 @@
 }
 
 .listItem:first-child {
-  border-bottom: 1px solid $colorFOrLineBorder;
+  border-bottom: 1px solid $colorForLineBorder;
 }

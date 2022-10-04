@@ -8,11 +8,11 @@ $white: #fff;
 $black: #000;
 $mainColor: #1890ff;
 $colorError: #ff4d4f;
-$colorFOrLineBorder: #f0f0f0;
+$colorForLineBorder: #f0f0f0;
+$colorForText: rgba(0,0,0,.65);
 
 /* Header */
 $boxShadowHeader: rgba(51, 51, 51, .33%);
-$colorForTextHeader: rgba(0,0,0,.65);
 
 /* Model Window (SignIn) */
 $modelWindowTitle: rgba(0, 0, 0, .85);
@@ -21,3 +21,6 @@ $borderForInput: #d9d9d9;
 $colorForSvg: #595959;
 $colorForPlaceholder: #c4c4c4;
 $colorForMessageInput: rgba(0,0,0,.45);
+
+/* Footer */
+$backgroundFooter: #f1f1f1;
