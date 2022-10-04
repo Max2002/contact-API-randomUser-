@@ -11,3 +11,4 @@ export { ReactComponent as DropDownSvg } from './dropdownArrow.svg';
 export { ReactComponent as LogOutIconSvg } from './logoutIcon.svg';
 export { ReactComponent as HomeSvg } from './home.svg';
 export { ReactComponent as ContactsSvg } from './contacts.svg';
+export { ReactComponent as IconHomeSvg } from './iconHomePage.svg';

@@ -55,7 +55,7 @@ export default function Header() {
       <>
         <p className={st.greeting}>Hello! {fullName}</p>
         <DropDownSvg className={st.dropDownSvg} />
-        <img className={st.circleAvatar} src={large} />
+        <img className={st.circleAvatar} src={large} alt={fullName} />
         <div className={st.dropDownList}>
           <Menu windowWidth={getWindowWidth} logOutUser={logOutUser} />
         </div>
