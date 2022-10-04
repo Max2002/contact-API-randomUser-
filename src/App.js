@@ -4,7 +4,7 @@ import st from './app.module.scss';
 
 export default function App() {
   return (
-    <div className={st.container}>
+    <div className={st.wrapperApp}>
       <Header />
     </div>
   );

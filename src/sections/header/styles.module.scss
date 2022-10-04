@@ -3,9 +3,8 @@
 
 .header {
   @include standard-flex;
-  width: 100%;
-  @include standard-position-fixed;
-  bottom: unset;
+  position: sticky;
+  top: 0;
   padding: 20px 40px;
   background: $white;
   box-shadow: 0 0 10px 0 $boxShadowHeader;
