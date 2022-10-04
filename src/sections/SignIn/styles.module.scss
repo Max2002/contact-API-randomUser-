@@ -10,8 +10,12 @@
   z-index: 999;
   width: 520px;
 
-  @include md-modal-window(768px);
-  @include sm-modal-window(576px);
+  @include media-breakpoint-down(md) {
+    width: 450px;
+  }
+  @include media-breakpoint-down(sm) {
+    width: 250px;
+  }
 }
 
 .form {
@@ -66,11 +70,6 @@
   path {
     fill: $colorForSvg;
   }
-}
-
-.passIcon {
-  cursor: pointer;
-  right: 10px;
 }
 
 @media (max-width: 768px) {

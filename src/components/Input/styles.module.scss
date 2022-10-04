@@ -10,10 +10,10 @@ input {
   font-size: $fontSizeLarge;
   border-radius: 2px;
   padding: 10px 0 10px 35px;
-}
 
-input::placeholder {
-  color: $colorForPlaceholder;
+  &::placeholder {
+    color: $colorForPlaceholder;
+  }
 }
 
 .field {
@@ -29,10 +29,10 @@ input::placeholder {
 }
 
 .isError {
-  border: 1px solid $colorForInputError;
+  border: 1px solid $colorError;
 
   &:focus {
-    box-shadow: 0 0 3px $colorForInputError;
+    box-shadow: 0 0 3px $colorError;
   }
 }
 
@@ -61,12 +61,17 @@ input::placeholder {
   }
 }
 
+.passIcon {
+  cursor: pointer;
+  right: 10px;
+}
+
 .error {
-  color: $colorForError;
+  color: $colorError;
 }
 
 .iconError {
-  color: $colorErrorIcon;
+  color: $colorError;
   right: 10px;
   margin-left: 10px;
 }

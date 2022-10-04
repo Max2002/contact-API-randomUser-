@@ -1,19 +1,22 @@
 import apiUser from '../../api/apiUser';
-import { MY_PROFILE_FETCHING, MY_PROFILE_FETCHED, ERROR } from '../actions';
+
+export const GET_MY_PROFILE_FETCHING = 'GET_MY_PROFILE/FETCHING';
+export const GET_MY_PROFILE_FETCHED = 'GET_MY_PROFILE/FETCHED';
+export const ERROR = 'ERROR';
 
 const myProfileFetching = () => ({
-  type: MY_PROFILE_FETCHING,
-  payload: 'loading',
+  type: GET_MY_PROFILE_FETCHING,
+  payload: true,
 });
 
-const myProfileFetched = (myProfile) => ({
-  type: MY_PROFILE_FETCHED,
-  payload: { myProfile, status: 'fetched' },
+const myProfileFetched = (profile) => ({
+  type: GET_MY_PROFILE_FETCHED,
+  payload: { profile, loading: false },
 });
 
 const myProfileError = (error) => ({
   type: ERROR,
-  payload: { error, status: 'error' },
+  payload: { error, loading: true },
 });
 
 export const getMyProfile = (email) => (dispatch) => {

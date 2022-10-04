@@ -1,39 +1,6 @@
 @import '../../assets/styles/variables';
 @import '../../assets/styles/mixins';
 
-.signInBtn {
-  @include center-flex;
-  color: $mainColor;
-  font-size: $fontSizeStandard;
-  font-family: $fontSegoeUi;
-
-  span {
-    margin-left: 10px;
-  }
-}
-
-.greeting {
-  font-size: $fontSizeStandard;
-  color: inherit;
-  margin-right: 5px;
-}
-
-.dropDownSvg {
-  margin-right: 15px;
-  color: inherit;
-  transition: .5s;
-}
-
-.dropDownList {
-  position: absolute;
-  overflow: hidden;
-  height: 0;
-  top: 65px;
-  width: 100%;
-  background: $white;
-  transition: .5s;
-}
-
 .listItem {
   @include center-flex;
   padding: 10px 20px;
@@ -53,33 +20,4 @@
 
 .listItem:first-child {
   border-bottom: 1px solid $colorFOrLineBorder;
-}
-
-.welcomeUser {
-  position: relative;
-  @include center-flex;
-  color: $colorForTextHeader;
-
-  &:hover {
-    color: $mainColor;
-    cursor: pointer;
-  }
-}
-
-.welcomeUser:hover .dropDownSvg {
-  rotate: 180deg;
-  transition: .5s;
-}
-
-.welcomeUser:hover .dropDownList {
-  height: 180%;
-  transition: .5s;
-
-  @include hover-dropdown(768px)
-}
-
-.circleAvatar {
-  border-radius: 50%;
-  width: 46px;
-  height: 46px;
 }

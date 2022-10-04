@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import getMyProfile from './getMyProfile';
+import myProfile from './myProfile';
 
-export const rootReducer = combineReducers({ getMyProfile });
+export const rootReducer = combineReducers({ myProfile });

@@ -1,3 +1,0 @@
-export const MY_PROFILE_FETCHING = 'MY_PROFILE_FETCHING';
-export const MY_PROFILE_FETCHED = 'MY_PROFILE_FETCHED';
-export const ERROR = 'ERROR';

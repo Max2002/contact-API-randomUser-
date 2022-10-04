@@ -3,9 +3,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
-import { Portal, Menu } from '../../components';
+import { Portal, Menu, Button } from '../../components';
 import SignIn from '../SignIn';
-import { LogoSvg } from '../../assets/icons';
+import {
+  DropDownSvg,
+  LoadingSvg,
+  LogoSvg,
+  SignInSvg,
+} from '../../assets/icons';
 import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
 import {
   fullNameSelector,
@@ -16,17 +21,17 @@ import st from './styles.module.scss';
 
 const welcomeUserSelector = createSelector(
   [fullNameSelector, getAvatar, getStatus],
-  (fullName, large, status) => ({
+  (fullName, large, loading) => ({
     fullName,
     large,
-    status,
+    loading,
   }),
 );
 
 export default function Header() {
   const [isSignIn, setIsSignIn] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
-  const user = useSelector(welcomeUserSelector);
+  const { fullName, large, loading } = useSelector(welcomeUserSelector);
   const getWindowWidth = useWindowWidth();
   const dispatch = useDispatch();
 
@@ -45,6 +50,34 @@ export default function Header() {
     setIsAuth(false);
   };
 
+  const renderAuthBlock = () => {
+    const welcomeUser = (
+      <>
+        <p className={st.greeting}>Hello! {fullName}</p>
+        <DropDownSvg className={st.dropDownSvg} />
+        <img className={st.circleAvatar} src={large} />
+        <div className={st.dropDownList}>
+          <Menu windowWidth={getWindowWidth} logOutUser={logOutUser} />
+        </div>
+      </>
+    );
+
+    if (isAuth) {
+      return (
+        <div className={st.welcomeUser}>
+          {loading ? <LoadingSvg /> : welcomeUser}
+        </div>
+      );
+    }
+
+    return (
+      <Button type="button" className={st.signInBtn} onClick={handleSignIn}>
+        <SignInSvg />
+        <span>Sign In</span>
+      </Button>
+    );
+  };
+
   return (
     <header className={st.header}>
       <LogoSvg />
@@ -55,13 +88,7 @@ export default function Header() {
             <li className={st.menuNavItem}>Contacts</li>
           </ul>
         )}
-        <Menu
-          handleSignIn={handleSignIn}
-          logOutUser={logOutUser}
-          user={user}
-          windowWidth={getWindowWidth}
-          isAuth={isAuth}
-        />
+        {renderAuthBlock()}
       </div>
       <div
         className={clsx(st.blurBlock, { [st.isBlur]: isSignIn })}

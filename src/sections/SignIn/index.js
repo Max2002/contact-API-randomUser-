@@ -1,16 +1,9 @@
 import { Formik, Form } from 'formik';
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { validationEmail, validationPassword } from '../../utils/validation';
 import { Field, Button } from '../../components';
-import {
-  CloseSvg,
-  ManIconSvg,
-  HidePassSvg,
-  PasswordSvg,
-  VisiblePassSvg,
-} from '../../assets/icons';
+import { CloseSvg, ManIconSvg, PasswordSvg } from '../../assets/icons';
 import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
 import st from './styles.module.scss';
 
@@ -20,9 +13,7 @@ const initialValues = {
 };
 
 export default function SignIn({ handleSignIn }) {
-  const [isVisiblePass, setIsVisiblePass] = useState(false);
   const dispatch = useDispatch();
-  const handleVisiblePass = () => setIsVisiblePass(!isVisiblePass);
 
   const validationForm = ({ email, password }) => {
     const errors = {};
@@ -49,12 +40,6 @@ export default function SignIn({ handleSignIn }) {
     handleSignIn();
   };
 
-  const passIcon = isVisiblePass ? (
-    <VisiblePassSvg className={st.passIcon} onClick={handleVisiblePass} />
-  ) : (
-    <HidePassSvg className={st.passIcon} onClick={handleVisiblePass} />
-  );
-
   return (
     <div className={st.modalWindow}>
       <div className={st.title}>Sign In</div>
@@ -72,10 +57,9 @@ export default function SignIn({ handleSignIn }) {
           />
           <Field
             name="password"
-            type={isVisiblePass ? 'text' : 'password'}
+            type="password"
             placeholder="Password"
             icon={<PasswordSvg className={st.svg} />}
-            passIcon={passIcon}
           />
           <div className={st.formButtons}>
             <Button className={st.formButtonsSignIn} type="submit">

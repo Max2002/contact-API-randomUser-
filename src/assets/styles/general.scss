@@ -11,7 +11,9 @@ body {
   font-family: $fontSegoeUi;
   font-size: $fontSizeStandard;
 
-  @include for-body-font-size(768px);
+  @include media-breakpoint-down(md) {
+    font-size: $fontSizeSmall;
+  }
 }
 
 ul {

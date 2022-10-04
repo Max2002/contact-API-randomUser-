@@ -1,14 +1,24 @@
 import { ErrorMessage, useField } from 'formik';
 import { FormControl } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { IconErrorSvg } from '../../assets/icons';
+import { useState } from 'react';
+import { HidePassSvg, IconErrorSvg, VisiblePassSvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
 export default function Field(props) {
-  const { name, type, placeholder, icon, passIcon } = props;
+  const { name, type, placeholder, icon } = props;
+  const [isVisiblePass, setIsVisiblePass] = useState(false);
   const [field, meta] = useField({ name });
   const { touched, error } = meta;
   const isTouched = touched && error;
+
+  const handleVisiblePass = () => setIsVisiblePass(!isVisiblePass);
+
+  const passIcon = isVisiblePass ? (
+    <VisiblePassSvg className={st.passIcon} onClick={handleVisiblePass} />
+  ) : (
+    <HidePassSvg className={st.passIcon} onClick={handleVisiblePass} />
+  );
 
   const renderIconError = () => {
     if (type === 'password' || type === 'text') {
@@ -30,7 +40,7 @@ export default function Field(props) {
         <FormControl
           {...field}
           className={isTouched ? st.isError : st.field}
-          type={type}
+          type={type === 'password' && isVisiblePass ? 'text' : type}
           name={name}
           placeholder={placeholder}
         />
@@ -47,7 +57,6 @@ export default function Field(props) {
 
 Field.defaultProps = {
   placeholder: '',
-  passIcon: null,
 };
 
 Field.propTypes = {
@@ -55,5 +64,4 @@ Field.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   icon: PropTypes.node.isRequired,
-  passIcon: PropTypes.node,
 };
