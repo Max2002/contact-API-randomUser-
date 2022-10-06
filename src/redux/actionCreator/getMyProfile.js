@@ -26,11 +26,15 @@ export const logOut = () => ({
 export const getMyProfile = (email) => async (dispatch) => {
   dispatch(myProfileFetching());
   try {
-    const { data } = await apiUser.get('/', { params: { seed: email } });
+    const {
+      data: {
+        results: [user],
+      },
+    } = await apiUser.get('/', { params: { seed: email } });
 
     localStorage.setItem('auth', email);
 
-    dispatch(myProfileSuccess(data.results[0]));
+    dispatch(myProfileSuccess(user));
   } catch (error) {
     dispatch(myProfileError(error));
   }

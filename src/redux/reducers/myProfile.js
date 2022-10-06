@@ -11,14 +11,14 @@ const initialState = {
     name: '',
     picture: {},
   },
-  loading: true,
+  loading: false,
   error: null,
 };
 
 const myProfile = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_MY_PROFILE_FETCHING: {
-      return { ...state };
+      return { ...state, loading: true, error: null };
     }
     case GET_MY_PROFILE_SUCCESS: {
       return {
@@ -26,14 +26,13 @@ const myProfile = (state = initialState, { type, payload }) => {
         authKey: payload.email,
         data: payload,
         loading: false,
+        error: null,
       };
     }
     case GET_MY_PROFILE_ERROR: {
       return { ...state, payload, loading: true };
     }
     case MY_PROFILE_LOG_OUT: {
-      localStorage.removeItem('auth');
-
       return { ...initialState, authKey: null };
     }
     default:

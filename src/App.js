@@ -1,24 +1,39 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Header from './sections/Header';
-import { getMyProfile } from './redux/actionCreator/getMyProfile';
-import { authSelector } from './redux/selectors/getMyProfile';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './sections/Home';
+import WrapperApp from './sections/WrapperApp';
 import './assets/styles/general.scss';
-import st from './app.module.scss';
+import Profile from './sections/Profile/indxe';
+import Contacts from './sections/Contacts';
 
 export default function App() {
-  const dispatch = useDispatch();
-  const authKey = useSelector(authSelector);
-
-  useEffect(() => {
-    if (authKey) {
-      dispatch(getMyProfile(localStorage.getItem('auth')));
-    }
-  }, []);
-
   return (
-    <div className={st.wrapperApp}>
-      <Header />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          index
+          element={
+            <WrapperApp>
+              <Home />
+            </WrapperApp>
+          }
+        />
+        <Route
+          path="Profile"
+          element={
+            <WrapperApp>
+              <Profile />
+            </WrapperApp>
+          }
+        />
+        <Route
+          path="Contacts"
+          element={
+            <WrapperApp>
+              <Contacts />
+            </WrapperApp>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }

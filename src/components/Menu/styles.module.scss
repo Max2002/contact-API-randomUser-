@@ -1,6 +1,42 @@
 @import '../../assets/styles/variables';
 @import '../../assets/styles/mixins';
 
+.welcomeUser {
+  position: relative;
+  @include flex-vertical-centre;
+  color: $primaryText;
+
+  &:hover {
+    color: $primary;
+    cursor: pointer;
+  }
+}
+
+.welcomeUser:hover .dropDownSvg {
+  rotate: 180deg;
+  transition: .5s;
+}
+
+.welcomeUser:hover .dropDownList {
+  height: 180%;
+  transition: .5s;
+
+  @include media-max(md) {
+    height: 350%;
+    transition: .5s;
+  };
+}
+
+.dropDownList {
+  position: absolute;
+  overflow: hidden;
+  height: 0;
+  top: 65px;
+  width: 100%;
+  background: $white;
+  transition: .5s;
+}
+
 .label {
   font-size: $fontSizePrimary;
   color: inherit;

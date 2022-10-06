@@ -12,7 +12,7 @@ const initialValues = {
   password: '',
 };
 
-export default function SignIn({ handleSignIn }) {
+export default function SignIn({ onSignIn }) {
   const dispatch = useDispatch();
 
   const validationForm = ({ email, password }) => {
@@ -35,7 +35,7 @@ export default function SignIn({ handleSignIn }) {
 
   const onSubmitForm = (data) => {
     dispatch(getMyProfile(data.email));
-    handleSignIn();
+    onSignIn();
   };
 
   return (
@@ -66,7 +66,7 @@ export default function SignIn({ handleSignIn }) {
             <Button
               className={st.formButtonsClose}
               type="button"
-              onClick={handleSignIn}
+              onClick={onSignIn}
             >
               <CloseSvg />
               <span>Cancel</span>
@@ -79,5 +79,5 @@ export default function SignIn({ handleSignIn }) {
 }
 
 SignIn.propTypes = {
-  handleSignIn: PropTypes.func.isRequired,
+  onSignIn: PropTypes.func.isRequired,
 };

@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import clsx from 'clsx';
-import { useDeviceWidth } from '../../hooks/useWindowWidth';
+import { ToastContainer, toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { Portal, Menu, Button } from '../../components';
 import SignIn from '../SignIn';
-import Message from '../../components/Message';
 import {
   DropDownSvg,
   LoadingSvg,
@@ -15,7 +16,6 @@ import {
   LogOutIconSvg,
   HomeSvg,
   ContactsSvg,
-  SuccessSvg,
 } from '../../assets/icons';
 import {
   fullNameSelector,
@@ -23,44 +23,41 @@ import {
   loadingSelector,
   authSelector,
 } from '../../redux/selectors/getMyProfile';
-import st from './styles.module.scss';
 import { logOut } from '../../redux/actionCreator/getMyProfile';
+import st from './styles.module.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
-const welcomeUserSelector = createSelector(
-  [fullNameSelector, avatarSelector, loadingSelector, authSelector],
-  (fullName, picture, loading, authKey) => ({
-    fullName,
-    picture,
-    loading,
-    authKey,
-  }),
-);
+const welcomeUserSelector = createStructuredSelector({
+  fullName: fullNameSelector,
+  picture: avatarSelector,
+  loading: loadingSelector,
+  authKey: authSelector,
+});
 
 export default function Header() {
   const [isSignIn, setIsSignIn] = useState(false);
-  const [isActiveMessage, setIsActiveMessage] = useState(false);
   const user = useSelector(welcomeUserSelector);
   const deviceWidth = useDeviceWidth();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const interval = setInterval(() => setIsActiveMessage(false), 3000);
-
-    if (isActiveMessage) {
-      interval;
-    }
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isActiveMessage]);
+  const navigate = useNavigate();
+  const notify = () =>
+    toast.success('Successfully logged out', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   const handleSignIn = () => setIsSignIn(!isSignIn);
-  const handleActiveMessage = () => setIsActiveMessage(false);
 
   const logOutUser = () => {
+    localStorage.removeItem('auth');
     dispatch(logOut());
-    setIsActiveMessage(true);
+    navigate('/');
+    notify();
   };
 
   const renderAuthBlock = () => {
@@ -77,7 +74,7 @@ export default function Header() {
         hide: deviceWidth > 768,
       },
       {
-        title: 'Contact',
+        title: 'Contacts',
         icon: <ContactsSvg />,
         link: true,
         hide: deviceWidth > 768,
@@ -97,15 +94,16 @@ export default function Header() {
         svg={<DropDownSvg className={st.dropDownSvg} />}
         avatar={picture.thumbnail}
         options={options}
-        classNameList={st.dropDownList}
       />
     );
 
     if (authKey) {
-      return (
-        <div className={st.welcomeUser}>
-          {loading ? <LoadingSvg /> : welcomeUser}
+      return loading ? (
+        <div>
+          <LoadingSvg />
         </div>
+      ) : (
+        welcomeUser
       );
     }
 
@@ -123,8 +121,12 @@ export default function Header() {
       <div className={clsx(st.menu, { [st.menuIsAuth]: !user.authKey })}>
         {user.authKey && deviceWidth > 768 && (
           <ul className={st.menuNav}>
-            <li className={st.menuNavItem}>Home</li>
-            <li className={st.menuNavItem}>Contacts</li>
+            <Link to="/" className={st.menuNavItem}>
+              Home
+            </Link>
+            <Link to="../Contacts" className={st.menuNavItem}>
+              Contacts
+            </Link>
           </ul>
         )}
         {renderAuthBlock()}
@@ -133,12 +135,19 @@ export default function Header() {
         className={clsx(st.blurBlock, { [st.isBlur]: isSignIn })}
         onClick={handleSignIn}
       />
-      <Portal>{isSignIn && <SignIn handleSignIn={handleSignIn} />}</Portal>
-      <Message
-        prefix={<SuccessSvg className={st.successSvg} />}
-        message="Successfully logged out"
-        isActive={isActiveMessage}
-        handleActiveMessage={handleActiveMessage}
+      <Portal>
+        {isSignIn && <SignIn notify={notify} onSignIn={handleSignIn} />}
+      </Portal>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </header>
   );

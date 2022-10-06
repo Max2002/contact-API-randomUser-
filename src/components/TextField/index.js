@@ -9,30 +9,23 @@ import st from './styles.module.scss';
 export default function TextField(props) {
   const { name, type, placeholder, prefix } = props;
   const [isVisiblePass, setIsVisiblePass] = useState(false);
-  const [field, meta] = useField({ name });
+  const [field, meta] = useField(name);
   const { touched, error } = meta;
   const isError = touched && error;
 
   const handleVisiblePass = () => setIsVisiblePass(!isVisiblePass);
 
-  const renderEye = isVisiblePass ? (
-    <VisiblePassSvg className={st.eyeIcon} onClick={handleVisiblePass} />
-  ) : (
-    <HidePassSvg className={st.eyeIcon} onClick={handleVisiblePass} />
+  const renderSufix = () => (
+    <div className={st.wrapperIconsPass}>
+      {type === 'password' &&
+        (isVisiblePass ? (
+          <VisiblePassSvg className={st.eyeIcon} onClick={handleVisiblePass} />
+        ) : (
+          <HidePassSvg className={st.eyeIcon} onClick={handleVisiblePass} />
+        ))}
+      {isError && <IconErrorSvg className={st.iconError} />}
+    </div>
   );
-
-  const renderIconError = () => {
-    if (type === 'password') {
-      return (
-        <div className={st.wrapperIconsPass}>
-          {renderEye}
-          {isError && <IconErrorSvg className={st.iconError} />}
-        </div>
-      );
-    }
-
-    return isError && <IconErrorSvg className={st.iconError} />;
-  };
 
   return (
     <div className={st.wrapper}>
@@ -45,7 +38,7 @@ export default function TextField(props) {
           name={name}
           placeholder={placeholder}
         />
-        {type === 'password' && renderIconError()}
+        {renderSufix()}
       </div>
       <ErrorMessage
         name={name}
