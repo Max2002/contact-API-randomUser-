@@ -2,20 +2,21 @@
 @import "../../assets/styles/mixins";
 
 .header {
-  @include standard-flex;
+  @include flex(space-between, center);
   position: sticky;
   top: 0;
-  padding: 20px 40px;
+  padding: 0 40px;
+  height: 65px;
   background: $white;
-  box-shadow: 0 0 10px 0 $boxShadowHeader;
+  box-shadow: 0 0 10px 0 $primaryShadow;
 }
 
 .menu {
-  @include standard-flex;
+  @include flex(space-between, center);
   margin-left: 30px;
   flex-basis: 95%;
 
-  @include media-breakpoint-down(md) {
+  @include media-max(md) {
     justify-content: end;
   }
 }
@@ -25,12 +26,12 @@
 }
 
 .menuNav {
-  @include standard-flex;
+  @include flex(space-between, center);
 }
 
 .menuNavItem {
-  color: $colorForTextHeader;
-  font-size: $fontSizeStandard;
+  color: $primaryText;
+  font-size: $fontSizePrimary;
 }
 
 .menuNavItem:first-child {
@@ -38,20 +39,14 @@
 }
 
 .signInBtn {
-  @include center-flex;
-  color: $mainColor;
-  font-size: $fontSizeStandard;
+  @include flex-vertical-centre;
+  color: $primary;
+  font-size: $fontSizePrimary;
   font-family: $fontSegoeUi;
 
   span {
     margin-left: 10px;
   }
-}
-
-.greeting {
-  font-size: $fontSizeStandard;
-  color: inherit;
-  margin-right: 5px;
 }
 
 .dropDownSvg {
@@ -62,11 +57,11 @@
 
 .welcomeUser {
   position: relative;
-  @include center-flex;
-  color: $colorForTextHeader;
+  @include flex-vertical-centre;
+  color: $primaryText;
 
   &:hover {
-    color: $mainColor;
+    color: $primary;
     cursor: pointer;
   }
 }
@@ -80,7 +75,7 @@
   height: 180%;
   transition: .5s;
 
-  @include media-breakpoint-down(md) {
+  @include media-max(md) {
     height: 350%;
     transition: .5s;
   };
@@ -96,15 +91,18 @@
   transition: .5s;
 }
 
-.circleAvatar {
-  border-radius: 50%;
-  width: 46px;
-  height: 46px;
+.successSvg {
+  color: $successSvg;
+  font-size: $fontSizeSuccessSvg;
 }
 
 .blurBlock {
   display: none;
-  @include standard-position-fixed;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: $black;
   opacity: .5;
   z-index: 998;

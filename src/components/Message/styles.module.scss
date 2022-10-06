@@ -1,0 +1,34 @@
+@import "../../assets/styles/variables";
+@import "../../assets/styles/mixins";
+
+.wrapperMessage {
+  position: absolute;
+  top: 30px;
+  right: 100%;
+  transform: translateX(-100%);
+  transition: .8s ease-out;
+  background: $white;
+  padding: 15px 20px;
+  @include flex(space-between, center);
+  color: $primaryText;
+  box-shadow: 0 0 10px 0 $primaryShadow;
+  border-radius: 2px;
+
+  .message {
+    margin: 0 70px 0 15px;
+    font-size: $fontSizePrimary;
+    font-weight: 500;
+  }
+
+  &.active {
+    right: 2%;
+    transform: translateX(-2%);
+    transition: .8s ease-out;
+  }
+}
+
+.closeBtn {
+  svg {
+    color: $primaryText;
+  }
+}

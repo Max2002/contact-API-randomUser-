@@ -9,9 +9,9 @@
 
 body {
   font-family: $fontSegoeUi;
-  font-size: $fontSizeStandard;
+  font-size: $fontSizePrimary;
 
-  @include media-breakpoint-down(md) {
+  @include media-max(md) {
     font-size: $fontSizeSmall;
   }
 }

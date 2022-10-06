@@ -1,40 +1,35 @@
 /* Flex mixins */
-@mixin standard-flex {
+@mixin flex ($justify-content, $align-items) {
   display: flex;
-  justify-content: space-between;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin flex-vertical-centre {
+  display: flex;
   align-items: center;
 }
 
-@mixin center-flex {
-  display: flex;
-  align-items: center;
-}
-
-/* Position mixins */
-@mixin standard-position-fixed {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-@mixin position-svg {
+@mixin position-vertical-svg {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
 
-@mixin media-breakpoint-down($size) {
-  @if $size == 'sm' {
-    @media (max-width: 576.98px) { @content }
-  } @else if $size == 'md' {
-    @media (max-width: 767.98px){ @content }
-  } @else if $size == 'lg' {
-    @media (max-width: 991.98px){ @content }
-  } @else if $size == 'xl' {
-    @media (max-width: 1199.98px){ @content }
-  } @else if $size == 'xxl' {
-    @media (max-width: 1399.98px){ @content }
+$media: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+@mixin media-max($breakpoint) {
+  @if map-has-key($media, $breakpoint) {
+    @media (max-width: map-get($media, $breakpoint)) {
+      @content
+    }
+  } @else {
+    @error "Breakpoint #{$breakpoint} not exists in media!";
   }
 }

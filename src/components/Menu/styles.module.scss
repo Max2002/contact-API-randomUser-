@@ -1,11 +1,23 @@
 @import '../../assets/styles/variables';
 @import '../../assets/styles/mixins';
 
+.label {
+  font-size: $fontSizePrimary;
+  color: inherit;
+  margin-right: 5px;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+}
+
 .listItem {
-  @include center-flex;
+  @include flex-vertical-centre;
   padding: 10px 20px;
-  color: $colorForTextHeader;
-  font-size: $fontSizeStandard;
+  color: $primaryText;
+  font-size: $fontSizePrimary;
 
   a, span {
     margin-left: 15px;
@@ -19,5 +31,5 @@
 }
 
 .listItem:first-child {
-  border-bottom: 1px solid $colorFOrLineBorder;
+  border-bottom: 1px solid $primaryLineBorder;
 }

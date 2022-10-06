@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { validationEmail, validationPassword } from '../../utils/validation';
-import { Field, Button } from '../../components';
+import { TextField, Button } from '../../components';
 import { CloseSvg, ManIconSvg, PasswordSvg } from '../../assets/icons';
 import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
 import st from './styles.module.scss';
@@ -34,8 +34,6 @@ export default function SignIn({ handleSignIn }) {
   };
 
   const onSubmitForm = (data) => {
-    localStorage.setItem(data.email, JSON.stringify(data));
-    localStorage.setItem('auth', data.email);
     dispatch(getMyProfile(data.email));
     handleSignIn();
   };
@@ -49,17 +47,17 @@ export default function SignIn({ handleSignIn }) {
         onSubmit={onSubmitForm}
       >
         <Form className={st.form}>
-          <Field
+          <TextField
             name="email"
             type="email"
             placeholder="Email"
-            icon={<ManIconSvg className={st.svg} />}
+            prefix={<ManIconSvg className={st.svg} />}
           />
-          <Field
+          <TextField
             name="password"
             type="password"
             placeholder="Password"
-            icon={<PasswordSvg className={st.svg} />}
+            prefix={<PasswordSvg className={st.svg} />}
           />
           <div className={st.formButtons}>
             <Button className={st.formButtonsSignIn} type="submit">

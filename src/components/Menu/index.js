@@ -1,42 +1,55 @@
 import PropTypes from 'prop-types';
-import {
-  ContactsSvg,
-  HomeSvg,
-  LogOutIconSvg,
-  ManIconSvg,
-} from '../../assets/icons';
 import st from './styles.module.scss';
 
 export default function Menu(props) {
-  const { windowWidth, logOutUser } = props;
+  const { label, svg, avatar, options, classNameList } = props;
+  const renderMenuItem = (item) => {
+    const { title, icon, link, onClick, hide } = item;
+
+    return (
+      !hide && (
+        <li key={title} className={st.listItem} onClick={onClick}>
+          {icon}
+          {link ? <a href="#">{title}</a> : <span>{title}</span>}
+        </li>
+      )
+    );
+  };
+
+  const contentList = options.map((menuItem) => {
+    if (Array.isArray(menuItem)) {
+      return menuItem.map(renderMenuItem);
+    }
+
+    return renderMenuItem(menuItem);
+  });
 
   return (
-    <ul className={st.list}>
-      <li className={st.listItem}>
-        <ManIconSvg />
-        <a href="#">Profile</a>
-      </li>
-      {windowWidth < 768 && (
-        <>
-          <li className={st.listItem}>
-            <HomeSvg />
-            <span>Home</span>
-          </li>
-          <li className={st.listItem}>
-            <ContactsSvg />
-            <span>Contacts</span>
-          </li>
-        </>
-      )}
-      <li className={st.listItem} onClick={logOutUser}>
-        <LogOutIconSvg />
-        <span>Log out</span>
-      </li>
-    </ul>
+    <>
+      <p className={st.label}>Hello! {label}</p>
+      {svg}
+      <img className={st.avatar} src={avatar} alt={label} />
+      <div className={classNameList}>
+        <ul className={st.list}>{contentList}</ul>
+      </div>
+    </>
   );
 }
 
+Menu.defaultProps = {
+  svg: null,
+};
+
 Menu.propTypes = {
-  windowWidth: PropTypes.number.isRequired,
-  logOutUser: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  svg: PropTypes.node,
+  avatar: PropTypes.string.isRequired,
+  options: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.node,
+    link: PropTypes.bool.isRequired,
+    onClick: PropTypes.func,
+    hide: PropTypes.bool,
+  }).isRequired,
+  classNameList: PropTypes.string.isRequired,
 };

@@ -1,18 +1,26 @@
 import { createSelector } from 'reselect';
 
-const getMyProfile = (state) => state.myProfile;
+const myProfileSelector = (state) => state.myProfile;
+const myDataSelector = createSelector(
+  myProfileSelector,
+  (myProfile) => myProfile.data,
+);
 
-export const getStatus = createSelector(
-  getMyProfile,
+export const authSelector = createSelector(
+  myProfileSelector,
+  (myProfile) => myProfile.authKey,
+);
+export const loadingSelector = createSelector(
+  myProfileSelector,
   (myProfile) => myProfile.loading,
 );
-export const fullNameSelector = createSelector(getMyProfile, ({ name }) => {
+export const fullNameSelector = createSelector(myDataSelector, ({ name }) => {
   const { title, first, last } = name;
 
   return `${title}, ${first} ${last}`;
 });
 
-export const getAvatar = createSelector(
-  getMyProfile,
-  ({ picture }) => picture.large,
+export const avatarSelector = createSelector(
+  myDataSelector,
+  ({ picture }) => picture,
 );

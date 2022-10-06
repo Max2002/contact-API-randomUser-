@@ -1,68 +1,107 @@
-import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { useWindowWidth } from '../../hooks/useWindowWidth';
+import clsx from 'clsx';
+import { useDeviceWidth } from '../../hooks/useWindowWidth';
 import { Portal, Menu, Button } from '../../components';
 import SignIn from '../SignIn';
+import Message from '../../components/Message';
 import {
   DropDownSvg,
   LoadingSvg,
   LogoSvg,
+  ManIconSvg,
   SignInSvg,
+  LogOutIconSvg,
+  HomeSvg,
+  ContactsSvg,
+  SuccessSvg,
 } from '../../assets/icons';
-import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
 import {
   fullNameSelector,
-  getAvatar,
-  getStatus,
+  avatarSelector,
+  loadingSelector,
+  authSelector,
 } from '../../redux/selectors/getMyProfile';
 import st from './styles.module.scss';
+import { logOut } from '../../redux/actionCreator/getMyProfile';
 
 const welcomeUserSelector = createSelector(
-  [fullNameSelector, getAvatar, getStatus],
-  (fullName, large, loading) => ({
+  [fullNameSelector, avatarSelector, loadingSelector, authSelector],
+  (fullName, picture, loading, authKey) => ({
     fullName,
-    large,
+    picture,
     loading,
+    authKey,
   }),
 );
 
 export default function Header() {
   const [isSignIn, setIsSignIn] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
-  const { fullName, large, loading } = useSelector(welcomeUserSelector);
-  const getWindowWidth = useWindowWidth();
+  const [isActiveMessage, setIsActiveMessage] = useState(false);
+  const user = useSelector(welcomeUserSelector);
+  const deviceWidth = useDeviceWidth();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsAuth(Boolean(localStorage.getItem('auth')));
+    const interval = setInterval(() => setIsActiveMessage(false), 3000);
 
-    if (isAuth) {
-      dispatch(getMyProfile(localStorage.getItem('auth')));
+    if (isActiveMessage) {
+      interval;
     }
-  }, [isSignIn, isAuth]);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isActiveMessage]);
 
   const handleSignIn = () => setIsSignIn(!isSignIn);
+  const handleActiveMessage = () => setIsActiveMessage(false);
 
   const logOutUser = () => {
-    localStorage.removeItem('auth');
-    setIsAuth(false);
+    dispatch(logOut());
+    setIsActiveMessage(true);
   };
 
   const renderAuthBlock = () => {
+    const options = [
+      {
+        title: 'Profile',
+        icon: <ManIconSvg />,
+        link: true,
+      },
+      {
+        title: 'Home',
+        icon: <HomeSvg />,
+        link: true,
+        hide: deviceWidth > 768,
+      },
+      {
+        title: 'Contact',
+        icon: <ContactsSvg />,
+        link: true,
+        hide: deviceWidth > 768,
+      },
+      {
+        title: 'Log out',
+        icon: <LogOutIconSvg />,
+        link: false,
+        onClick: logOutUser,
+      },
+    ];
+    const { fullName, picture, loading, authKey } = user;
+
     const welcomeUser = (
-      <>
-        <p className={st.greeting}>Hello! {fullName}</p>
-        <DropDownSvg className={st.dropDownSvg} />
-        <img className={st.circleAvatar} src={large} />
-        <div className={st.dropDownList}>
-          <Menu windowWidth={getWindowWidth} logOutUser={logOutUser} />
-        </div>
-      </>
+      <Menu
+        label={fullName}
+        svg={<DropDownSvg className={st.dropDownSvg} />}
+        avatar={picture.thumbnail}
+        options={options}
+        classNameList={st.dropDownList}
+      />
     );
 
-    if (isAuth) {
+    if (authKey) {
       return (
         <div className={st.welcomeUser}>
           {loading ? <LoadingSvg /> : welcomeUser}
@@ -81,8 +120,8 @@ export default function Header() {
   return (
     <header className={st.header}>
       <LogoSvg />
-      <div className={clsx(st.menu, { [st.menuIsAuth]: !isAuth })}>
-        {isAuth && getWindowWidth > 768 && (
+      <div className={clsx(st.menu, { [st.menuIsAuth]: !user.authKey })}>
+        {user.authKey && deviceWidth > 768 && (
           <ul className={st.menuNav}>
             <li className={st.menuNavItem}>Home</li>
             <li className={st.menuNavItem}>Contacts</li>
@@ -95,6 +134,12 @@ export default function Header() {
         onClick={handleSignIn}
       />
       <Portal>{isSignIn && <SignIn handleSignIn={handleSignIn} />}</Portal>
+      <Message
+        prefix={<SuccessSvg className={st.successSvg} />}
+        message="Successfully logged out"
+        isActive={isActiveMessage}
+        handleActiveMessage={handleActiveMessage}
+      />
     </header>
   );
 }
