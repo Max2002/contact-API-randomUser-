@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Header from '../Header';
 import { authSelector } from '../../redux/selectors/getMyProfile';
 import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
-import st from './styles.modlue.scss';
+import st from './styles.module.scss';
 
 export default function WrapperApp({ children }) {
   const dispatch = useDispatch();

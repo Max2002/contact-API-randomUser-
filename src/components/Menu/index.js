@@ -1,19 +1,21 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import { DropDownSvg } from '../../assets/icons';
 import st from './styles.module.scss';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function Menu(props) {
-  const { label, svg, avatar, options } = props;
+  const { label, avatar, options, loading } = props;
 
   const renderMenuItem = (item) => {
-    const { title, icon, link, onClick, hide } = item;
-    const to = title === 'Home' ? '/' : `../${title}`;
+    const { title, icon, link, path, onClick, hide } = item;
 
     return (
       !hide && (
         <li key={title} className={st.listItem} onClick={onClick}>
           {icon}
-          {link ? <Link to={to}>{title}</Link> : <span>{title}</span>}
+          {link ? <Link to={path}>{title}</Link> : <span>{title}</span>}
         </li>
       )
     );
@@ -23,9 +25,17 @@ export default function Menu(props) {
 
   return (
     <div className={st.welcomeUser}>
-      <p className={st.label}>Hello! {label}</p>
-      {svg}
-      <img className={st.avatar} src={avatar} alt={label} />
+      {loading ? (
+        <Skeleton width={200} height={20} />
+      ) : (
+        <p className={st.label}>Hello! {label}</p>
+      )}
+      <DropDownSvg className={st.dropDownSvg} />
+      {loading ? (
+        <Skeleton circle width={50} height={50} />
+      ) : (
+        <img className={st.avatar} src={avatar} alt={label} />
+      )}
       <div className={st.dropDownList}>
         <ul className={st.list}>{contentList}</ul>
       </div>
@@ -33,13 +43,8 @@ export default function Menu(props) {
   );
 }
 
-Menu.defaultProps = {
-  svg: null,
-};
-
 Menu.propTypes = {
   label: PropTypes.string.isRequired,
-  svg: PropTypes.node,
   avatar: PropTypes.string.isRequired,
   options: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -48,4 +53,5 @@ Menu.propTypes = {
     onClick: PropTypes.func,
     hide: PropTypes.bool,
   }).isRequired,
+  loading: PropTypes.bool.isRequired,
 };

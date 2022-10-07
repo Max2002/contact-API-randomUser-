@@ -15,22 +15,17 @@ export default function TextField(props) {
 
   const handleVisiblePass = () => setIsVisiblePass(!isVisiblePass);
 
-  const renderSufix = () => (
-    <div className={st.wrapperIconsPass}>
-      {type === 'password' &&
-        (isVisiblePass ? (
-          <VisiblePassSvg className={st.eyeIcon} onClick={handleVisiblePass} />
-        ) : (
-          <HidePassSvg className={st.eyeIcon} onClick={handleVisiblePass} />
-        ))}
-      {isError && <IconErrorSvg className={st.iconError} />}
-    </div>
-  );
+  const renderEye = () =>
+    isVisiblePass ? (
+      <VisiblePassSvg className={st.eyeIcon} onClick={handleVisiblePass} />
+    ) : (
+      <HidePassSvg className={st.eyeIcon} onClick={handleVisiblePass} />
+    );
 
   return (
     <div className={st.wrapper}>
       <div className={st.wrapperField}>
-        {prefix}
+        <div className={st.wrapperPrefix}>{prefix}</div>
         <FormControl
           {...field}
           className={clsx(st.field, { [st.errorField]: isError })}
@@ -38,7 +33,10 @@ export default function TextField(props) {
           name={name}
           placeholder={placeholder}
         />
-        {renderSufix()}
+        <div className={st.wrapperIcons}>
+          {type === 'password' && renderEye()}
+          {isError && <IconErrorSvg className={st.iconError} />}
+        </div>
       </div>
       <ErrorMessage
         name={name}

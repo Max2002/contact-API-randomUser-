@@ -51,13 +51,13 @@ export default function SignIn({ onSignIn }) {
             name="email"
             type="email"
             placeholder="Email"
-            prefix={<ManIconSvg className={st.svg} />}
+            prefix={<ManIconSvg />}
           />
           <TextField
             name="password"
             type="password"
             placeholder="Password"
-            prefix={<PasswordSvg className={st.svg} />}
+            prefix={<PasswordSvg />}
           />
           <div className={st.formButtons}>
             <Button className={st.formButtonsSignIn} type="submit">

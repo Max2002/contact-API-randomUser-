@@ -60,7 +60,7 @@
   }
 }
 
-.wrapperIconsPass {
+.wrapperIcons {
   @include flex-vertical-centre;
   @include position-vertical-svg;
   right: 10px;
@@ -69,6 +69,14 @@
     position: unset;
     top: 0;
     transform: unset;
+  }
+}
+
+.wrapperPrefix {
+  margin-left: 10px;
+
+  path {
+    fill: $svgInput;
   }
 }
 

@@ -3,7 +3,7 @@ import apiUser from '../../api/apiUser';
 export const GET_MY_PROFILE_FETCHING = 'GET_MY_PROFILE/FETCHING';
 export const GET_MY_PROFILE_SUCCESS = 'GET_MY_PROFILE/SUCCESS';
 export const GET_MY_PROFILE_ERROR = 'GET_MY_PROFILE/ERROR';
-export const MY_PROFILE_LOG_OUT = 'MY_PROFILE/LOG_OUT';
+export const MY_PROFILE_LOG_OUT = 'MY_PROFILE_LOG_OUT';
 
 const myProfileFetching = () => ({
   type: GET_MY_PROFILE_FETCHING,

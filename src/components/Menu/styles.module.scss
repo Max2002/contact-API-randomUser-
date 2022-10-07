@@ -10,21 +10,26 @@
     color: $primary;
     cursor: pointer;
   }
-}
 
-.welcomeUser:hover .dropDownSvg {
-  rotate: 180deg;
-  transition: .5s;
-}
-
-.welcomeUser:hover .dropDownList {
-  height: 180%;
-  transition: .5s;
-
-  @include media-max(md) {
-    height: 350%;
+  &:hover .dropDownSvg {
+    rotate: 180deg;
     transition: .5s;
-  };
+  }
+
+  &:hover .dropDownList {
+    height: 180%;
+    transition: .5s;
+
+    @include media-max(md) {
+      height: 350%;
+      transition: .5s;
+    };
+  }
+}
+
+.dropDownSvg {
+  transition: .5s;
+  margin-right: 10px;
 }
 
 .dropDownList {
