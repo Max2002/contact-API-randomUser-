@@ -18,12 +18,11 @@ const initialState = {
 const myProfile = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_MY_PROFILE_FETCHING: {
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true, error: null, authKey: payload };
     }
     case GET_MY_PROFILE_SUCCESS: {
       return {
         ...state,
-        authKey: payload.email,
         data: payload,
         loading: false,
         error: null,

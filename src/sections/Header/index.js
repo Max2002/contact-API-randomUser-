@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { Portal, Menu, Button } from '../../components';
 import SignIn from '../SignIn';
+import { HOME, CONTACTS, PROFILE } from '../../constans/routes';
 import {
   LogoSvg,
   ManIconSvg,
@@ -56,20 +57,20 @@ export default function Header() {
       title: 'Profile',
       icon: <ManIconSvg />,
       link: true,
-      path: 'profile',
+      path: PROFILE,
     },
     {
       title: 'Home',
       icon: <HomeSvg />,
       link: true,
-      path: 'home',
+      path: HOME,
       hide: deviceWidth > 768,
     },
     {
       title: 'Contacts',
       icon: <ContactsSvg />,
       link: true,
-      path: 'contacts',
+      path: CONTACTS,
       hide: deviceWidth > 768,
     },
     {
@@ -86,10 +87,10 @@ export default function Header() {
       <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
         {authKey && deviceWidth > 768 && (
           <ul className={st.menuNav}>
-            <Link to="/" className={st.menuNavItem}>
+            <Link to={HOME} className={st.menuNavItem}>
               Home
             </Link>
-            <Link to="../contacts" className={st.menuNavItem}>
+            <Link to={CONTACTS} className={st.menuNavItem}>
               Contacts
             </Link>
           </ul>

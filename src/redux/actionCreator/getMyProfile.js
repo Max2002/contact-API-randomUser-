@@ -7,6 +7,7 @@ export const MY_PROFILE_LOG_OUT = 'MY_PROFILE_LOG_OUT';
 
 const myProfileFetching = () => ({
   type: GET_MY_PROFILE_FETCHING,
+  payload: localStorage.getItem('auth'),
 });
 
 const myProfileSuccess = (profile) => ({
@@ -24,6 +25,8 @@ export const logOut = () => ({
 });
 
 export const getMyProfile = (email) => async (dispatch) => {
+  localStorage.setItem('auth', email);
+
   dispatch(myProfileFetching());
   try {
     const {
@@ -31,8 +34,6 @@ export const getMyProfile = (email) => async (dispatch) => {
         results: [user],
       },
     } = await apiUser.get('/', { params: { seed: email } });
-
-    localStorage.setItem('auth', email);
 
     dispatch(myProfileSuccess(user));
   } catch (error) {

@@ -1,22 +1,36 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { getMyProfile } from './redux/actionCreator/getMyProfile';
+import Header from './sections/Header';
 import Home from './sections/Home';
-import WrapperApp from './sections/WrapperApp';
 import Profile from './sections/Profile/indxe';
 import Contacts from './sections/Contacts';
 import Page404 from './sections/404';
+import { PROFILE } from './constans/routes';
+import { authSelector } from './redux/selectors/getMyProfile';
+import st from './app.module.scss';
 import './assets/styles/general.scss';
 
 export default function App() {
-  const renderWrapper = (element) => <WrapperApp>{element}</WrapperApp>;
+  const dispatch = useDispatch();
+  const authKey = useSelector(authSelector);
+
+  useEffect(() => {
+    if (authKey) {
+      dispatch(getMyProfile(authKey));
+    }
+  }, [authKey]);
 
   return (
-    <BrowserRouter>
+    <div className={st.wrapperApp}>
+      <Header />
       <Routes>
-        <Route index element={renderWrapper(<Home />)} />
-        <Route path="Profile" element={renderWrapper(<Profile />)} />
-        <Route path="Contacts" element={renderWrapper(<Contacts />)} />
-        <Route path="*" element={renderWrapper(<Page404 />)} />
+        <Route index element={<Home />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="contacts" element={<Contacts />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }

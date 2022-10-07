@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import { DropDownSvg } from '../../assets/icons';
 import st from './styles.module.scss';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function Menu(props) {
   const { label, avatar, options, loading } = props;
@@ -46,12 +45,14 @@ export default function Menu(props) {
 Menu.propTypes = {
   label: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
-  options: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    icon: PropTypes.node,
-    link: PropTypes.bool.isRequired,
-    onClick: PropTypes.func,
-    hide: PropTypes.bool,
-  }).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      icon: PropTypes.node,
+      link: PropTypes.bool.isRequired,
+      onClick: PropTypes.func,
+      hide: PropTypes.bool,
+    }).isRequired,
+  ).isRequired,
   loading: PropTypes.bool.isRequired,
 };
