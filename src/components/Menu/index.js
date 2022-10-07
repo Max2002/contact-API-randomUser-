@@ -8,13 +8,13 @@ export default function Menu(props) {
   const { label, avatar, options, loading } = props;
 
   const renderMenuItem = (item) => {
-    const { title, icon, link, path, onClick, hide } = item;
+    const { title, icon, link, onClick, hide } = item;
 
     return (
       !hide && (
         <li key={title} className={st.listItem} onClick={onClick}>
           {icon}
-          {link ? <Link to={path}>{title}</Link> : <span>{title}</span>}
+          {link ? <Link to={link}>{title}</Link> : <span>{title}</span>}
         </li>
       )
     );

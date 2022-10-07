@@ -24,7 +24,6 @@ import {
 } from '../../redux/selectors/getMyProfile';
 import { logOut } from '../../redux/actionCreator/getMyProfile';
 import st from './styles.module.scss';
-import 'react-toastify/dist/ReactToastify.css';
 
 const welcomeUserSelector = createStructuredSelector({
   fullName: fullNameSelector,
@@ -56,21 +55,18 @@ export default function Header() {
     {
       title: 'Profile',
       icon: <ManIconSvg />,
-      link: true,
-      path: PROFILE,
+      link: `../${PROFILE}`,
     },
     {
       title: 'Home',
       icon: <HomeSvg />,
-      link: true,
-      path: HOME,
+      link: `../${HOME}`,
       hide: deviceWidth > 768,
     },
     {
       title: 'Contacts',
       icon: <ContactsSvg />,
-      link: true,
-      path: CONTACTS,
+      link: `../${CONTACTS}`,
       hide: deviceWidth > 768,
     },
     {
@@ -87,10 +83,10 @@ export default function Header() {
       <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
         {authKey && deviceWidth > 768 && (
           <ul className={st.menuNav}>
-            <Link to={HOME} className={st.menuNavItem}>
+            <Link to={`../${HOME}`} className={st.menuNavItem}>
               Home
             </Link>
-            <Link to={CONTACTS} className={st.menuNavItem}>
+            <Link to={`../${CONTACTS}`} className={st.menuNavItem}>
               Contacts
             </Link>
           </ul>

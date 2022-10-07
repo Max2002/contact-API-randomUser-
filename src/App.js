@@ -7,8 +7,8 @@ import Home from './sections/Home';
 import Profile from './sections/Profile/indxe';
 import Contacts from './sections/Contacts';
 import Page404 from './sections/404';
-import { PROFILE } from './constans/routes';
 import { authSelector } from './redux/selectors/getMyProfile';
+import { CONTACTS, PROFILE } from './constans/routes';
 import st from './app.module.scss';
 import './assets/styles/general.scss';
 
@@ -27,8 +27,8 @@ export default function App() {
       <Header />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="contacts" element={<Contacts />} />
+        <Route path={PROFILE} element={<Profile />} />
+        <Route path={CONTACTS} element={<Contacts />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </div>
