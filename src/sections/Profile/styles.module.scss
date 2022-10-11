@@ -1,0 +1,131 @@
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
+
+.profile {
+  @include flex(start, center);
+  flex: auto;
+  flex-direction: column;
+
+  .title {
+    margin: 20px 0;
+    font-weight: 600;
+    color: $primaryText;
+    font-size: $fontSizeTitle;
+  }
+}
+
+.data {
+  width: 100%;
+  @include flex(center, start);
+  @include media-max(md) {
+    @include flex(center, center);
+    flex-direction: column;
+  }
+
+  span {
+    margin: 5px;
+  }
+}
+
+.avatar {
+  width: 260px;
+  height: 260px;
+  margin-right: 40px;
+
+  @include media-max(md) {
+    margin-right: unset;
+    margin-bottom: 20px;
+    width: 220px;
+    height: 220px;
+  }
+}
+
+.personalInfo {
+}
+
+.fullName {
+  font-weight: 600;
+  color: $primaryText;
+  font-size: $fontSizeXL;
+
+  @include media-max(md) {
+    font-size: $fontSizeLarge;
+    text-align: center;
+  }
+
+  span {
+    font-size: 80%;
+    color: $messageInput;
+  }
+}
+
+.contact {
+  font-size: $fontSizePrimary;
+  color: $primary;
+  margin: 10px 0;
+  @include flex-vertical-centre;
+
+  a {
+    color: $primary;
+  }
+
+  svg {
+    font-size: $fontSizeLarge;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
+
+.icon {
+  position: relative;
+}
+
+.copy {
+  position: absolute;
+  top: -45px;
+  left: -17px;
+  min-width: 30px;
+  min-height: 32px;
+  padding: 6px 8px;
+  color: $white;
+  background-color: rgba(0,0,0,.75);
+  border-radius: 2px;
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -45%;
+    left: 37%;
+    border: 7px solid transparent;
+    border-top: 7px solid rgba(0, 0, 0, .75);
+  }
+}
+
+.icon:hover .copy {
+  visibility: visible;
+  opacity: 1;
+}
+
+.copied {
+  color: $copied;
+}
+
+.address {
+
+}
+
+.nationality {
+  //color: $nationality;
+  //background: $backNationality;
+  padding: 2px 7px;
+  //border: 1px solid $borderNationality;
+  font-size: $fontSizeSmall;
+}
+
+.borderDashed {
+  border-bottom: 1px dashed $dashedLine;
+  padding-bottom: 10px;
+}

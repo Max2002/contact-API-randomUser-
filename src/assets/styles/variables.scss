@@ -3,8 +3,10 @@ $fontSizeSmall: 10px;
 $fontSizeMessage: 12px;
 $fontSizePrimary: 14px;
 $fontSizeLarge: 16px;
-$error404: 80px;
+$fontSizeXL: 24px;
 $errorMessage: 26px;
+$fontSizeTitle: 32px;
+$error404: 80px;
 
 $white: #fff;
 $black: #000;
@@ -14,6 +16,7 @@ $errorMessage404: #333;
 $primaryLineBorder: #f0f0f0;
 $primaryText: rgba(0, 0, 0, .65);
 $primaryShadow: rgba(51, 51, 51, .33%);
+$dashedLine: rgba(0, 0, 0, .2);
 
 /* Model Window (SignIn) */
 $modelWindowTitle: rgba(0, 0, 0, .85);
@@ -25,3 +28,6 @@ $messageInput: rgba(0, 0, 0, .45);
 
 /* Footer */
 $backgroundFooter: #f1f1f1;
+
+/* Profile */
+$copied: #52c41a;
