@@ -1,0 +1,75 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.modalWindow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $white;
+  z-index: 999;
+  width: 520px;
+
+  @include media-max(md) {
+    width: 450px;
+  }
+  @include media-max(sm) {
+    width: 250px;
+  }
+}
+
+.form {
+  padding: 25px;
+}
+
+.title {
+  padding: 16px 24px;
+  border-bottom: 2px solid $primaryLineBorder;
+  font-weight: 500;
+  font-size: $fontSizeLarge;
+  color: $modelWindowTitle;
+}
+
+.formButtons {
+  @include flex(space-between, center);
+  margin-top: 20px;
+  width: 100%;
+
+  @include media-max(md) {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.formButtonsSignIn {
+  width: 75%;
+  color: $white;
+  background: $primary;
+  border-color: $primary;
+  font-size: $fontSizeLarge;
+  border-radius: 2px;
+  text-align: center;
+  padding: 10px 15px;
+  font-weight: 400;
+
+  @include media-max(md) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.formButtonsClose {
+  @include flex(space-between, center);
+  color: $cLose;
+  padding: 4px 15px;
+  font-weight: 400;
+  font-size: $fontSizePrimary;
+
+  svg {
+    margin-top: 2px;
+  }
+
+  span {
+    margin-left: 8px;
+  }
+}

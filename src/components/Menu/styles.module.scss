@@ -1,0 +1,76 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.welcomeUser {
+  position: relative;
+  @include flex-vertical-centre;
+  color: $primaryText;
+
+  &:hover {
+    color: $primary;
+    cursor: pointer;
+
+    .dropDownSvg {
+      rotate: 180deg;
+      transition: .5s;
+    }
+
+    .dropDownList {
+      height: 180%;
+      transition: .5s;
+
+      @include media-max(md) {
+        height: 350%;
+        transition: .5s;
+      }
+    }
+  }
+}
+
+.dropDownSvg {
+  transition: .5s;
+  margin-right: 10px;
+}
+
+.dropDownList {
+  position: absolute;
+  overflow: hidden;
+  height: 0;
+  top: 65px;
+  width: 100%;
+  background: $white;
+  transition: .5s;
+}
+
+.label {
+  font-size: $fontSizePrimary;
+  color: inherit;
+  margin-right: 5px;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+}
+
+.listItem {
+  @include flex-vertical-centre;
+  padding: 10px 20px;
+  color: $primaryText;
+  font-size: $fontSizePrimary;
+
+  a, span {
+    margin-left: 15px;
+    color: inherit;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $primaryLineBorder;
+  }
+}

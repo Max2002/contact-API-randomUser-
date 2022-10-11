@@ -1,12 +1,24 @@
 $fontSegoeUi: "Segoe UI";
 $fontSizeSmall: 10px;
-$fontSizeStandard: 14px;
+$fontSizeMessage: 12px;
+$fontSizePrimary: 14px;
 $fontSizeLarge: 16px;
-
-$modelWindowTitle: rgba(0, 0, 0, .85);
+$error404: 80px;
+$errorMessage: 26px;
 
 $white: #fff;
 $black: #000;
-$boxShadowHeader: rgba(51, 51, 51, .33%);
-$colorNavItem: rgba(0,0,0,.65);
-$colorBtnSignIn: #1890ff;
+$primary: #1890ff;
+$error: #ff4d4f;
+$errorMessage404: #333;
+$primaryLineBorder: #f0f0f0;
+$primaryText: rgba(0, 0, 0, .65);
+$primaryShadow: rgba(51, 51, 51, .33%);
+
+/* Model Window (SignIn) */
+$modelWindowTitle: rgba(0, 0, 0, .85);
+$cLose: #db402c;
+$borderInput: #d9d9d9;
+$svgInput: #595959;
+$placeholder: #c4c4c4;
+$messageInput: rgba(0, 0, 0, .45);

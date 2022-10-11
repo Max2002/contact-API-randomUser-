@@ -1,0 +1,72 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.header {
+  @include flex(space-between, center);
+  position: sticky;
+  top: 0;
+  padding: 0 40px;
+  height: 65px;
+  background: $white;
+  box-shadow: 0 0 10px 0 $primaryShadow;
+}
+
+.menu {
+  @include flex(space-between, center);
+  margin-left: 30px;
+  flex-basis: 95%;
+
+  @include media-max(md) {
+    justify-content: end;
+  }
+}
+
+.menuIsAuth {
+  justify-content: end;
+}
+
+.menuNav {
+  @include flex(space-between, center);
+}
+
+.menuNavItem {
+  color: $primaryText;
+  font-size: $fontSizePrimary;
+}
+
+.menuNavItem:first-child {
+  margin-right: 15px;
+}
+
+.signInBtn {
+  @include flex-vertical-centre;
+  color: $primary;
+  font-size: $fontSizePrimary;
+  font-family: $fontSegoeUi;
+
+  span {
+    margin-left: 10px;
+  }
+}
+
+.dropDownSvg {
+  margin-right: 15px;
+  color: inherit;
+  transition: .5s;
+}
+
+.blurBlock {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $black;
+  opacity: .5;
+  z-index: 998;
+}
+
+.isBlur {
+  display: block;
+}

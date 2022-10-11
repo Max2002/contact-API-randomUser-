@@ -1,0 +1,35 @@
+/* Flex mixins */
+@mixin flex ($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin flex-vertical-centre {
+  display: flex;
+  align-items: center;
+}
+
+@mixin position-vertical-svg {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+$media: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+@mixin media-max($breakpoint) {
+  @if map-has-key($media, $breakpoint) {
+    @media (max-width: map-get($media, $breakpoint)) {
+      @content
+    }
+  } @else {
+    @error "Breakpoint #{$breakpoint} not exists in media!";
+  }
+}

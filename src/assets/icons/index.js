@@ -1,4 +1,12 @@
-import { ReactComponent as LogoSvg } from './logo.svg';
-import { ReactComponent as SignInSvg } from './sigIn.svg';
-
-export { LogoSvg, SignInSvg };
+export { ReactComponent as LogoSvg } from './logo.svg';
+export { ReactComponent as SignInSvg } from './sigIn.svg';
+export { ReactComponent as ManIconSvg } from './manIcon.svg';
+export { ReactComponent as PasswordSvg } from './password.svg';
+export { ReactComponent as CloseSvg } from './close.svg';
+export { ReactComponent as HidePassSvg } from './hidePass.svg';
+export { ReactComponent as VisiblePassSvg } from './visiblePass.svg';
+export { ReactComponent as IconErrorSvg } from './iconError.svg';
+export { ReactComponent as DropDownSvg } from './dropdownArrow.svg';
+export { ReactComponent as LogOutIconSvg } from './logoutIcon.svg';
+export { ReactComponent as HomeSvg } from './home.svg';
+export { ReactComponent as ContactsSvg } from './contacts.svg';

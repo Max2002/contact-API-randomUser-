@@ -1,4 +1,7 @@
 @import 'variables';
+@import 'mixins';
+@import 'react-toastify/dist/ReactToastify.css';
+@import 'react-loading-skeleton/dist/skeleton.css';
 
 * {
   margin: 0;
@@ -8,7 +11,11 @@
 
 body {
   font-family: $fontSegoeUi;
-  font-size: $fontSizeStandard;
+  font-size: $fontSizePrimary;
+
+  @include media-max(md) {
+    font-size: $fontSizeSmall;
+  }
 }
 
 ul {
@@ -20,8 +27,20 @@ a {
 }
 
 button {
+  font-family: $fontSegoeUi;
   cursor: pointer;
   outline: none;
   border: none;
   background: none;
+}
+
+input {
+  outline: none;
+  font-family: $fontSegoeUi;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
