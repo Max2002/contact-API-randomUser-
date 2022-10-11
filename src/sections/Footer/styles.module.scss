@@ -1,0 +1,9 @@
+@import "../../assets/styles/variables";
+
+.footer {
+  color: $primaryText;
+  text-align: center;
+  font-size: $fontSizePrimary;
+  padding: 13px 0;
+  background: $backgroundFooter;
+}

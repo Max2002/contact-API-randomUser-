@@ -1,0 +1,29 @@
+@import "../../assets/styles/variables";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+}
+
+.blockSvg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: auto;
+  flex-direction: column;
+}
+
+.spinReactLogo {
+  animation: spin 20s linear infinite;
+  max-width: 300px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

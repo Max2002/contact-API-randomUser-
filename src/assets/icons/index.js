@@ -7,6 +7,7 @@ export { ReactComponent as HidePassSvg } from './hidePass.svg';
 export { ReactComponent as VisiblePassSvg } from './visiblePass.svg';
 export { ReactComponent as IconErrorSvg } from './iconError.svg';
 export { ReactComponent as DropDownSvg } from './dropdownArrow.svg';
-export { ReactComponent as LogOutIconSvg } from './logoutIcon.svg';
+export { ReactComponent as LogOutSvg } from './logout.svg';
 export { ReactComponent as HomeSvg } from './home.svg';
 export { ReactComponent as ContactsSvg } from './contacts.svg';
+export { ReactComponent as ReactLogoSvg } from './reactLogo.svg';
