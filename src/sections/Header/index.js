@@ -55,18 +55,18 @@ export default function Header() {
     {
       title: 'Profile',
       icon: <ManIconSvg />,
-      link: `../${PROFILE}`,
+      link: PROFILE,
     },
     {
       title: 'Home',
       icon: <HomeSvg />,
-      link: `../${HOME}`,
+      link: HOME,
       hide: deviceWidth > 768,
     },
     {
       title: 'Contacts',
       icon: <ContactsSvg />,
-      link: `../${CONTACTS}`,
+      link: CONTACTS,
       hide: deviceWidth > 768,
     },
     {
@@ -83,10 +83,10 @@ export default function Header() {
       <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
         {authKey && deviceWidth > 768 && (
           <ul className={st.menuNav}>
-            <Link to={`../${HOME}`} className={st.menuNavItem}>
+            <Link to={HOME} className={st.menuNavItem}>
               Home
             </Link>
-            <Link to={`../${CONTACTS}`} className={st.menuNavItem}>
+            <Link to={CONTACTS} className={st.menuNavItem}>
               Contacts
             </Link>
           </ul>
