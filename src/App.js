@@ -7,8 +7,9 @@ import Home from './sections/Home';
 import Profile from './sections/Profile/indxe';
 import Contacts from './sections/Contacts';
 import Page404 from './sections/404';
+import Footer from './sections/Footer';
 import { authSelector } from './redux/selectors/getMyProfile';
-import { CONTACTS, PROFILE, ERROR } from './constans/routes';
+import { CONTACTS, PROFILE } from './constans/routes';
 import st from './app.module.scss';
 import './assets/styles/general.scss';
 
