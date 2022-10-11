@@ -47,7 +47,7 @@ export default function Header() {
   const logOutUser = () => {
     localStorage.removeItem('auth');
     dispatch(logOut());
-    navigate('/');
+    navigate(HOME);
     notify();
   };
 
