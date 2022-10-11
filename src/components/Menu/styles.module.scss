@@ -9,21 +9,21 @@
   &:hover {
     color: $primary;
     cursor: pointer;
-  }
 
-  &:hover .dropDownSvg {
-    rotate: 180deg;
-    transition: .5s;
-  }
-
-  &:hover .dropDownList {
-    height: 180%;
-    transition: .5s;
-
-    @include media-max(md) {
-      height: 350%;
+    .dropDownSvg {
+      rotate: 180deg;
       transition: .5s;
-    };
+    }
+
+    .dropDownList {
+      height: 180%;
+      transition: .5s;
+
+      @include media-max(md) {
+        height: 350%;
+        transition: .5s;
+      }
+    }
   }
 }
 
@@ -69,8 +69,8 @@
     width: 14px;
     height: 14px;
   }
-}
 
-.listItem:first-child {
-  border-bottom: 1px solid $primaryLineBorder;
+  &:not(:last-child) {
+    border-bottom: 1px solid $primaryLineBorder;
+  }
 }
