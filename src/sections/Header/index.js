@@ -12,7 +12,7 @@ import {
   LogoSvg,
   ManIconSvg,
   SignInSvg,
-  LogOutIconSvg,
+  LogOutSvg,
   HomeSvg,
   ContactsSvg,
 } from '../../assets/icons';
@@ -71,7 +71,7 @@ export default function Header() {
     },
     {
       title: 'Log out',
-      icon: <LogOutIconSvg />,
+      icon: <LogOutSvg />,
       link: false,
       onClick: logOutUser,
     },

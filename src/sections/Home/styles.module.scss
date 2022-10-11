@@ -3,11 +3,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  padding: 12px 2vw;
-  background: url('../../assets/images/mainBack.jpg') no-repeat center center, $white;
-  background-size: cover;
   flex: auto;
-  //height: 80vh;
 }
 
 .blockSvg {
