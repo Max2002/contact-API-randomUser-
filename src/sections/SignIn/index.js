@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { validationEmail, validationPassword } from '../../utils/validation';
-import { Field, Button } from '../../components';
+import { TextField, Button } from '../../components';
 import { CloseSvg, ManIconSvg, PasswordSvg } from '../../assets/icons';
 import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
 import st from './styles.module.scss';
@@ -12,7 +12,7 @@ const initialValues = {
   password: '',
 };
 
-export default function SignIn({ handleSignIn }) {
+export default function SignIn({ onSignIn }) {
   const dispatch = useDispatch();
 
   const validationForm = ({ email, password }) => {
@@ -34,10 +34,8 @@ export default function SignIn({ handleSignIn }) {
   };
 
   const onSubmitForm = (data) => {
-    localStorage.setItem(data.email, JSON.stringify(data));
-    localStorage.setItem('auth', data.email);
     dispatch(getMyProfile(data.email));
-    handleSignIn();
+    onSignIn();
   };
 
   return (
@@ -49,17 +47,17 @@ export default function SignIn({ handleSignIn }) {
         onSubmit={onSubmitForm}
       >
         <Form className={st.form}>
-          <Field
+          <TextField
             name="email"
             type="email"
             placeholder="Email"
-            icon={<ManIconSvg className={st.svg} />}
+            prefix={<ManIconSvg />}
           />
-          <Field
+          <TextField
             name="password"
             type="password"
             placeholder="Password"
-            icon={<PasswordSvg className={st.svg} />}
+            prefix={<PasswordSvg />}
           />
           <div className={st.formButtons}>
             <Button className={st.formButtonsSignIn} type="submit">
@@ -68,7 +66,7 @@ export default function SignIn({ handleSignIn }) {
             <Button
               className={st.formButtonsClose}
               type="button"
-              onClick={handleSignIn}
+              onClick={onSignIn}
             >
               <CloseSvg />
               <span>Cancel</span>
@@ -81,5 +79,5 @@ export default function SignIn({ handleSignIn }) {
 }
 
 SignIn.propTypes = {
-  handleSignIn: PropTypes.func.isRequired,
+  onSignIn: PropTypes.func.isRequired,
 };

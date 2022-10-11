@@ -1,0 +1,97 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.wrapper {
+  height: 85px;
+}
+
+.field {
+  width: 100%;
+  font-size: $fontSizeLarge;
+  border-radius: 2px;
+  padding: 10px 0 10px 35px;
+  border: 1px solid $borderInput;
+
+  &:hover {
+    border: 1px solid $primary;
+  }
+
+  &:focus {
+    border: 1px solid $primary;
+    box-shadow: 0 0 3px $primary;
+  }
+
+  &::placeholder {
+    color: $placeholder;
+  }
+
+  @include media-max(md) {
+    font-size: $fontSizePrimary;
+  }
+}
+
+.errorField {
+  border: 1px solid $error;
+
+  &:hover {
+    border: 1px solid $error;
+  }
+
+  &:focus {
+    border: 1px solid $error;
+    box-shadow: 0 0 3px $error;
+  }
+}
+
+.wrapperField {
+  position: relative;
+
+  svg {
+    @include position-vertical-svg;
+  }
+}
+
+.inputMessage {
+  color: $messageInput;
+  font-size: $fontSizeMessage;
+
+  @include media-max(md) {
+    font-size: $fontSizeSmall;
+  }
+}
+
+.wrapperIcons {
+  @include flex-vertical-centre;
+  @include position-vertical-svg;
+  right: 10px;
+
+  svg {
+    position: unset;
+    top: 0;
+    transform: unset;
+  }
+}
+
+.wrapperPrefix {
+  margin-left: 10px;
+
+  path {
+    fill: $svgInput;
+  }
+}
+
+.eyeIcon {
+  cursor: pointer;
+  right: 10px;
+  color: $svgInput;
+}
+
+.error {
+  color: $error;
+}
+
+.iconError {
+  color: $error;
+  right: 10px;
+  margin-left: 10px;
+}

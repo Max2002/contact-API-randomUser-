@@ -1,100 +1,118 @@
-import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import { useWindowWidth } from '../../hooks/useWindowWidth';
+import { createStructuredSelector } from 'reselect';
+import clsx from 'clsx';
+import { ToastContainer, toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { Portal, Menu, Button } from '../../components';
 import SignIn from '../SignIn';
+import { HOME, CONTACTS, PROFILE } from '../../constans/routes';
 import {
-  DropDownSvg,
-  LoadingSvg,
   LogoSvg,
+  ManIconSvg,
   SignInSvg,
+  LogOutIconSvg,
+  HomeSvg,
+  ContactsSvg,
 } from '../../assets/icons';
-import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
 import {
   fullNameSelector,
-  getAvatar,
-  getStatus,
+  avatarSelector,
+  loadingSelector,
+  authSelector,
 } from '../../redux/selectors/getMyProfile';
+import { logOut } from '../../redux/actionCreator/getMyProfile';
 import st from './styles.module.scss';
 
-const welcomeUserSelector = createSelector(
-  [fullNameSelector, getAvatar, getStatus],
-  (fullName, large, loading) => ({
-    fullName,
-    large,
-    loading,
-  }),
-);
+const welcomeUserSelector = createStructuredSelector({
+  fullName: fullNameSelector,
+  picture: avatarSelector,
+  loading: loadingSelector,
+  authKey: authSelector,
+});
 
 export default function Header() {
-  const [isSignIn, setIsSignIn] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
-  const { fullName, large, loading } = useSelector(welcomeUserSelector);
-  const getWindowWidth = useWindowWidth();
+  const [isActiveModal, setIsActiveModal] = useState(false);
+  const user = useSelector(welcomeUserSelector);
+  const deviceWidth = useDeviceWidth();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { fullName, picture, loading, authKey } = user;
 
-  useEffect(() => {
-    setIsAuth(Boolean(localStorage.getItem('auth')));
+  const notify = () => toast.success('Successfully logged out');
 
-    if (isAuth) {
-      dispatch(getMyProfile(localStorage.getItem('auth')));
-    }
-  }, [isSignIn, isAuth]);
-
-  const handleSignIn = () => setIsSignIn(!isSignIn);
+  const handleSignIn = () => setIsActiveModal(!isActiveModal);
 
   const logOutUser = () => {
     localStorage.removeItem('auth');
-    setIsAuth(false);
+    dispatch(logOut());
+    navigate(HOME);
+    notify();
   };
 
-  const renderAuthBlock = () => {
-    const welcomeUser = (
-      <>
-        <p className={st.greeting}>Hello! {fullName}</p>
-        <DropDownSvg className={st.dropDownSvg} />
-        <img className={st.circleAvatar} src={large} />
-        <div className={st.dropDownList}>
-          <Menu windowWidth={getWindowWidth} logOutUser={logOutUser} />
-        </div>
-      </>
-    );
-
-    if (isAuth) {
-      return (
-        <div className={st.welcomeUser}>
-          {loading ? <LoadingSvg /> : welcomeUser}
-        </div>
-      );
-    }
-
-    return (
-      <Button type="button" className={st.signInBtn} onClick={handleSignIn}>
-        <SignInSvg />
-        <span>Sign In</span>
-      </Button>
-    );
-  };
+  const options = [
+    {
+      title: 'Profile',
+      icon: <ManIconSvg />,
+      link: PROFILE,
+    },
+    {
+      title: 'Home',
+      icon: <HomeSvg />,
+      link: HOME,
+      hide: deviceWidth > 768,
+    },
+    {
+      title: 'Contacts',
+      icon: <ContactsSvg />,
+      link: CONTACTS,
+      hide: deviceWidth > 768,
+    },
+    {
+      title: 'Log out',
+      icon: <LogOutIconSvg />,
+      link: false,
+      onClick: logOutUser,
+    },
+  ];
 
   return (
     <header className={st.header}>
       <LogoSvg />
-      <div className={clsx(st.menu, { [st.menuIsAuth]: !isAuth })}>
-        {isAuth && getWindowWidth > 768 && (
+      <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
+        {authKey && deviceWidth > 768 && (
           <ul className={st.menuNav}>
-            <li className={st.menuNavItem}>Home</li>
-            <li className={st.menuNavItem}>Contacts</li>
+            <Link to={HOME} className={st.menuNavItem}>
+              Home
+            </Link>
+            <Link to={CONTACTS} className={st.menuNavItem}>
+              Contacts
+            </Link>
           </ul>
         )}
-        {renderAuthBlock()}
+        {authKey ? (
+          <Menu
+            label={fullName}
+            avatar={picture.thumbnail}
+            loading={loading}
+            options={options}
+          />
+        ) : (
+          <Button type="button" className={st.signInBtn} onClick={handleSignIn}>
+            <SignInSvg />
+            <span>Sign In</span>
+          </Button>
+        )}
       </div>
       <div
-        className={clsx(st.blurBlock, { [st.isBlur]: isSignIn })}
+        className={clsx(st.blurBlock, { [st.isBlur]: isActiveModal })}
         onClick={handleSignIn}
       />
-      <Portal>{isSignIn && <SignIn handleSignIn={handleSignIn} />}</Portal>
+      <Portal>
+        {isActiveModal && <SignIn notify={notify} onSignIn={handleSignIn} />}
+      </Portal>
+      <ToastContainer position="top-right" autoClose={3000} />
     </header>
   );
 }

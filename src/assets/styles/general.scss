@@ -1,5 +1,7 @@
 @import 'variables';
-@import "mixins";
+@import 'mixins';
+@import 'react-toastify/dist/ReactToastify.css';
+@import 'react-loading-skeleton/dist/skeleton.css';
 
 * {
   margin: 0;
@@ -9,9 +11,9 @@
 
 body {
   font-family: $fontSegoeUi;
-  font-size: $fontSizeStandard;
+  font-size: $fontSizePrimary;
 
-  @include media-breakpoint-down(md) {
+  @include media-max(md) {
     font-size: $fontSizeSmall;
   }
 }
