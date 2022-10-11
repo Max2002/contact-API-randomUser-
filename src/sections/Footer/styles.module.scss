@@ -1,9 +1,9 @@
 @import "../../assets/styles/variables";
 
-footer {
-  color: $colorForText;
+.footer {
+  color: $primaryText;
   text-align: center;
-  font-size: $fontSizeStandard;
+  font-size: $fontSizePrimary;
   padding: 13px 0;
   background: $backgroundFooter;
 }
