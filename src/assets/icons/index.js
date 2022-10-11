@@ -10,4 +10,4 @@ export { ReactComponent as DropDownSvg } from './dropdownArrow.svg';
 export { ReactComponent as LogOutSvg } from './logout.svg';
 export { ReactComponent as HomeSvg } from './home.svg';
 export { ReactComponent as ContactsSvg } from './contacts.svg';
-export { ReactComponent as SpinReactLogoSvg } from './spinReactLogo.svg';
+export { ReactComponent as ReactLogoSvg } from './reactLogo.svg';

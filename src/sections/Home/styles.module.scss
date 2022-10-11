@@ -12,11 +12,11 @@
   align-items: center;
   flex: auto;
   flex-direction: column;
+}
 
-  svg {
-    animation: spin 20s linear infinite;
-    max-width: 300px;
-  }
+.spinReactLogo {
+  animation: spin 20s linear infinite;
+  max-width: 300px;
 }
 
 @keyframes spin {
