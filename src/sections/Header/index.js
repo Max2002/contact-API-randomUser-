@@ -72,7 +72,6 @@ export default function Header() {
     {
       title: 'Log out',
       icon: <LogOutSvg />,
-      link: false,
       onClick: logOutUser,
     },
   ];

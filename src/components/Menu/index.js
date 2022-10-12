@@ -44,12 +44,12 @@ export default function Menu(props) {
 
 Menu.propTypes = {
   label: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       icon: PropTypes.node,
-      link: PropTypes.bool.isRequired,
+      link: PropTypes.string,
       onClick: PropTypes.func,
       hide: PropTypes.bool,
     }).isRequired,

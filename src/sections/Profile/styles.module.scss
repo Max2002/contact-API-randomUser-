@@ -21,10 +21,10 @@
     @include flex(center, center);
     flex-direction: column;
   }
+}
 
-  span {
-    margin: 5px;
-  }
+.skeleton {
+  margin: 10px;
 }
 
 .avatar {
@@ -59,69 +59,12 @@
   }
 }
 
-.contact {
-  font-size: $fontSizePrimary;
-  color: $primary;
-  margin: 10px 0;
-  @include flex-vertical-centre;
-
-  a {
-    color: $primary;
-  }
-
-  svg {
-    font-size: $fontSizeLarge;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-}
-
-.icon {
-  position: relative;
-}
-
-.copy {
-  position: absolute;
-  top: -45px;
-  left: -17px;
-  min-width: 30px;
-  min-height: 32px;
-  padding: 6px 8px;
-  color: $white;
-  background-color: rgba(0,0,0,.75);
-  border-radius: 2px;
-  visibility: hidden;
-  opacity: 0;
-  transition: .3s;
-
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -45%;
-    left: 37%;
-    border: 7px solid transparent;
-    border-top: 7px solid rgba(0, 0, 0, .75);
-  }
-}
-
-.icon:hover .copy {
-  visibility: visible;
-  opacity: 1;
-}
-
-.copied {
-  color: $copied;
-}
-
-.address {
-  color: $primaryText;
-}
-
 .nationality {
   color: $white;
   background: $backNationality;
   padding: 2px 7px;
   font-size: $fontSizeSmall;
+  margin: unset;
 }
 
 .borderDashed {

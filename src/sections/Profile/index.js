@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Skeleton from 'react-loading-skeleton';
-import { useEffect, useState } from 'react';
+import CopyElement from '../../components/CopyElement';
 import {
   ageSelector,
   avatarSelector,
@@ -12,7 +11,6 @@ import {
   addressSelector,
   nationalitySelector,
 } from '../../redux/selectors/getMyProfile';
-import { CopySvg, CopiedSvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
 const myProfileSelector = createStructuredSelector({
@@ -26,45 +24,15 @@ const myProfileSelector = createStructuredSelector({
 });
 
 export default function Profile() {
-  const [isCopied, setIsCopied] = useState({
-    email: false,
-    phone: false,
-    address: false,
-  });
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => setIsCopied({ email: false, phone: false, address: false }),
-      2000,
-    );
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isCopied]);
-
   const { picture, fullName, age, email, phone, address, nat } =
     useSelector(myProfileSelector);
 
-  const handleCopy = (name) => {
-    setIsCopied({ ...isCopied, [name]: true });
-  };
-
-  const renderCopyIcon = (name) => (
-    <div className={st.icon}>
-      <div className={st.copy}>{isCopied[name] ? 'Copied' : 'Copy'}</div>
-      <CopyToClipboard text={name}>
-        {isCopied[name] ? (
-          <CopiedSvg className={st.copied} />
-        ) : (
-          <CopySvg onClick={() => handleCopy(name)} />
-        )}
-      </CopyToClipboard>
-    </div>
-  );
-
   const renderElement = (element, flag, width = 375, height = 15) => {
-    return flag ? element : <Skeleton width={width} height={height} />;
+    return flag ? (
+      element
+    ) : (
+      <Skeleton className={st.skeleton} width={width} height={height} />
+    );
   };
 
   return (
@@ -85,26 +53,18 @@ export default function Profile() {
             age,
           )}
           {renderElement(
-            <div className={st.contact}>
-              {renderCopyIcon('email')}
-              <a href={email}>{email}</a>
-            </div>,
+            <CopyElement isLink prefixLink="mailto:">
+              {email}
+            </CopyElement>,
             email,
           )}
           {renderElement(
-            <div className={st.contact}>
-              {renderCopyIcon('phone')}
-              <a href={`tel:${phone}`}>{phone}</a>
-            </div>,
+            <CopyElement isLink prefixLink="tel:">
+              {phone}
+            </CopyElement>,
             phone,
           )}
-          {renderElement(
-            <div className={`${st.contact} ${st.borderDashed}`}>
-              {renderCopyIcon('address')}
-              <span className={st.address}>{address}</span>
-            </div>,
-            address,
-          )}
+          {renderElement(<CopyElement>{address}</CopyElement>, address)}
           {renderElement(
             <span className={st.nationality}>{nat}</span>,
             nat,
