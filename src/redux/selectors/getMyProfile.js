@@ -39,19 +39,16 @@ export const phoneSelector = createSelector(
   myDataSelector,
   (data) => data.phone,
 );
-export const addressSelector = createSelector(
-  locationSelector,
-  (location) => {
-    if (location) {
-      const {country, street, city, state, postcode} = location;
-      const {number, name} = street;
+export const addressSelector = createSelector(locationSelector, (location) => {
+  if (location) {
+    const { country, street, city, state, postcode } = location;
+    const { number, name } = street;
 
-      return `/${country}/ ${number} ${name}, ${city}, ${state} ${postcode}`;
-    }
+    return `/${country}/ ${number} ${name}, ${city}, ${state} ${postcode}`;
+  }
 
-    return undefined;
-  },
-);
+  return undefined;
+});
 export const nationalitySelector = createSelector(
   myDataSelector,
   (data) => data.nat,
