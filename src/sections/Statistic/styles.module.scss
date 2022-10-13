@@ -1,0 +1,81 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.wrapper {
+  background: $primaryBack;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.statistic {
+  background: $white;
+  padding: 10px 15px 60px 15px;
+  box-shadow: 0 5px 5px $shadowStatistic;
+}
+
+.statisticTitle {
+  font-weight: 600;
+  color: $primaryText;
+  font-size: $fontSizeXL;
+}
+
+.amount {
+  @include flex(start, start);
+  margin-top: 15px;
+}
+
+.genders {
+  @include flex(center, start);
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.wrapperGender {
+  @include flex(space-between, center);
+  @include media-max(sm) {
+    flex-wrap: wrap;
+  }
+}
+
+.collection {
+  margin-right: 30px;
+}
+
+.collectionTitle {
+  color: $messageInput;
+}
+
+.value {
+  color: $primaryText;
+  font-size: $fontSizeXL;
+  margin: 10px 0;
+}
+
+.predominate {
+  background: $dominate;
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.titleNats {
+  color: $messageInput;
+  margin: 30px 0 10px 0;
+}
+
+.nationalities {
+  @include flex(start, center);
+  flex-wrap: wrap;
+}
+
+.nat {
+  margin-bottom: 10px;
+  width: 120px;
+  @include flex(start, center);
+
+  span {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+}

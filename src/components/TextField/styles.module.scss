@@ -53,10 +53,10 @@
 
 .inputMessage {
   color: $messageInput;
-  font-size: $fontSizeMessage;
+  font-size: $fontSizeM;
 
   @include media-max(md) {
-    font-size: $fontSizeSmall;
+    font-size: $fontSizeS;
   }
 }
 

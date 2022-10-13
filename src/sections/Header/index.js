@@ -78,40 +78,46 @@ export default function Header() {
 
   return (
     <header className={st.header}>
-      <LogoSvg />
-      <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
-        {authKey && deviceWidth > 768 && (
-          <ul className={st.menuNav}>
-            <Link to={HOME} className={st.menuNavItem}>
-              Home
-            </Link>
-            <Link to={CONTACTS} className={st.menuNavItem}>
-              Contacts
-            </Link>
-          </ul>
-        )}
-        {authKey ? (
-          <Menu
-            label={fullName}
-            avatar={picture.thumbnail}
-            loading={loading}
-            options={options}
-          />
-        ) : (
-          <Button type="button" className={st.signInBtn} onClick={handleSignIn}>
-            <SignInSvg />
-            <span>Sign In</span>
-          </Button>
-        )}
+      <div className={`container ${st.containerHeader}`}>
+        <LogoSvg />
+        <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
+          {authKey && deviceWidth > 768 && (
+            <ul className={st.menuNav}>
+              <Link to={HOME} className={st.menuNavItem}>
+                Home
+              </Link>
+              <Link to={CONTACTS} className={st.menuNavItem}>
+                Contacts
+              </Link>
+            </ul>
+          )}
+          {authKey ? (
+            <Menu
+              label={fullName}
+              avatar={picture.thumbnail}
+              loading={loading}
+              options={options}
+            />
+          ) : (
+            <Button
+              type="button"
+              className={st.signInBtn}
+              onClick={handleSignIn}
+            >
+              <SignInSvg />
+              <span>Sign In</span>
+            </Button>
+          )}
+        </div>
+        <div
+          className={clsx(st.blurBlock, { [st.isBlur]: isActiveModal })}
+          onClick={handleSignIn}
+        />
+        <Portal>
+          {isActiveModal && <SignIn notify={notify} onSignIn={handleSignIn} />}
+        </Portal>
+        <ToastContainer position="top-right" autoClose={3000} />
       </div>
-      <div
-        className={clsx(st.blurBlock, { [st.isBlur]: isActiveModal })}
-        onClick={handleSignIn}
-      />
-      <Portal>
-        {isActiveModal && <SignIn notify={notify} onSignIn={handleSignIn} />}
-      </Portal>
-      <ToastContainer position="top-right" autoClose={3000} />
     </header>
   );
 }

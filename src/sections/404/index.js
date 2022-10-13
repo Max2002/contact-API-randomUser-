@@ -9,7 +9,7 @@ export default function Page404() {
   const backHome = () => navigate(HOME);
 
   return (
-    <div className={st.page404}>
+    <main className={st.page404}>
       <div className={st.code}>404</div>
       <div className={st.message}>Requested page not found!</div>
       <div>
@@ -17,6 +17,6 @@ export default function Page404() {
           Back to home
         </Button>
       </div>
-    </div>
+    </main>
   );
 }

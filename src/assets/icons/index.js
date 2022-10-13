@@ -13,3 +13,8 @@ export { ReactComponent as ContactsSvg } from './contacts.svg';
 export { ReactComponent as ReactLogoSvg } from './reactLogo.svg';
 export { ReactComponent as CopySvg } from './copy.svg';
 export { ReactComponent as CopiedSvg } from './copied.svg';
+export { ReactComponent as ReloadSvg } from './reload.svg';
+export { ReactComponent as PlateSvg } from './plateView.svg';
+export { ReactComponent as TableSvg } from './tableView.svg';
+export { ReactComponent as SortASCSvg } from './sortASC.svg';
+export { ReactComponent as SortDESCSvg } from './sortDESC.svg';

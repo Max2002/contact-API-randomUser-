@@ -36,7 +36,7 @@ export default function Profile() {
   };
 
   return (
-    <div className={`container ${st.profile}`}>
+    <main className={`container ${st.profile}`}>
       <h1 className={st.title}>Profile</h1>
       <div className={st.data}>
         {renderElement(
@@ -72,6 +72,6 @@ export default function Profile() {
           )}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

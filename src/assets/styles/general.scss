@@ -14,7 +14,7 @@ body {
   font-size: $fontSizePrimary;
 
   @include media-max(md) {
-    font-size: $fontSizeSmall;
+    font-size: $fontSizeS;
   }
 }
 
@@ -40,7 +40,7 @@ input {
 }
 
 .container {
-  max-width: 1024px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
 }
