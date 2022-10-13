@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
 import { DropDownSvg } from '../../assets/icons';
 import st from './styles.module.scss';
+import LoadingElement from '../LoadingElement';
 
 export default function Menu(props) {
   const { label, avatar, options, loading } = props;
@@ -24,23 +24,28 @@ export default function Menu(props) {
 
   return (
     <div className={st.welcomeUser}>
-      {loading ? (
-        <Skeleton width={200} height={20} />
-      ) : (
-        <p className={st.label}>Hello! {label}</p>
-      )}
+      <LoadingElement
+        flag={!loading}
+        element={<p className={st.label}>Hello! {label}</p>}
+        width={200}
+      />
       <DropDownSvg className={st.dropDownSvg} />
-      {loading ? (
-        <Skeleton circle width={50} height={50} />
-      ) : (
-        <img className={st.avatar} src={avatar} alt={label} />
-      )}
+      <LoadingElement
+        flag={!loading}
+        element={<img className={st.avatar} src={avatar} alt={label} />}
+        width={50}
+        height={50}
+      />
       <div className={st.dropDownList}>
         <ul className={st.list}>{contentList}</ul>
       </div>
     </div>
   );
 }
+
+Menu.defaultProps = {
+  avatar: '',
+};
 
 Menu.propTypes = {
   label: PropTypes.string.isRequired,

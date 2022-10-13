@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Skeleton from 'react-loading-skeleton';
 import CopyElement from '../../components/CopyElement';
 import {
   ageSelector,
@@ -12,6 +11,7 @@ import {
   nationalitySelector,
 } from '../../redux/selectors/getMyProfile';
 import st from './styles.module.scss';
+import LoadingElement from '../../components/LoadingElement';
 
 const myProfileSelector = createStructuredSelector({
   picture: avatarSelector,
@@ -27,49 +27,44 @@ export default function Profile() {
   const { picture, fullName, age, email, phone, address, nat } =
     useSelector(myProfileSelector);
 
-  const renderElement = (element, flag, width = 375, height = 15) => {
-    return flag ? (
-      element
-    ) : (
-      <Skeleton className={st.skeleton} width={width} height={height} />
-    );
-  };
-
   return (
     <div className={`container ${st.profile}`}>
       <h1 className={st.title}>Profile</h1>
       <div className={st.data}>
-        {renderElement(
-          <img className={st.avatar} src={picture.large} alt={fullName} />,
-          picture.large,
-          260,
-          260,
-        )}
-        <div className={st.personalInfo}>
-          {renderElement(
-            <h3 className={`${st.fullName} ${st.borderDashed}`}>
-              {fullName} <span>({age} years)</span>
-            </h3>,
-            age,
-          )}
-          {renderElement(
-            <CopyElement isLink prefixLink="mailto:">
-              {email}
-            </CopyElement>,
-            email,
-          )}
-          {renderElement(
-            <CopyElement isLink prefixLink="tel:">
-              {phone}
-            </CopyElement>,
-            phone,
-          )}
-          {renderElement(<CopyElement>{address}</CopyElement>, address)}
-          {renderElement(
-            <span className={st.nationality}>{nat}</span>,
-            nat,
-            40,
-          )}
+        <LoadingElement
+          flag={picture.large}
+          element={
+            <img className={st.avatar} src={picture.large} alt={fullName} />
+          }
+          width={260}
+          height={260}
+        />
+        <div>
+          <LoadingElement
+            flag={age}
+            element={
+              <h3 className={`${st.fullName} ${st.borderDashed}`}>
+                {fullName} <span>({age} years)</span>
+              </h3>
+            }
+          />
+          <LoadingElement
+            flag={email}
+            element={<CopyElement link prefixLink="mailto:" content={email} />}
+          />
+          <LoadingElement
+            flag={phone}
+            element={<CopyElement link prefixLink="tel:" content={phone} />}
+          />
+          <LoadingElement
+            flag={address}
+            element={<CopyElement content={address} />}
+          />
+          <LoadingElement
+            flag={nat}
+            element={<span className={st.nationality}>{nat}</span>}
+            width={40}
+          />
         </div>
       </div>
     </div>

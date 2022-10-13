@@ -7,21 +7,21 @@
   margin: 10px 0;
   @include flex-vertical-centre;
 
-  a {
-    color: $primary;
-  }
-
-  span {
-    color: $primaryText;
-    margin: unset;
-  }
-
   svg {
     font-size: $fontSizeLarge;
     margin-right: 10px;
     cursor: pointer;
     margin-top: 7px;
   }
+}
+
+.link {
+  color: $primary;
+}
+
+.text {
+  color: $primaryText;
+  margin: unset;
 }
 
 .copy {

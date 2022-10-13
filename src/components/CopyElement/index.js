@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CopiedSvg, CopySvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
-export default function CopyElement({ children, isLink, prefixLink }) {
+export default function CopyElement({ content, link, prefixLink }) {
   const [isCopied, setIsCopied] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
     setIsCopied(true);
   };
 
@@ -19,39 +19,35 @@ export default function CopyElement({ children, isLink, prefixLink }) {
     };
   }, [isCopied]);
 
-  const renderPrefix = () => (
-    <div className={st.icon}>
-      <div className={st.copy}>{isCopied ? 'Copied' : 'Copy'}</div>
-      <CopyToClipboard text={children}>
+  return (
+    <div className={st.contact}>
+      <div className={st.icon}>
+        <div className={st.copy}>{isCopied ? 'Copied' : 'Copy'}</div>
         {isCopied ? (
           <CopiedSvg className={st.copied} />
         ) : (
-          <CopySvg onClick={handleCopy} />
+          <CopySvg onClick={() => handleCopy(content)} />
         )}
-      </CopyToClipboard>
-    </div>
-  );
-
-  return (
-    <div className={st.contact}>
-      {renderPrefix()}
-      {isLink ? (
-        <a href={`${prefixLink}${children}`}>{children}</a>
+      </div>
+      {link ? (
+        <a className={st.link} href={`${prefixLink}${content}`}>
+          {content}
+        </a>
       ) : (
-        <span>{children}</span>
+        <span className={st.text}>{content}</span>
       )}
     </div>
   );
 }
 
 CopyElement.defaultProps = {
-  children: '',
-  isLink: false,
+  content: '',
+  link: false,
   prefixLink: '',
 };
 
 CopyElement.propTypes = {
-  children: PropTypes.string,
-  isLink: PropTypes.bool,
+  content: PropTypes.string,
+  link: PropTypes.bool,
   prefixLink: PropTypes.string,
 };
