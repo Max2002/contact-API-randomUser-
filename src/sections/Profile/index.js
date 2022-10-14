@@ -45,7 +45,7 @@ export default function Profile() {
           260,
           260,
         )}
-        <div className={st.personalInfo}>
+        <div>
           {renderElement(
             <h3 className={`${st.fullName} ${st.borderDashed}`}>
               {fullName} <span>({age} years)</span>

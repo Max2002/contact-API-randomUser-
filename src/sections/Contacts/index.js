@@ -12,16 +12,18 @@ import { PlateSvg, ReloadSvg, TableSvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
 export default function Contacts() {
-  const [switchView, setSwitchView] = useState(false);
+  const [viewContacts, setViewContacts] = useState(false);
   const dispatch = useDispatch();
   const contacts = useSelector(dataSelector);
   const deviceWidth = useDeviceWidth();
 
-  const handleSwitch = () => setSwitchView(!switchView);
-  const reloadData = () => dispatch(getContacts(1, 10));
+  const dispatchContacts = () => dispatch(getContacts(1, 10));
+
+  const handleViewContacts = () => setViewContacts(!viewContacts);
+  const updateContacts = () => dispatchContacts(1, 10);
 
   useEffect(() => {
-    dispatch(getContacts(1, 10));
+    dispatchContacts();
   }, []);
 
   const renderBlocksView = (contact) => {
@@ -65,22 +67,22 @@ export default function Contacts() {
       <div className={st.head}>
         <h1 className={st.title}>Contacts</h1>
         <div className={st.switchView}>
-          <Button className={st.reload} type="button" onClick={reloadData}>
+          <Button className={st.reload} type="button" onClick={updateContacts}>
             <ReloadSvg />
           </Button>
           {deviceWidth > 992 && (
             <>
               <Button
-                className={clsx(st.switchBtn, { [st.active]: switchView })}
+                className={clsx(st.switchBtn, { [st.active]: viewContacts })}
                 type="button"
-                onClick={handleSwitch}
+                onClick={handleViewContacts}
               >
                 <PlateSvg />
               </Button>
               <Button
-                className={clsx(st.switchBtn, { [st.active]: !switchView })}
+                className={clsx(st.switchBtn, { [st.active]: !viewContacts })}
                 type="button"
-                onClick={handleSwitch}
+                onClick={handleViewContacts}
               >
                 <TableSvg />
               </Button>
@@ -89,7 +91,7 @@ export default function Contacts() {
         </div>
       </div>
       <div>
-        {switchView || deviceWidth < 992 ? (
+        {viewContacts || deviceWidth < 992 ? (
           <div className={st.blocksView}>{contacts.map(renderBlocksView)}</div>
         ) : (
           <Table contacts={contacts} />

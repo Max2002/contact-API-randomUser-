@@ -1,3 +1,6 @@
+import { useSelector } from 'react-redux';
+import { locale } from 'moment/moment';
+import { authSelector } from '../selectors/getMyProfile';
 import apiUser from '../../api/apiUser';
 
 export const GET_CONTACTS_FETCHING = 'GET_CONTACTS/FETCHING';
@@ -20,6 +23,7 @@ const contactsError = (error) => ({
 
 export const getContacts = (page, conutCotacts) => async (dispatch) => {
   dispatch(contactsFetching());
+
   try {
     const {
       data: { results },

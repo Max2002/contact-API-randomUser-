@@ -7,16 +7,10 @@ import { SortASCSvg, SortDESCSvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
 export default function Table({ contacts }) {
-  const [sortByName, setSortByName] = useState([true, false, false]);
+  const [sortByName, setSortByName] = useState(0);
 
   const handleSortByName = () => {
-    const trueIndex = sortByName.indexOf(true);
-    const newSortByName = sortByName.slice();
-
-    newSortByName[trueIndex] = false;
-    const nextIndex = trueIndex + 1 === sortByName.length ? 0 : trueIndex + 1;
-
-    newSortByName[nextIndex] = true;
+    const newSortByName = sortByName + 1 > 2 ? 0 : sortByName + 1;
 
     setSortByName(newSortByName);
   };
@@ -65,14 +59,14 @@ export default function Table({ contacts }) {
   };
 
   const renderRows = () => {
-    if (sortByName[1]) {
+    if (sortByName === 1) {
       return contacts
         .slice()
         .sort((a, b) => b.name.first.localeCompare(a.name.first))
         .map(rows);
     }
 
-    if (sortByName[2]) {
+    if (sortByName === 2) {
       return contacts
         .slice()
         .sort((a, b) => a.name.first.localeCompare(b.name.first))
@@ -93,10 +87,10 @@ export default function Table({ contacts }) {
           Full name
           <div className={st.sortIcons}>
             <SortASCSvg
-              className={clsx('', { [st.activeIconSort]: sortByName[1] })}
+              className={clsx('', { [st.activeIconSort]: sortByName === 2 })}
             />
             <SortDESCSvg
-              className={clsx('', { [st.activeIconSort]: sortByName[2] })}
+              className={clsx('', { [st.activeIconSort]: sortByName === 1 })}
             />
           </div>
         </td>
