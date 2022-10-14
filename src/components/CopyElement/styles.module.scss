@@ -6,13 +6,17 @@
   color: $primary;
   margin: 10px 0;
   @include flex-vertical-centre;
+}
 
-  svg {
-    font-size: $fontSizeLarge;
-    margin-right: 10px;
-    cursor: pointer;
-    margin-top: 7px;
-  }
+.copy, .copied {
+  font-size: $fontSizeLarge;
+  margin-right: 10px;
+  cursor: pointer;
+  margin-top: 7px;
+}
+
+.copied {
+  color: $copied;
 }
 
 .link {
@@ -24,7 +28,7 @@
   margin: unset;
 }
 
-.copy {
+.notificationCopy {
   position: absolute;
   top: -45px;
   left: -17px;
@@ -48,14 +52,10 @@
   }
 }
 
-.copied {
-  color: $copied;
-}
-
-.icon {
+.copySvg {
   position: relative;
 
-  &:hover .copy {
+  &:hover .notificationCopy {
     visibility: visible;
     opacity: 1;
   }

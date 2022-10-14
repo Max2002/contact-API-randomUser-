@@ -49,11 +49,11 @@
     font-size: $fontSizeLarge;
     text-align: center;
   }
+}
 
-  span {
-    font-size: 80%;
-    color: $messageInput;
-  }
+.age {
+  font-size: 80%;
+  color: $messageInput;
 }
 
 .nationality {

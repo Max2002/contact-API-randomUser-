@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import CopyElement from '../../components/CopyElement';
+import LoadingElement from '../../components/LoadingElement';
+import Container from '../../components/Container';
 import {
   ageSelector,
   avatarSelector,
@@ -11,7 +13,6 @@ import {
   nationalitySelector,
 } from '../../redux/selectors/getMyProfile';
 import st from './styles.module.scss';
-import LoadingElement from '../../components/LoadingElement';
 
 const myProfileSelector = createStructuredSelector({
   picture: avatarSelector,
@@ -28,45 +29,34 @@ export default function Profile() {
     useSelector(myProfileSelector);
 
   return (
-    <div className={`container ${st.profile}`}>
-      <h1 className={st.title}>Profile</h1>
-      <div className={st.data}>
-        <LoadingElement
-          flag={picture.large}
-          element={
+    <Container>
+      <div className={st.profile}>
+        <h1 className={st.title}>Profile</h1>
+        <div className={st.data}>
+          <LoadingElement loading={picture.large} width={260} height={260}>
             <img className={st.avatar} src={picture.large} alt={fullName} />
-          }
-          width={260}
-          height={260}
-        />
-        <div>
-          <LoadingElement
-            flag={age}
-            element={
+          </LoadingElement>
+          <div>
+            <LoadingElement loading={age}>
               <h3 className={`${st.fullName} ${st.borderDashed}`}>
-                {fullName} <span>({age} years)</span>
+                {fullName} <span className={st.age}>({age} years)</span>
               </h3>
-            }
-          />
-          <LoadingElement
-            flag={email}
-            element={<CopyElement link prefixLink="mailto:" content={email} />}
-          />
-          <LoadingElement
-            flag={phone}
-            element={<CopyElement link prefixLink="tel:" content={phone} />}
-          />
-          <LoadingElement
-            flag={address}
-            element={<CopyElement content={address} />}
-          />
-          <LoadingElement
-            flag={nat}
-            element={<span className={st.nationality}>{nat}</span>}
-            width={40}
-          />
+            </LoadingElement>
+            <LoadingElement loading={email}>
+              <CopyElement link={`mailto:${email}`} content={email} />
+            </LoadingElement>
+            <LoadingElement loading={phone}>
+              <CopyElement link={`tel:${phone}`} content={phone} />
+            </LoadingElement>
+            <LoadingElement loading={address}>
+              <CopyElement content={address} />
+            </LoadingElement>
+            <LoadingElement loading={nat} width={40}>
+              <span className={st.nationality}>{nat}</span>
+            </LoadingElement>
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
