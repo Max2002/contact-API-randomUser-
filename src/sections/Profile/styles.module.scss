@@ -5,13 +5,13 @@
   @include flex(start, center);
   flex: auto;
   flex-direction: column;
+}
 
-  .title {
-    margin: 20px 0;
-    font-weight: 600;
-    color: $primaryText;
-    font-size: $fontSizeTitle;
-  }
+.title {
+  margin: 20px 0;
+  font-weight: 600;
+  color: $primaryText;
+  font-size: $fontSizeTitle;
 }
 
 .data {

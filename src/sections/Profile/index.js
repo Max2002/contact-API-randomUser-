@@ -29,32 +29,30 @@ export default function Profile() {
     useSelector(myProfileSelector);
 
   return (
-    <Container>
-      <div className={st.profile}>
-        <h1 className={st.title}>Profile</h1>
-        <div className={st.data}>
-          <LoadingElement loading={picture.large} width={260} height={260}>
-            <img className={st.avatar} src={picture.large} alt={fullName} />
+    <Container className={st.profile}>
+      <h1 className={st.title}>Profile</h1>
+      <div className={st.data}>
+        <LoadingElement loading={picture.large} width={260} height={260}>
+          <img className={st.avatar} src={picture.large} alt={fullName} />
+        </LoadingElement>
+        <div>
+          <LoadingElement loading={age}>
+            <h3 className={`${st.fullName} ${st.borderDashed}`}>
+              {fullName} <span className={st.age}>({age} years)</span>
+            </h3>
           </LoadingElement>
-          <div>
-            <LoadingElement loading={age}>
-              <h3 className={`${st.fullName} ${st.borderDashed}`}>
-                {fullName} <span className={st.age}>({age} years)</span>
-              </h3>
-            </LoadingElement>
-            <LoadingElement loading={email}>
-              <CopyElement link={`mailto:${email}`} content={email} />
-            </LoadingElement>
-            <LoadingElement loading={phone}>
-              <CopyElement link={`tel:${phone}`} content={phone} />
-            </LoadingElement>
-            <LoadingElement loading={address}>
-              <CopyElement content={address} />
-            </LoadingElement>
-            <LoadingElement loading={nat} width={40}>
-              <span className={st.nationality}>{nat}</span>
-            </LoadingElement>
-          </div>
+          <LoadingElement loading={email}>
+            <CopyElement link={`mailto:${email}`} content={email} />
+          </LoadingElement>
+          <LoadingElement loading={phone}>
+            <CopyElement link={`tel:${phone}`} content={phone} />
+          </LoadingElement>
+          <LoadingElement loading={address}>
+            <CopyElement content={address} />
+          </LoadingElement>
+          <LoadingElement loading={nat} width={40}>
+            <span className={st.nationality}>{nat}</span>
+          </LoadingElement>
         </div>
       </div>
     </Container>

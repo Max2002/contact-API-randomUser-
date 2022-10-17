@@ -30,9 +30,9 @@ export default function CopyElement({ content, link }) {
           {isCopied ? 'Copied' : 'Copy'}
         </div>
         {isCopied ? (
-          <CopiedSvg className={st.copied} />
+          <CopiedSvg className={`${st.copiesSvg} ${st.copied}`} />
         ) : (
-          <CopySvg className={st.copy} onClick={handleCopy} />
+          <CopySvg className={st.copiesSvg} onClick={handleCopy} />
         )}
       </div>
       {link ? (
