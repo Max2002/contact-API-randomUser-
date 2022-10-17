@@ -5,6 +5,7 @@ import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { dataSelector } from '../../redux/selectors/getContacts';
 import { getContacts } from '../../redux/actionCreator/getContacts';
 import { Button } from '../../components';
+import Filters from './Filters';
 import Statistic from '../Statistic';
 import Table from './Table';
 import CopyElement from '../../components/CopyElement';
@@ -15,16 +16,68 @@ export default function Contacts() {
   const [viewContacts, setViewContacts] = useState(false);
   const dispatch = useDispatch();
   const contacts = useSelector(dataSelector);
+  const [filteredContacts, setFilterContacts] = useState([]);
   const deviceWidth = useDeviceWidth();
+  const nationalities = [...new Set(contacts.map((contact) => contact.nat))];
 
   const dispatchContacts = () => dispatch(getContacts(1, 10));
 
   const handleViewContacts = () => setViewContacts(!viewContacts);
-  const updateContacts = () => dispatchContacts(1, 10);
+  const updateContacts = () => dispatchContacts();
 
   useEffect(() => {
     dispatchContacts();
   }, []);
+
+  const filterByFullName = (value) => {
+    const filterContacts = contacts
+      .slice()
+      .map((contact) => {
+        const {
+          name: { title, first, last },
+        } = contact;
+
+        return (
+          `${title}. ${first} ${last}`.toLowerCase().includes(value) && contact
+        );
+      })
+      .filter((contact) => contact);
+
+    setFilterContacts(
+      filterContacts.length === 0 ? ['No data'] : filterContacts,
+    );
+  };
+
+  const filterGender = (gender) => {
+    if (gender === 'gender') {
+      dispatchContacts();
+      setFilterContacts([]);
+    } else {
+      const filterContacts = contacts
+        .slice()
+        .filter((contact) => contact.gender === gender.toLowerCase());
+
+      setFilterContacts(
+        filterContacts.length === 0 ? ['No data'] : filterContacts,
+      );
+    }
+  };
+
+  const filterNat = (nat) => {
+    if (nat.length === 0) {
+      dispatchContacts();
+      setFilterContacts([]);
+    } else {
+      const nats = nat.map(({ value }) => value);
+      const filterContacts = contacts
+        .slice()
+        .filter((contact) => nats.includes(contact.nat));
+
+      setFilterContacts(
+        filterContacts.length === 0 ? ['No data'] : filterContacts,
+      );
+    }
+  };
 
   const renderBlocksView = (contact) => {
     const { picture, name, dob, email, phone, location, nat } = contact;
@@ -62,6 +115,9 @@ export default function Contacts() {
     );
   };
 
+  const resContacts =
+    filteredContacts.length === 0 ? contacts : filteredContacts;
+
   return (
     <main className={`container ${st.contacts}`}>
       <div className={st.head}>
@@ -90,14 +146,28 @@ export default function Contacts() {
           )}
         </div>
       </div>
-      <div>
-        {viewContacts || deviceWidth < 992 ? (
-          <div className={st.blocksView}>{contacts.map(renderBlocksView)}</div>
-        ) : (
-          <Table contacts={contacts} />
-        )}
-      </div>
-      <Statistic contacts={contacts} />
+      <Filters
+        filterByName={filterByFullName}
+        filterGender={filterGender}
+        filterNat={filterNat}
+        nationalities={nationalities}
+      />
+      {resContacts[0] === 'No data' ? (
+        <div>No data</div>
+      ) : (
+        <>
+          <div>
+            {viewContacts || deviceWidth < 992 ? (
+              <div className={st.blocksView}>
+                {resContacts.map(renderBlocksView)}
+              </div>
+            ) : (
+              <Table contacts={resContacts} />
+            )}
+          </div>
+          <Statistic contacts={resContacts} />
+        </>
+      )}
     </main>
   );
 }

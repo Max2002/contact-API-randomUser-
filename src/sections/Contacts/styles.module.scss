@@ -53,6 +53,117 @@
   background: $primary;
 }
 
+.wrapperFilters {
+  padding: 15px;
+  background: $primaryBack;
+  margin-bottom: 30px;
+}
+
+.filters {
+  @include flex(space-between, center);
+  background: $white;
+  padding: 20px;
+  color: $primaryText;
+
+  @include media-max(lg) {
+    flex-direction: column;
+  }
+}
+
+.filterByName {
+  @include flex(space-between, center);
+  border: 1px solid $borderInput;
+  width: 450px;
+  border-radius: 5px;
+
+  &:focus-within {
+    border: 1px solid $primary;
+    box-shadow: 0 0 3px $primary;
+  }
+
+  &:hover {
+    border: 1px solid $primary;
+  }
+
+  &::placeholder {
+    color: $placeholder;
+  }
+
+  @include media-max(xl) {
+    width: 350px;
+  }
+
+  @include media-max(lg) {
+    width: 100%;
+  }
+}
+
+.fieldFilter {
+  @include flex(space-between, centre);
+  width: 90%;
+}
+
+.field {
+  border: none;
+  font-size: $fontSizeLarge;
+  margin-left: 10px;
+  width: 95%;
+}
+
+.fieldBtn {
+  margin-top: 5px;
+  font-size: $fontSizeM;
+  color: $placeholder;
+
+  &:hover {
+    color: $clearButton;
+  }
+}
+
+.searchIcon {
+  border-left: 1px solid $borderInput;
+  padding: 10px;
+  color: $messageInput;
+}
+
+.gender {
+  padding: 11px;
+  width: 200px;
+  font-size: $fontSizePrimary;
+
+  @include media-max(lg) {
+    width: 100%;
+    padding: unset;
+    margin: 20px 0;
+  }
+}
+
+.selectNat {
+  padding: 11px;
+  width: 250px;
+  font-size: $fontSizePrimary;
+
+  @include media-max(lg) {
+    width: 100%;
+    padding: unset;
+  }
+}
+
+.clear {
+  @include flex(space-between, centre);
+  color: $primary;
+  cursor: pointer;
+
+  @include media-max(lg) {
+    margin-top: 20px;
+  }
+}
+
+.clearBtn {
+  margin: -2.5px 0 0 15px;
+  color: $primary;
+}
+
 .table {
   background: $white;
   border-radius: 2px;

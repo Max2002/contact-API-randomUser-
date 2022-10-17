@@ -1,6 +1,3 @@
-import { useSelector } from 'react-redux';
-import { locale } from 'moment/moment';
-import { authSelector } from '../selectors/getMyProfile';
 import apiUser from '../../api/apiUser';
 
 export const GET_CONTACTS_FETCHING = 'GET_CONTACTS/FETCHING';
@@ -21,7 +18,7 @@ const contactsError = (error) => ({
   payload: error,
 });
 
-export const getContacts = (page, conutCotacts) => async (dispatch) => {
+export const getContacts = (page, countContacts) => async (dispatch) => {
   dispatch(contactsFetching());
 
   try {
@@ -31,7 +28,7 @@ export const getContacts = (page, conutCotacts) => async (dispatch) => {
       params: {
         seed: localStorage.getItem('auth'),
         page,
-        results: conutCotacts,
+        results: countContacts,
       },
     });
 

@@ -18,3 +18,6 @@ export { ReactComponent as PlateSvg } from './plateView.svg';
 export { ReactComponent as TableSvg } from './tableView.svg';
 export { ReactComponent as SortASCSvg } from './sortASC.svg';
 export { ReactComponent as SortDESCSvg } from './sortDESC.svg';
+export { ReactComponent as SearchSvg } from './searchIcon.svg';
+export { ReactComponent as ClearInputSvg } from './clearInput.svg';
+export { ReactComponent as ClearFilterSvg } from './clearFilter.svg';
