@@ -18,22 +18,26 @@ const contactsError = (error) => ({
   payload: error,
 });
 
-export const getContacts = (page, countContacts) => async (dispatch) => {
-  dispatch(contactsFetching());
+export const getContacts =
+  (page, countContacts) => async (dispatch, getState) => {
+    dispatch(contactsFetching());
 
-  try {
-    const {
-      data: { results },
-    } = await apiUser.get('/', {
-      params: {
-        seed: localStorage.getItem('auth'),
-        page,
-        results: countContacts,
-      },
-    });
+    try {
+      const {
+        myProfile: { authKey },
+      } = getState();
+      const {
+        data: { results },
+      } = await apiUser.get('/', {
+        params: {
+          seed: authKey,
+          page,
+          results: countContacts,
+        },
+      });
 
-    dispatch(contactsSuccess(results));
-  } catch (error) {
-    dispatch(contactsError(error));
-  }
-};
+      dispatch(contactsSuccess(results));
+    } catch (error) {
+      dispatch(contactsError(error));
+    }
+  };

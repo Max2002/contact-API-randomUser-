@@ -1,0 +1,59 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.table {
+  background: $white;
+  border-radius: 2px;
+  border-spacing: 0;
+  padding: 20px 30px;
+  width: 100%;
+
+  td {
+    padding: 10px;
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+}
+
+.firstRow {
+  font-weight: 500;
+  color: $title;
+  font-size: $fontSizePrimary;
+  background: $firstRow;
+}
+
+.sortColumn {
+  @include flex(start, center);
+  transition: all .5s;
+  cursor: pointer;
+
+  &:hover {
+    background: $backHeadTable;
+  }
+}
+
+.sortIcons {
+  @include flex(center, center);
+  flex-direction: column;
+  margin-left: 10px;
+  font-size: $fontSizeS;
+  color: $messageInput;
+
+  svg:hover {
+    color: $primary;
+  }
+}
+
+.activeIconSort {
+  color: $primary;
+}
+
+.email {
+  a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+  }
+}

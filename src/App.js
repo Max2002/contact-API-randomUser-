@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { getMyProfile } from './redux/actionCreator/getMyProfile';
 import Header from './sections/Header';
 import Home from './sections/Home';
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }

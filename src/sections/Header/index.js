@@ -78,7 +78,7 @@ export default function Header() {
 
   return (
     <header className={st.header}>
-      <div className={`container ${st.containerHeader}`}>
+      <div className={clsx('container', st.containerHeader)}>
         <LogoSvg />
         <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
           {authKey && deviceWidth > 768 && (
@@ -116,7 +116,6 @@ export default function Header() {
         <Portal>
           {isActiveModal && <SignIn notify={notify} onSignIn={handleSignIn} />}
         </Portal>
-        <ToastContainer position="top-right" autoClose={3000} />
       </div>
     </header>
   );

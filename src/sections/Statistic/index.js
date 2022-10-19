@@ -5,21 +5,10 @@ export default function Statistic({ contacts }) {
   const amountGender = { male: 0, female: 0, indeterminate: 0 };
   const amountNat = {};
 
-  contacts.map(({ gender, nat }) => {
-    if (amountNat[nat]) {
-      amountNat[nat] += 1;
-    } else {
-      amountNat[nat] = 1;
-    }
-
-    if (gender === 'male') {
-      amountGender.male += 1;
-    } else if (gender === 'female') {
-      amountGender.female += 1;
-    } else {
-      amountGender.indeterminate += 1;
-    }
-  });
+  contacts.reduce((preventValue, { gender, nat }) => {
+    amountGender[gender] += 1;
+    amountNat[nat] = amountNat[nat] ? (amountNat[nat] += 1) : 1;
+  }, {});
   const maxGender = Math.max(...Object.values(amountGender));
   const [dominateGender] = Object.keys(amountGender).filter(
     (key) => amountGender[key] === maxGender,

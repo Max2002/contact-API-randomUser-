@@ -1,16 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import moment from 'moment/moment';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { dataSelector } from '../../redux/selectors/getContacts';
 import { getContacts } from '../../redux/actionCreator/getContacts';
 import { Button } from '../../components';
 import Filters from './Filters';
 import Statistic from '../Statistic';
-import Table from './Table';
-import CopyElement from '../../components/CopyElement';
+import Table from '../../components/Table';
 import { PlateSvg, ReloadSvg, TableSvg } from '../../assets/icons';
 import st from './styles.module.scss';
+import ContactCard from '../../components/ContactCard';
+import CopyElement from '../../components/CopyElement';
 
 export default function Contacts() {
   const [viewContacts, setViewContacts] = useState(false);
@@ -79,44 +81,73 @@ export default function Contacts() {
     }
   };
 
-  const renderBlocksView = (contact) => {
-    const { picture, name, dob, email, phone, location, nat } = contact;
-    const { title, first, last } = name;
-    const { country, street, city, state, postcode } = location;
-    const address = `/${country}/ ${street.number} ${street.name}, ${city}, ${state} ${postcode}`;
-
-    return (
-      <div className={st.contact}>
-        <img
-          className={st.blocksAvatar}
-          src={picture.large}
-          alt={`${first}${last}`}
-        />
-        <div className={st.personalInfo}>
-          <p className={`${st.fullNameBlockView} ${st.dashedLine}`}>
-            {title}. {first} {last} <span>({dob.age} years)</span>
-          </p>
-          <div>
-            <CopyElement isLink prefixLink="mailto:">
-              {email}
-            </CopyElement>
-          </div>
-          <div className={st.phone}>
-            <CopyElement isLink prefixLink="tel:">
-              {phone}
-            </CopyElement>
-          </div>
-          <div className={`${st.address} ${st.dashedLine}`}>
-            <CopyElement>{address}</CopyElement>
-          </div>
-          <p className={`${st.nat} ${st.natBlocksView}`}>{nat}</p>
-        </div>
-      </div>
-    );
-  };
-
   const resContacts =
     filteredContacts.length === 0 ? contacts : filteredContacts;
+
+  const renderContacts = (flagCard) => {
+    return resContacts.map((contact) => {
+      const { picture, name, dob, email, phone, location, nat } = contact;
+      const { title, first, last } = name;
+      const { date, age } = dob;
+      const { country, street, city, state, postcode } = location;
+      const address = `/${country}/ ${street.number} ${street.name}, ${city}, ${state} ${postcode}`;
+      const dateFormat = moment(date).format('dddd, MM/DD/yyyy, h:MM:ss A');
+
+      if (flagCard) {
+        const personalInfoContact = {
+          avatar: picture.large,
+          fullName: `${title}. ${first} ${last}`,
+          age,
+          email,
+          phone,
+          address,
+          nat,
+        };
+
+        return <ContactCard contact={personalInfoContact} />;
+      }
+
+      return {
+        avatar: (
+          <img
+            className={st.avatar}
+            src={picture.thumbnail}
+            alt={`${first}${last}`}
+          />
+        ),
+        fullName: [title, `${first} ${last}`],
+        birthday: (
+          <span>
+            {dateFormat}
+            <br />
+            {age} years
+          </span>
+        ),
+        email: (
+          <CopyElement isLink prefixLink="mailto:">
+            {email}
+          </CopyElement>
+        ),
+        phone: (
+          <CopyElement isLink prefixLink="tel:">
+            {phone}
+          </CopyElement>
+        ),
+        location: <CopyElement>{address}</CopyElement>,
+        nat: <span className={st.nat}>{nat}</span>,
+      };
+    });
+  };
+
+  const tableColumns = [
+    'Avatar',
+    'Full name',
+    'Birthday',
+    'Email',
+    'Phone',
+    'Location',
+    'Nationality',
+  ];
 
   return (
     <main className={`container ${st.contacts}`}>
@@ -158,11 +189,9 @@ export default function Contacts() {
         <>
           <div>
             {viewContacts || deviceWidth < 992 ? (
-              <div className={st.blocksView}>
-                {resContacts.map(renderBlocksView)}
-              </div>
+              <div className={st.blocksView}>{renderContacts(true)}</div>
             ) : (
-              <Table contacts={resContacts} />
+              <Table columns={tableColumns} options={renderContacts(false)} />
             )}
           </div>
           <Statistic contacts={resContacts} />

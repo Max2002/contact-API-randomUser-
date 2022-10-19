@@ -16,6 +16,6 @@ Button.defaultProps = {
 Button.propTypes = {
   type: PropTypes.string.isRequired,
   className: PropTypes.string,
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   onClick: PropTypes.func,
 };

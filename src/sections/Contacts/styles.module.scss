@@ -150,7 +150,7 @@
 }
 
 .clear {
-  @include flex(space-between, centre);
+  @include flex(space-between, center);
   color: $primary;
   cursor: pointer;
 
@@ -162,61 +162,6 @@
 .clearBtn {
   margin: -2.5px 0 0 15px;
   color: $primary;
-}
-
-.table {
-  background: $white;
-  border-radius: 2px;
-  border-spacing: 0;
-  padding: 20px 30px;
-  width: 100%;
-
-  td {
-    padding: 10px;
-
-    &:last-child {
-      text-align: right;
-    }
-  }
-}
-
-.firstRow {
-  font-weight: 500;
-  color: $title;
-  font-size: $fontSizePrimary;
-  background: $firstRow;
-}
-
-.fullNameSort {
-  @include flex(start, center);
-  transition: all .5s;
-
-  &:hover {
-    background: $backHeadTable;
-  }
-}
-
-.sortIcons {
-  @include flex(center, center);
-  flex-direction: column;
-  margin-left: 10px;
-  cursor: pointer;
-  font-size: $fontSizeS;
-  color: $messageInput;
-
-  svg:hover {
-    color: $primary;
-  }
-}
-
-.activeIconSort {
-  color: $primary;
-}
-
-.row {
-  td {
-    font-size: $fontSizePrimary;
-  }
 }
 
 .avatar {
@@ -231,14 +176,6 @@
 
 .fullName, .email, .phone {
   color: $primary;
-}
-
-.email {
-  a {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100px;
-  }
 }
 
 .address {
@@ -259,55 +196,10 @@
     @include flex(center, center);
     flex-direction: column;
   }
-}
 
-.contact {
-  width: 395px;
-  max-width: 395px;
-  margin: 10px 0;
-  background: $white;
-  transition: all .5s;
-
-  &:hover {
-    box-shadow: 0 7px 15px 0 $primaryShadow;
+  @include media-max(xl) {
+    @include flex(space-around, center);
   }
-
-  @include media-max(sm) {
-    width: 250px;
-    max-width: 250px;
-  }
-}
-
-.blocksAvatar {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  margin-bottom: 20px;
-}
-
-.personalInfo {
-  @include flex(center, start);
-  flex-direction: column;
-  padding: 0 30px 30px 30px;
-}
-
-.fullNameBlockView {
-  font-weight: 500;
-  color: $primary;
-  padding-bottom: 15px;
-  font-size: $fontSizePrimary;
-
-  span {
-    color: $messageInput;
-  }
-
-  //@include media-max(sm) {
-  //  font-size: $fontSizeM;
-  //}
-}
-
-.natBlocksView {
-  margin-top: 20px;
 }
 
 .dashedLine {
