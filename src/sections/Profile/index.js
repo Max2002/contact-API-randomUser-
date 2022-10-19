@@ -32,25 +32,25 @@ export default function Profile() {
     <Container className={st.profile}>
       <h1 className={st.title}>Profile</h1>
       <div className={st.data}>
-        <LoadingElement loading={picture.large} width={260} height={260}>
+        <LoadingElement loading={!picture.large} width={260} height={260}>
           <img className={st.avatar} src={picture.large} alt={fullName} />
         </LoadingElement>
         <div>
-          <LoadingElement loading={age}>
+          <LoadingElement loading={!age}>
             <h3 className={`${st.fullName} ${st.borderDashed}`}>
               {fullName} <span className={st.age}>({age} years)</span>
             </h3>
           </LoadingElement>
-          <LoadingElement loading={email}>
+          <LoadingElement loading={!email}>
             <CopyElement link={`mailto:${email}`} content={email} />
           </LoadingElement>
-          <LoadingElement loading={phone}>
+          <LoadingElement loading={!phone}>
             <CopyElement link={`tel:${phone}`} content={phone} />
           </LoadingElement>
-          <LoadingElement loading={address}>
+          <LoadingElement loading={!address}>
             <CopyElement content={address} />
           </LoadingElement>
-          <LoadingElement loading={nat} width={40}>
+          <LoadingElement loading={!nat} width={40}>
             <span className={st.nationality}>{nat}</span>
           </LoadingElement>
         </div>

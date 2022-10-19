@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import Hint from '../Hint';
 import { CopiedSvg, CopySvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
@@ -26,11 +28,11 @@ export default function CopyElement({ content, link }) {
   return (
     <div className={st.contact}>
       <div className={st.copySvg}>
-        <div className={st.notificationCopy}>
+        <Hint className={st.notificationCopy}>
           {isCopied ? 'Copied' : 'Copy'}
-        </div>
+        </Hint>
         {isCopied ? (
-          <CopiedSvg className={`${st.copiesSvg} ${st.copied}`} />
+          <CopiedSvg className={clsx(st.copiesSvg, st.copied)} />
         ) : (
           <CopySvg className={st.copiesSvg} onClick={handleCopy} />
         )}

@@ -4,9 +4,9 @@ import st from '../../sections/Profile/styles.module.scss';
 
 export default function LoadingElement({ children, loading, width, height }) {
   return loading ? (
-    children
-  ) : (
     <Skeleton className={st.skeleton} width={width} height={height} />
+  ) : (
+    children
   );
 }
 

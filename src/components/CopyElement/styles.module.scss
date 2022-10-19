@@ -10,7 +10,7 @@
 
 .copiesSvg {
   font-size: $fontSizeLarge;
-  margin-right: 10px;
+  //margin-right: 10px;
   cursor: pointer;
   margin-top: 7px;
 }
@@ -21,39 +21,23 @@
 
 .link {
   color: $primary;
+  margin-left: 10px;
 }
 
 .text {
   color: $primaryText;
-  margin: unset;
+  margin-left: 10px;
 }
 
 .notificationCopy {
-  position: absolute;
-  top: -45px;
-  left: -17px;
-  min-width: 30px;
-  min-height: 32px;
-  padding: 6px 8px;
-  color: $white;
-  background-color: rgba(0,0,0,.75);
-  border-radius: 2px;
   visibility: hidden;
   opacity: 0;
-  transition: .3s;
-
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -45%;
-    left: 37%;
-    border: 7px solid transparent;
-    border-top: 7px solid rgba(0, 0, 0, .75);
-  }
 }
 
 .copySvg {
   position: relative;
+  @include flex(center, center);
+  flex-direction: column;
 
   &:hover .notificationCopy {
     visibility: visible;
