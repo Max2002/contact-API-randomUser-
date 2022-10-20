@@ -6,6 +6,10 @@ export default function Container({ children, className }) {
   return <div className={clsx(st.container, className)}>{children}</div>;
 }
 
+Container.defaultProps = {
+  className: '',
+};
+
 Container.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,

@@ -23,6 +23,7 @@
   height: 240px;
   object-fit: cover;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .personalInfo {
@@ -36,6 +37,7 @@
   color: $primary;
   padding-bottom: 15px;
   font-size: $fontSizePrimary;
+  cursor: pointer;
 
   span {
     color: $messageInput;

@@ -5,3 +5,7 @@ export { default as Menu } from './Menu';
 export { default as ContactCard } from './ContactCard';
 export { default as CopyElement } from './CopyElement';
 export { default as Table } from './Table';
+export { default as ContactInfo } from './ContactInfo';
+export { default as Container } from './Container';
+export { default as Hint } from './Hint';
+export { default as LoadingElement } from './LoadingElement';

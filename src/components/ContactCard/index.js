@@ -3,14 +3,22 @@ import clsx from 'clsx';
 import CopyElement from '../CopyElement';
 import st from './styles.module.scss';
 
-export default function ContactCard({ contact }) {
+export default function ContactCard({ contact, contactView, index, id }) {
   const { avatar, fullName, age, email, phone, address, nat } = contact;
 
   return (
     <div className={st.contact}>
-      <img className={st.blocksAvatar} src={avatar} alt={fullName} />
+      <img
+        className={st.blocksAvatar}
+        src={avatar}
+        alt={fullName}
+        onClick={() => contactView(index, id)}
+      />
       <div className={st.personalInfo}>
-        <p className={clsx(st.fullNameBlockView, st.dashedLine)}>
+        <p
+          className={clsx(st.fullNameBlockView, st.dashedLine)}
+          onClick={() => contactView(index, id)}
+        >
           {fullName} <span>({age} years)</span>
         </p>
         <CopyElement content={email} link={`mailto:${email}`} />
@@ -22,7 +30,15 @@ export default function ContactCard({ contact }) {
   );
 }
 
+ContactCard.defaultProps = {
+  index: null,
+  id: null,
+};
+
 ContactCard.propTypes = {
+  contactView: PropTypes.func.isRequired,
+  index: PropTypes.number,
+  id: PropTypes.number,
   contact: PropTypes.shape({
     avatar: PropTypes.string,
     fullName: PropTypes.string,

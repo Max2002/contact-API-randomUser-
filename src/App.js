@@ -6,6 +6,7 @@ import { getMyProfile } from './redux/actionCreator/getMyProfile';
 import Header from './sections/Header';
 import Home from './sections/Home';
 import Profile from './sections/Profile';
+import Contact from './sections/Contact';
 import Contacts from './sections/Contacts';
 import Page404 from './sections/404';
 import Footer from './sections/Footer';
@@ -31,6 +32,7 @@ export default function App() {
         <Route index element={<Home />} />
         {authKey && <Route path={PROFILE} element={<Profile />} />}
         {authKey && <Route path={CONTACTS} element={<Contacts />} />}
+        {authKey && <Route path="/contacts/:contactId" element={<Contact />} />}
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />

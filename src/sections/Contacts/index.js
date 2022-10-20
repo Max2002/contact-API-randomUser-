@@ -4,25 +4,27 @@ import clsx from 'clsx';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { dataSelector } from '../../redux/selectors/getContacts';
 import { getContacts } from '../../redux/actionCreator/getContacts';
-import { Button } from '../../components';
+import { Button, Container } from '../../components';
 import Filters from './Filters';
 import Statistic from '../Statistic';
 import Main from './Main';
 import Switcher from './Switcher';
-import Container from '../../components/Container';
 import { PlateSvg, ReloadSvg, TableSvg } from '../../assets/icons';
 import st from './styles.module.scss';
+import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
 
 export default function Contacts() {
   const [viewContacts, setViewContacts] = useState(false);
   const [filteredContacts, setFilterContacts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [contactsOnPage, setContactsOnPage] = useState(10);
   const dispatch = useDispatch();
   const deviceWidth = useDeviceWidth();
   const contacts = useSelector(dataSelector);
   const nationalities = [...new Set(contacts.map((contact) => contact.nat))];
 
-  const dispatchContacts = () => dispatch(getContacts(1, 30));
+  const dispatchContacts = () =>
+    dispatch(getContacts(AMOUNT_PAGES, AMOUNT_CONTACTS));
 
   const handleViewContacts = () => setViewContacts(!viewContacts);
   const updateContacts = () => dispatchContacts();
@@ -34,8 +36,8 @@ export default function Contacts() {
   const filterOrNotContacts =
     filteredContacts.length === 0 ? contacts : filteredContacts;
   const resContacts = filterOrNotContacts.slice(
-    currentPage - 1 === 0 ? 0 : (currentPage - 1) * 10,
-    currentPage * 10,
+    currentPage - 1 === 0 ? 0 : (currentPage - 1) * contactsOnPage,
+    currentPage * contactsOnPage,
   );
 
   const handleCurrentPage = (next) => {
@@ -65,6 +67,8 @@ export default function Contacts() {
   const onClickListItem = (newPage) => {
     setCurrentPage(newPage);
   };
+
+  const handleContactsOnPage = (amount) => setContactsOnPage(amount);
 
   const filterByFullName = (value) => {
     const contactsForFilter =
@@ -158,14 +162,17 @@ export default function Contacts() {
         filterNat={filterNat}
         nationalities={nationalities}
       />
-      <Switcher
-        handleCurrentPage={handleCurrentPage}
-        onClickListItem={onClickListItem}
-        currentPage={currentPage}
-        amountPage={filterOrNotContacts.length / 10}
-      />
       <Main viewContacts={viewContacts} contacts={resContacts} />
       <Statistic contacts={filterOrNotContacts} />
+      {deviceWidth > 992 && (
+        <Switcher
+          handleCurrentPage={handleCurrentPage}
+          onClickListItem={onClickListItem}
+          handleContactsOnPage={handleContactsOnPage}
+          currentPage={currentPage}
+          amountPage={filterOrNotContacts.length / contactsOnPage}
+        />
+      )}
     </Container>
   );
 }

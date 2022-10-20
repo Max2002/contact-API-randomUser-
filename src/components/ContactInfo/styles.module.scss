@@ -23,10 +23,6 @@
   }
 }
 
-.skeleton {
-  margin: 10px;
-}
-
 .avatar {
   width: 260px;
   height: 260px;
@@ -67,4 +63,26 @@
 .borderDashed {
   border-bottom: 1px dashed $dashedLine;
   padding-bottom: 10px;
+}
+
+.back {
+  @include flex(center, center);
+  color: $white;
+  background: $primary;
+  font-weight: 400;
+  text-align: center;
+  height: 32px;
+  padding: 4px 15px;
+  font-size: $fontSizePrimary;
+  border-radius: 2px;
+  transition: all .5s;
+
+  &:hover {
+    background: #4fa9fc;
+  }
+}
+
+.backSvg {
+  margin-right: 10px;
+  color: $white;
 }

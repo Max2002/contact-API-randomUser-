@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import Hint from '../Hint';
+import { Hint } from '../index';
 import { CopiedSvg, CopySvg } from '../../assets/icons';
 import st from './styles.module.scss';
 

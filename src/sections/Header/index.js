@@ -5,9 +5,8 @@ import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
-import { Portal, Menu, Button } from '../../components';
+import { Portal, Menu, Button, Container } from '../../components';
 import SignIn from '../SignIn';
-import Container from '../../components/Container';
 import { HOME, CONTACTS, PROFILE } from '../../constans/routes';
 import {
   LogoSvg,

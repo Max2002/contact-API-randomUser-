@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
-import st from '../../sections/Profile/styles.module.scss';
+import st from './styles.module.scss';
 
 export default function LoadingElement({ children, loading, width, height }) {
   return loading ? (

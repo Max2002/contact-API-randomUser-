@@ -1,16 +1,30 @@
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { ContactCard, CopyElement, Table } from '../../components';
+import { getContact } from '../../redux/actionCreator/getViewContact';
 import { NoDataSvg } from '../../assets/icons';
+import { CONTACTS } from '../../constans/routes';
+import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
 import st from './styles.module.scss';
 
 export default function Main({ contacts, viewContacts }) {
   const deviceWidth = useDeviceWidth();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const contactView = (index, id) => {
+    navigate(`${CONTACTS}/${index + 1}`);
+    localStorage.setItem('contactView', id);
+    dispatch(getContact(id, AMOUNT_PAGES, AMOUNT_CONTACTS));
+  };
 
   const renderContacts = (flagCard) => {
-    return contacts.map((contact) => {
-      const { picture, name, dob, email, phone, location, nat } = contact;
+    return contacts.map((contact, index) => {
+      const { picture, name, dob, email, phone, location, nat, login } =
+        contact;
       const { title, first, last } = name;
       const { date, age } = dob;
       const { country, street, city, state, postcode } = location;
@@ -28,7 +42,14 @@ export default function Main({ contacts, viewContacts }) {
           nat,
         };
 
-        return <ContactCard contact={personalInfoContact} />;
+        return (
+          <ContactCard
+            contactView={contactView}
+            contact={personalInfoContact}
+            index={index}
+            id={login.uuid}
+          />
+        );
       }
 
       return {
@@ -37,6 +58,7 @@ export default function Main({ contacts, viewContacts }) {
             className={st.avatar}
             src={picture.thumbnail}
             alt={`${first}${last}`}
+            onClick={() => contactView(index, login.uuid)}
           />
         ),
         fullName: [title, `${first} ${last}`],

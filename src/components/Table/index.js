@@ -39,31 +39,39 @@ export default function Table({ columns, options }) {
 
   return (
     <table className={st.table}>
-      <tr className={st.firstRow}>
-        {columns.map((column) => (
-          <td
-            className={clsx('', { [st.sortColumn]: column === 'Full name' })}
-            onClick={column === 'Full name' && handleSortByName}
-          >
-            {column}
-            {column === 'Full name' && (
-              <div className={st.sortIcons}>
-                <SortASCSvg
-                  className={clsx('', {
-                    [st.activeIconSort]: sortByName === 'asc',
-                  })}
-                />
-                <SortDESCSvg
-                  className={clsx('', {
-                    [st.activeIconSort]: sortByName === 'desc',
-                  })}
-                />
-              </div>
-            )}
-          </td>
-        ))}
-      </tr>
-      {!sortByName ? options.map(renderRows) : sortOptions.map(renderRows)}
+      <tbody>
+        <tr className={st.firstRow}>
+          {columns.map((column) =>
+            column === 'Full name' ? (
+              <td
+                className={clsx('', {
+                  [st.sortColumn]: column === 'Full name',
+                })}
+                onClick={handleSortByName}
+              >
+                {column}
+                {column === 'Full name' && (
+                  <div className={st.sortIcons}>
+                    <SortASCSvg
+                      className={clsx('', {
+                        [st.activeIconSort]: sortByName === 'asc',
+                      })}
+                    />
+                    <SortDESCSvg
+                      className={clsx('', {
+                        [st.activeIconSort]: sortByName === 'desc',
+                      })}
+                    />
+                  </div>
+                )}
+              </td>
+            ) : (
+              <td>{column}</td>
+            ),
+          )}
+        </tr>
+        {!sortByName ? options.map(renderRows) : sortOptions.map(renderRows)}
+      </tbody>
     </table>
   );
 }
