@@ -30,7 +30,7 @@ export default function App() {
       <Routes>
         <Route index element={<Home />} />
         {authKey && <Route path={PROFILE} element={<Profile />} />}
-        <Route path={CONTACTS} element={<Contacts />} />
+        {authKey && <Route path={CONTACTS} element={<Contacts />} />}
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />

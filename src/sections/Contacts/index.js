@@ -34,7 +34,7 @@ export default function Contacts() {
   const filterOrNotContacts =
     filteredContacts.length === 0 ? contacts : filteredContacts;
   const resContacts = filterOrNotContacts.slice(
-    currentPage - 1 === 0 ? 1 : (currentPage - 1) * 10,
+    currentPage - 1 === 0 ? 0 : (currentPage - 1) * 10,
     currentPage * 10,
   );
 
@@ -67,7 +67,9 @@ export default function Contacts() {
   };
 
   const filterByFullName = (value) => {
-    const filterContacts = contacts
+    const contactsForFilter =
+      filterOrNotContacts[0] === 'No data' ? contacts : filterOrNotContacts;
+    const filterContacts = contactsForFilter
       .slice()
       .map((contact) => {
         const {
@@ -80,14 +82,17 @@ export default function Contacts() {
       })
       .filter((contact) => contact);
 
-    setFilterContacts(
-      filterContacts.length === 0 ? ['No data'] : filterContacts,
-    );
+    if (value) {
+      setFilterContacts(
+        filterContacts.length === 0 ? ['No data'] : filterContacts,
+      );
+    } else {
+      setFilterContacts([]);
+    }
   };
 
   const filterGender = (gender) => {
     if (gender === 'gender') {
-      dispatchContacts();
       setFilterContacts([]);
     } else {
       const filterContacts = contacts
@@ -102,7 +107,6 @@ export default function Contacts() {
 
   const filterNat = (nat) => {
     if (nat.length === 0) {
-      dispatchContacts();
       setFilterContacts([]);
     } else {
       const nats = nat.map(({ value }) => value);

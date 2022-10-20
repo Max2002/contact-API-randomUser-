@@ -54,7 +54,7 @@ export default function Filters(props) {
               name="fullName"
               placeholder="Search by full name"
               ref={refFullName}
-              onKeyUp={onChangeFullName}
+              onChange={onChangeFullName}
             />
             {refFullName.current?.value && (
               <Button
