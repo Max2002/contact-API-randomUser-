@@ -21,3 +21,6 @@ export { ReactComponent as SortDESCSvg } from './sortDESC.svg';
 export { ReactComponent as SearchSvg } from './searchIcon.svg';
 export { ReactComponent as ClearInputSvg } from './clearInput.svg';
 export { ReactComponent as ClearFilterSvg } from './clearFilter.svg';
+export { ReactComponent as NoDataSvg } from './noData.svg';
+export { ReactComponent as ArrowNextSvg } from './arrowNext.svg';
+export { ReactComponent as ArrowPrevSvg } from './arrowPrev.svg';

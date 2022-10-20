@@ -21,7 +21,9 @@ export default function Statistic({ contacts }) {
         <div className={st.amount}>
           <div>
             <p className={st.collectionTitle}>Collection size</p>
-            <p className={st.value}>{contacts.length}</p>
+            <p className={st.value}>
+              {contacts[0] === 'No data' ? 0 : contacts.length}
+            </p>
           </div>
           <div className={st.genders}>
             <div className={st.wrapperGender}>
@@ -44,11 +46,12 @@ export default function Statistic({ contacts }) {
         <div>
           <p className={st.titleNats}>Nationalities</p>
           <div className={st.nationalities}>
-            {Object.keys(amountNat).map((key) => (
-              <div key={key} className={st.nat}>
-                <span>{key}:</span> {amountNat[key]} contacts
-              </div>
-            ))}
+            {contacts[0] !== 'No data' &&
+              Object.keys(amountNat).map((key) => (
+                <div key={key} className={st.nat}>
+                  <span>{key}:</span> {amountNat[key]} contacts
+                </div>
+              ))}
           </div>
         </div>
       </div>

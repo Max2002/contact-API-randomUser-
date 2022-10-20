@@ -1,9 +1,16 @@
 import PropTypes from 'prop-types';
 import { Button as ButtonRB } from 'react-bootstrap';
 
-export default function Button({ type, className, children, onClick }) {
+export default function Button(props) {
+  const { type, className, children, onClick, disabled } = props;
+
   return (
-    <ButtonRB className={className} type={type} onClick={onClick}>
+    <ButtonRB
+      className={className}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </ButtonRB>
   );
@@ -11,6 +18,7 @@ export default function Button({ type, className, children, onClick }) {
 
 Button.defaultProps = {
   className: '',
+  disabled: false,
 };
 
 Button.propTypes = {
@@ -18,4 +26,5 @@ Button.propTypes = {
   className: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };

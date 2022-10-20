@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import clsx from 'clsx';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { Portal, Menu, Button } from '../../components';

@@ -42,13 +42,13 @@
   background: $white;
   border: 2px solid $primaryLineBorder;
 
-  &:hover:not(.active) {
+  &:hover:not(.activeSwitchBtn) {
     color: $primary;
     border: 2px solid $primary;
   }
 }
 
-.active {
+.activeSwitchBtn {
   color: $white;
   background: $primary;
 }
@@ -205,4 +205,52 @@
 .dashedLine {
   border-bottom: 1px dashed $dashedLine;
   width: 100%;
+}
+
+.noData {
+  @include flex(center, center);
+  flex-direction: column;
+  background: $white;
+  color: $primaryText;
+  padding: 50px 0;
+  border-radius: 2px;
+  box-shadow: 0 0 10px $primaryShadow;
+}
+
+.noDataSvg {
+  height: 50px;
+}
+
+.switcher {
+  @include flex(end, center);
+}
+
+.arrowSwitch {
+  color: $primaryText;
+
+  &:disabled {
+    color: $gray;
+    cursor: no-drop;
+  }
+}
+
+.listNumber {
+  @include flex(space-between, center);
+}
+
+.item {
+  margin: 0 10px;
+  cursor: pointer;
+  color: $primaryText;
+  font-weight: 500;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.activeItem {
+  border: 1px solid $primary;
+  margin: unset;
+  padding: 5px 10px;
 }

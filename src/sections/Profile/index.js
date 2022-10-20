@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Skeleton from 'react-loading-skeleton';
-import CopyElement from '../../components/CopyElement';
+import { CopyElement } from '../../components';
 import {
   ageSelector,
   avatarSelector,
