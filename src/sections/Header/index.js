@@ -93,7 +93,7 @@ export default function Header() {
         {authKey ? (
           <Menu
             label={fullName}
-            avatar={picture.thumbnail}
+            avatarUrl={picture.thumbnail}
             loading={loading}
             options={options}
           />

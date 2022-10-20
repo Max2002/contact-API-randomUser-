@@ -5,7 +5,7 @@ import st from './styles.module.scss';
 import LoadingElement from '../LoadingElement';
 
 export default function Menu(props) {
-  const { label, avatar, options, loading } = props;
+  const { label, avatarUrl, options, loading } = props;
 
   const renderMenuItem = (item) => {
     const { title, icon, link, onClick, hide } = item;
@@ -29,22 +29,20 @@ export default function Menu(props) {
       </LoadingElement>
       <DropDownSvg className={st.dropDownSvg} />
       <LoadingElement loading={loading} width={50} height={50}>
-        <img className={st.avatar} src={avatar} alt={label} />
+        <img className={st.avatar} src={avatarUrl} alt={label} />
       </LoadingElement>
-      <div className={st.dropDownList}>
-        <ul className={st.list}>{contentList}</ul>
-      </div>
+      <ul className={st.dropDownList}>{contentList}</ul>
     </div>
   );
 }
 
 Menu.defaultProps = {
-  avatar: '',
+  avatarUrl: '',
 };
 
 Menu.propTypes = {
   label: PropTypes.string.isRequired,
-  avatar: PropTypes.string,
+  avatarUrl: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
