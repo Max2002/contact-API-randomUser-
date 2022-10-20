@@ -47,17 +47,9 @@ export default function Main({ contacts, viewContacts }) {
             {age} years
           </span>
         ),
-        email: (
-          <CopyElement isLink prefixLink="mailto:">
-            {email}
-          </CopyElement>
-        ),
-        phone: (
-          <CopyElement isLink prefixLink="tel:">
-            {phone}
-          </CopyElement>
-        ),
-        location: <CopyElement>{address}</CopyElement>,
+        email: <CopyElement content={email} link={`mailto:${email}`} />,
+        phone: <CopyElement content={phone} link={`tel:${phone}`} />,
+        location: <CopyElement content={address} />,
         nat: <span className={st.nat}>{nat}</span>,
       };
     });

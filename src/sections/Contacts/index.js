@@ -7,10 +7,11 @@ import { getContacts } from '../../redux/actionCreator/getContacts';
 import { Button } from '../../components';
 import Filters from './Filters';
 import Statistic from '../Statistic';
-import { PlateSvg, ReloadSvg, TableSvg } from '../../assets/icons';
-import st from './styles.module.scss';
 import Main from './Main';
 import Switcher from './Switcher';
+import Container from '../../components/Container';
+import { PlateSvg, ReloadSvg, TableSvg } from '../../assets/icons';
+import st from './styles.module.scss';
 
 export default function Contacts() {
   const [viewContacts, setViewContacts] = useState(false);
@@ -116,7 +117,7 @@ export default function Contacts() {
   };
 
   return (
-    <main className={`container ${st.contacts}`}>
+    <Container className={st.contacts}>
       <div className={st.head}>
         <h1 className={st.title}>Contacts</h1>
         <div className={st.switchView}>
@@ -161,6 +162,6 @@ export default function Contacts() {
       />
       <Main viewContacts={viewContacts} contacts={resContacts} />
       <Statistic contacts={filterOrNotContacts} />
-    </main>
+    </Container>
   );
 }

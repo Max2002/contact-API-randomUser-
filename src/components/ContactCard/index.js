@@ -13,19 +13,9 @@ export default function ContactCard({ contact }) {
         <p className={clsx(st.fullNameBlockView, st.dashedLine)}>
           {fullName} <span>({age} years)</span>
         </p>
-        <div>
-          <CopyElement isLink prefixLink="mailto:">
-            {email}
-          </CopyElement>
-        </div>
-        <div>
-          <CopyElement isLink prefixLink="tel:">
-            {phone}
-          </CopyElement>
-        </div>
-        <div className={st.dashedLine}>
-          <CopyElement>{address}</CopyElement>
-        </div>
+        <CopyElement content={email} link={`mailto:${email}`} />
+        <CopyElement content={phone} link={`tel:${phone}`} />
+        <CopyElement content={address} />
         <p className={clsx(st.nat, st.natBlocksView)}>{nat}</p>
       </div>
     </div>

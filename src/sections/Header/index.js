@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { Portal, Menu, Button } from '../../components';
 import SignIn from '../SignIn';
+import Container from '../../components/Container';
 import { HOME, CONTACTS, PROFILE } from '../../constans/routes';
 import {
   LogoSvg,
@@ -78,7 +79,7 @@ export default function Header() {
 
   return (
     <header className={st.header}>
-      <div className={clsx('container', st.containerHeader)}>
+      <Container className={st.containerHeader}>
         <LogoSvg />
         <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
           {authKey && deviceWidth > 768 && (
@@ -94,7 +95,7 @@ export default function Header() {
           {authKey ? (
             <Menu
               label={fullName}
-              avatar={picture.thumbnail}
+              avatarUrl={picture.thumbnail}
               loading={loading}
               options={options}
             />
@@ -116,7 +117,7 @@ export default function Header() {
         <Portal>
           {isActiveModal && <SignIn notify={notify} onSignIn={handleSignIn} />}
         </Portal>
-      </div>
+      </Container>
     </header>
   );
 }
