@@ -1,57 +1,59 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import clsx from 'clsx';
+import Hint from '../Hint';
 import { CopiedSvg, CopySvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
-export default function CopyElement({ children, isLink, prefixLink }) {
+export default function CopyElement({ content, link }) {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = () => {
+    navigator.clipboard.writeText(content);
     setIsCopied(true);
   };
 
   useEffect(() => {
-    const interval = setInterval(() => setIsCopied(false), 2000);
+    let interval;
+
+    if (isCopied) {
+      interval = setInterval(() => setIsCopied(false), 2000);
+    }
 
     return () => {
       clearInterval(interval);
     };
   }, [isCopied]);
 
-  const renderPrefix = () => (
-    <div className={st.icon}>
-      <div className={st.copy}>{isCopied ? 'Copied' : 'Copy'}</div>
-      <CopyToClipboard text={children}>
-        {isCopied ? (
-          <CopiedSvg className={st.copied} />
-        ) : (
-          <CopySvg onClick={handleCopy} />
-        )}
-      </CopyToClipboard>
-    </div>
-  );
-
   return (
     <div className={st.contact}>
-      {renderPrefix()}
-      {isLink ? (
-        <a href={`${prefixLink}${children}`}>{children}</a>
+      <div className={st.copySvg}>
+        <Hint className={st.notificationCopy}>
+          {isCopied ? 'Copied' : 'Copy'}
+        </Hint>
+        {isCopied ? (
+          <CopiedSvg className={clsx(st.copiesSvg, st.copied)} />
+        ) : (
+          <CopySvg className={st.copiesSvg} onClick={handleCopy} />
+        )}
+      </div>
+      {link ? (
+        <a className={st.link} href={link}>
+          {content}
+        </a>
       ) : (
-        <span>{children}</span>
+        <span className={st.text}>{content}</span>
       )}
     </div>
   );
 }
 
 CopyElement.defaultProps = {
-  children: '',
-  isLink: false,
-  prefixLink: '',
+  content: '',
+  link: '',
 };
 
 CopyElement.propTypes = {
-  children: PropTypes.string,
-  isLink: PropTypes.bool,
-  prefixLink: PropTypes.string,
+  content: PropTypes.string,
+  link: PropTypes.string,
 };

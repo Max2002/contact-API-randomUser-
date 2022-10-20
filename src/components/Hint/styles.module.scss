@@ -1,0 +1,24 @@
+@import '../../assets/styles/variables';
+
+.hint {
+  width: 60px;
+  background: $backHint;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  transition: all .5s;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid;
+    border-color: $backHint transparent transparent transparent;
+  }
+}

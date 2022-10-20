@@ -5,13 +5,13 @@
   @include flex(start, center);
   flex: auto;
   flex-direction: column;
+}
 
-  .title {
-    margin: 20px 0;
-    font-weight: 600;
-    color: $primaryText;
-    font-size: $fontSizeTitle;
-  }
+.title {
+  margin: 20px 0;
+  font-weight: 600;
+  color: $primaryText;
+  font-size: $fontSizeTitle;
 }
 
 .data {
@@ -49,11 +49,11 @@
     font-size: $fontSizeLarge;
     text-align: center;
   }
+}
 
-  span {
-    font-size: 80%;
-    color: $messageInput;
-  }
+.age {
+  font-size: $fontSizeLarge;
+  color: $messageInput;
 }
 
 .nationality {

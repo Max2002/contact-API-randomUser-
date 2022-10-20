@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { getMyProfile } from './redux/actionCreator/getMyProfile';
 import Header from './sections/Header';
 import Home from './sections/Home';
-import Profile from './sections/Profile/index';
+import Profile from './sections/Profile';
 import Contacts from './sections/Contacts';
 import Page404 from './sections/404';
 import Footer from './sections/Footer';

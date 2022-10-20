@@ -6,56 +6,39 @@
   color: $primary;
   margin: 10px 0;
   @include flex-vertical-centre;
-
-  a {
-    color: $primary;
-  }
-
-  span {
-    color: $primaryText;
-    margin: unset;
-  }
-
-  svg {
-    font-size: $fontSizeLarge;
-    margin-right: 10px;
-    cursor: pointer;
-    margin-top: 7px;
-  }
 }
 
-.copy {
-  position: absolute;
-  top: -45px;
-  left: -17px;
-  min-width: 30px;
-  min-height: 32px;
-  padding: 6px 8px;
-  color: $white;
-  background-color: rgba(0,0,0,.75);
-  border-radius: 2px;
-  visibility: hidden;
-  opacity: 0;
-  transition: .3s;
-
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -45%;
-    left: 37%;
-    border: 7px solid transparent;
-    border-top: 7px solid rgba(0, 0, 0, .75);
-  }
+.copiesSvg {
+  font-size: $fontSizeLarge;
+  cursor: pointer;
+  margin-top: 7px;
 }
 
 .copied {
   color: $copied;
 }
 
-.icon {
-  position: relative;
+.link {
+  color: $primary;
+  margin-left: 10px;
+}
 
-  &:hover .copy {
+.text {
+  color: $primaryText;
+  margin-left: 10px;
+}
+
+.notificationCopy {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.copySvg {
+  position: relative;
+  @include flex(center, center);
+  flex-direction: column;
+
+  &:hover .notificationCopy {
     visibility: visible;
     opacity: 1;
   }
