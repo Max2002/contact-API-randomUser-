@@ -27,16 +27,13 @@ export default function CopyElement({ content, link }) {
 
   return (
     <div className={st.contact}>
-      <div className={st.copySvg}>
-        <Hint className={st.notificationCopy}>
-          {isCopied ? 'Copied' : 'Copy'}
-        </Hint>
+      <Hint label={isCopied ? 'Copied' : 'Copy'}>
         {isCopied ? (
           <CopiedSvg className={clsx(st.copiesSvg, st.copied)} />
         ) : (
           <CopySvg className={st.copiesSvg} onClick={handleCopy} />
         )}
-      </div>
+      </Hint>
       {link ? (
         <a className={st.link} href={link}>
           {content}
