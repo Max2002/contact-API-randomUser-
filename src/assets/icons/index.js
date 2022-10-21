@@ -11,3 +11,5 @@ export { ReactComponent as LogOutSvg } from './logout.svg';
 export { ReactComponent as HomeSvg } from './home.svg';
 export { ReactComponent as ContactsSvg } from './contacts.svg';
 export { ReactComponent as ReactLogoSvg } from './reactLogo.svg';
+export { ReactComponent as CopySvg } from './copy.svg';
+export { ReactComponent as CopiedSvg } from './copied.svg';

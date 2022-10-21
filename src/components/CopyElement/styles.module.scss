@@ -1,0 +1,29 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.contact {
+  font-size: $fontSizePrimary;
+  color: $primary;
+  margin: 10px 0;
+  @include flex-vertical-centre;
+}
+
+.copiesSvg {
+  font-size: $fontSizeLarge;
+  cursor: pointer;
+  margin-top: 7px;
+}
+
+.copied {
+  color: $copied;
+}
+
+.link {
+  color: $primary;
+  margin-left: 10px;
+}
+
+.text {
+  color: $primaryText;
+  margin-left: 10px;
+}

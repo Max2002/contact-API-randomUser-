@@ -1,0 +1,70 @@
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
+
+.profile {
+  @include flex(start, center);
+  flex: auto;
+  flex-direction: column;
+}
+
+.title {
+  margin: 20px 0;
+  font-weight: 600;
+  color: $primaryText;
+  font-size: $fontSizeTitle;
+}
+
+.data {
+  width: 100%;
+  @include flex(center, start);
+  @include media-max(md) {
+    @include flex(center, center);
+    flex-direction: column;
+  }
+}
+
+.skeleton {
+  margin: 10px;
+}
+
+.avatar {
+  width: 260px;
+  height: 260px;
+  margin-right: 40px;
+
+  @include media-max(md) {
+    margin-right: unset;
+    margin-bottom: 20px;
+    width: 220px;
+    height: 220px;
+  }
+}
+
+.fullName {
+  font-weight: 600;
+  color: $primaryText;
+  font-size: $fontSizeXL;
+
+  @include media-max(md) {
+    font-size: $fontSizeLarge;
+    text-align: center;
+  }
+}
+
+.age {
+  font-size: $fontSizeLarge;
+  color: $messageInput;
+}
+
+.nationality {
+  color: $white;
+  background: $backNationality;
+  padding: 2px 7px;
+  font-size: $fontSizeSmall;
+  margin: unset;
+}
+
+.borderDashed {
+  border-bottom: 1px dashed $dashedLine;
+  padding-bottom: 10px;
+}

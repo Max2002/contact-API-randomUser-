@@ -72,7 +72,6 @@ export default function Header() {
     {
       title: 'Log out',
       icon: <LogOutSvg />,
-      link: false,
       onClick: logOutUser,
     },
   ];
@@ -94,7 +93,7 @@ export default function Header() {
         {authKey ? (
           <Menu
             label={fullName}
-            avatar={picture.thumbnail}
+            avatarUrl={picture.thumbnail}
             loading={loading}
             options={options}
           />
