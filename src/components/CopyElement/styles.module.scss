@@ -27,19 +27,3 @@
   color: $primaryText;
   margin-left: 10px;
 }
-
-.notificationCopy {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.copySvg {
-  position: relative;
-  @include flex(center, center);
-  flex-direction: column;
-
-  &:hover .notificationCopy {
-    visibility: visible;
-    opacity: 1;
-  }
-}
