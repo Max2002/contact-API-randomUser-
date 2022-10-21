@@ -47,7 +47,6 @@ export default function Contacts() {
       const nextPage = currentPage + 1;
 
       if (nextPage > amountPage) {
-        // setDisableNext(true);
         setCurrentPage(amountPage);
       } else {
         setCurrentPage(nextPage);
@@ -56,7 +55,6 @@ export default function Contacts() {
       const prevPage = currentPage - 1;
 
       if (prevPage < 1) {
-        // setDisablePrev(true);
         setCurrentPage(1);
       } else {
         setCurrentPage(prevPage);
@@ -162,7 +160,7 @@ export default function Contacts() {
         filterNat={filterNat}
         nationalities={nationalities}
       />
-      <Main viewContacts={viewContacts} contacts={resContacts} />
+      <Main contacts={resContacts} />
       <Statistic contacts={filterOrNotContacts} />
       {deviceWidth > 992 && (
         <Switcher

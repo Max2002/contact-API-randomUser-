@@ -2,16 +2,14 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useDeviceWidth } from '../../hooks/useDeviceWidth';
-import { ContactCard, CopyElement, Table } from '../../components';
+import { CopyElement, Table } from '../../components';
 import { getContact } from '../../redux/actionCreator/getViewContact';
 import { NoDataSvg } from '../../assets/icons';
 import { CONTACTS } from '../../constans/routes';
 import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
 import st from './styles.module.scss';
 
-export default function Main({ contacts, viewContacts }) {
-  const deviceWidth = useDeviceWidth();
+export default function Main({ contacts }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,7 +19,7 @@ export default function Main({ contacts, viewContacts }) {
     dispatch(getContact(id, AMOUNT_PAGES, AMOUNT_CONTACTS));
   };
 
-  const renderContacts = (flagCard) => {
+  const renderContacts = () => {
     return contacts.map((contact, index) => {
       const { picture, name, dob, email, phone, location, nat, login } =
         contact;
@@ -30,27 +28,6 @@ export default function Main({ contacts, viewContacts }) {
       const { country, street, city, state, postcode } = location;
       const address = `/${country}/ ${street.number} ${street.name}, ${city}, ${state} ${postcode}`;
       const dateFormat = moment(date).format('dddd, MM/DD/yyyy, h:MM:ss A');
-
-      if (flagCard) {
-        const personalInfoContact = {
-          avatar: picture.large,
-          fullName: `${title}. ${first} ${last}`,
-          age,
-          email,
-          phone,
-          address,
-          nat,
-        };
-
-        return (
-          <ContactCard
-            contactView={contactView}
-            contact={personalInfoContact}
-            index={index}
-            id={login.uuid}
-          />
-        );
-      }
 
       return {
         avatar: (
@@ -96,14 +73,9 @@ export default function Main({ contacts, viewContacts }) {
     );
   }
 
-  return viewContacts || deviceWidth < 992 ? (
-    <div className={st.blocksView}>{renderContacts(true)}</div>
-  ) : (
-    <Table columns={tableColumns} options={renderContacts(false)} />
-  );
+  return <Table columns={tableColumns} options={renderContacts(false)} />;
 }
 
 Main.propTypes = {
   contacts: PropTypes.array.isRequired,
-  viewContacts: PropTypes.bool.isRequired,
 };
