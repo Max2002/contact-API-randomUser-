@@ -10,7 +10,7 @@ import {
   nationalitySelector,
   phoneSelector,
 } from '../../redux/selectors/getViewContact';
-import { ContactInfo } from '../../components';
+import ContactInfo from '../../components/ContactInfo';
 import { getContact } from '../../redux/actionCreator/getViewContact';
 import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
 

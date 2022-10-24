@@ -10,7 +10,7 @@ import {
 } from '../../assets/icons';
 import st from './styles.module.scss';
 
-export default function Switcher(props) {
+export default function SelectorPage(props) {
   const {
     handleCurrentPage,
     onClickListItem,
@@ -179,7 +179,7 @@ export default function Switcher(props) {
   );
 }
 
-Switcher.propTypes = {
+SelectorPage.propTypes = {
   handleCurrentPage: PropTypes.func.isRequired,
   onClickListItem: PropTypes.func.isRequired,
   handleContactsOnPage: PropTypes.func.isRequired,

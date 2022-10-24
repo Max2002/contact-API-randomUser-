@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { DropDownSvg } from '../../assets/icons';
-import { LoadingElement } from '../index';
+import LoadingElement from '../LoadingElement';
 import st from './styles.module.scss';
 
 export default function Menu(props) {

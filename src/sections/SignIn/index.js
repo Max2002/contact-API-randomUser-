@@ -1,10 +1,12 @@
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { validationEmail, validationPassword } from '../../utils/validation';
 import { TextField, Button } from '../../components';
 import { CloseSvg, ManIconSvg, PasswordSvg } from '../../assets/icons';
 import { getMyProfile } from '../../redux/actionCreator/getMyProfile';
+import { PROFILE } from '../../constans/routes';
 import st from './styles.module.scss';
 
 const initialValues = {
@@ -14,6 +16,7 @@ const initialValues = {
 
 export default function SignIn({ onSignIn }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validationForm = ({ email, password }) => {
     const errors = {};
@@ -35,6 +38,7 @@ export default function SignIn({ onSignIn }) {
 
   const onSubmitForm = (data) => {
     dispatch(getMyProfile(data.email));
+    navigate(PROFILE);
     onSignIn();
   };
 

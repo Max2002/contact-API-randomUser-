@@ -5,35 +5,25 @@ import { SortASCSvg, SortDESCSvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
 export default function Table({ columns, options }) {
-  const [sortByName, setSortByName] = useState(null);
-  const sortOptions =
-    sortByName === 'asc'
-      ? options
-          .slice()
-          .sort((a, b) => a.fullName[1].localeCompare(b.fullName[1]))
-      : options
-          .slice()
-          .sort((a, b) => b.fullName[1].localeCompare(a.fullName[1]));
+  const [sortFlag, setSortFlag] = useState(null);
 
-  const renderRows = (option) => (
-    <tr>
-      {Object.keys(option).map((key) => (
-        <td key={key} className={key === 'email' ? st.email : null}>
-          {Array.isArray(option[key])
-            ? `${option[key][0]}. ${option[key][1]}`
-            : option[key]}
-        </td>
+  const renderRows = (option, index) => (
+    <tr key={index}>
+      {option.map(({ key, content }) => (
+        <td key={key}>{content}</td>
       ))}
     </tr>
   );
 
-  const handleSortByName = () => {
-    if (!sortByName) {
-      setSortByName('asc');
-    } else if (sortByName === 'asc') {
-      setSortByName('desc');
+  const handleSortFlag = (render) => {
+    render(options, sortFlag);
+
+    if (!sortFlag) {
+      setSortFlag('asc');
+    } else if (sortFlag === 'asc') {
+      setSortFlag('desc');
     } else {
-      setSortByName(null);
+      setSortFlag(null);
     }
   };
 
@@ -41,52 +31,53 @@ export default function Table({ columns, options }) {
     <table className={st.table}>
       <tbody>
         <tr className={st.firstRow}>
-          {columns.map((column) =>
-            column === 'Full name' ? (
+          {columns.map(({ key, title, render }) =>
+            render ? (
               <td
-                className={clsx('', {
-                  [st.sortColumn]: column === 'Full name',
-                })}
-                onClick={handleSortByName}
+                className={st.sortColumn}
+                onClick={() => handleSortFlag(render)}
+                key={key}
               >
-                {column}
-                {column === 'Full name' && (
-                  <div className={st.sortIcons}>
-                    <SortASCSvg
-                      className={clsx('', {
-                        [st.activeIconSort]: sortByName === 'asc',
-                      })}
-                    />
-                    <SortDESCSvg
-                      className={clsx('', {
-                        [st.activeIconSort]: sortByName === 'desc',
-                      })}
-                    />
-                  </div>
-                )}
+                {title}
+                <div className={st.sortIcons}>
+                  <SortASCSvg
+                    className={clsx('', {
+                      [st.activeIconSort]: sortFlag === 'asc',
+                    })}
+                  />
+                  <SortDESCSvg
+                    className={clsx('', {
+                      [st.activeIconSort]: sortFlag === 'desc',
+                    })}
+                  />
+                </div>
               </td>
             ) : (
-              <td>{column}</td>
+              <td key={key}>{title}</td>
             ),
           )}
         </tr>
-        {!sortByName ? options.map(renderRows) : sortOptions.map(renderRows)}
+        {options.map(renderRows)}
       </tbody>
     </table>
   );
 }
 
 Table.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.string).isRequired,
-  options: PropTypes.arrayOf(
+  columns: PropTypes.arrayOf(
     PropTypes.shape({
-      avatar: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-      fullName: PropTypes.arrayOf(PropTypes.string),
-      age: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-      email: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-      phone: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-      address: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-      nat: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+      title: PropTypes.string.isRequired,
+      key: PropTypes.string.isRequired,
+      render: PropTypes.func,
     }),
+  ).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        content: PropTypes.oneOfType([PropTypes.node, PropTypes.string])
+          .isRequired,
+      }),
+    ),
   ).isRequired,
 };

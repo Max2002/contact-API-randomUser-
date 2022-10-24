@@ -9,7 +9,7 @@ import {
   addressSelector,
   nationalitySelector,
 } from '../../redux/selectors/getMyProfile';
-import { ContactInfo } from '../../components';
+import ContactInfo from '../../components/ContactInfo';
 
 const myProfileSelector = createStructuredSelector({
   picture: avatarSelector,

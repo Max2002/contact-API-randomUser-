@@ -20,7 +20,7 @@
       transition: .5s;
 
       @include media-max(md) {
-        height: 350%;
+        height: 275%;
         transition: .5s;
       }
     }
@@ -36,7 +36,7 @@
   position: absolute;
   overflow: hidden;
   height: 0;
-  top: 65px;
+  top: 55px;
   width: 100%;
   background: $white;
   transition: .5s;

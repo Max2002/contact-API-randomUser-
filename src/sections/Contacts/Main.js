@@ -29,39 +29,88 @@ export default function Main({ contacts }) {
       const address = `/${country}/ ${street.number} ${street.name}, ${city}, ${state} ${postcode}`;
       const dateFormat = moment(date).format('dddd, MM/DD/yyyy, h:MM:ss A');
 
-      return {
-        avatar: (
-          <img
-            className={st.avatar}
-            src={picture.thumbnail}
-            alt={`${first}${last}`}
-            onClick={() => contactView(index, login.uuid)}
-          />
-        ),
-        fullName: [title, `${first} ${last}`],
-        birthday: (
-          <span>
-            {dateFormat}
-            <br />
-            {age} years
-          </span>
-        ),
-        email: <CopyElement content={email} link={`mailto:${email}`} />,
-        phone: <CopyElement content={phone} link={`tel:${phone}`} />,
-        location: <CopyElement content={address} />,
-        nat: <span className={st.nat}>{nat}</span>,
-      };
+      return [
+        {
+          key: 'avatar',
+          content: (
+            <img
+              className={st.avatar}
+              src={picture.thumbnail}
+              alt={`${first}${last}`}
+              onClick={() => contactView(index, login.uuid)}
+            />
+          ),
+        },
+        {
+          key: 'fullName',
+          content: `${title}. ${first} ${last}`,
+          sort: `${first} ${last}`,
+        },
+        {
+          key: 'birthday',
+          content: (
+            <span>
+              {dateFormat}
+              <br />
+              {age} years
+            </span>
+          ),
+        },
+        {
+          key: 'email',
+          content: (
+            <CopyElement
+              content={email}
+              link={`mailto:${email}`}
+              className={st.email}
+            />
+          ),
+        },
+        {
+          key: 'phone',
+          content: <CopyElement content={phone} link={`tel:${phone}`} />,
+        },
+        { key: 'location', content: <CopyElement content={address} /> },
+        { key: 'nat', content: <span className={st.nat}>{nat}</span> },
+      ];
     });
   };
 
   const tableColumns = [
-    'Avatar',
-    'Full name',
-    'Birthday',
-    'Email',
-    'Phone',
-    'Location',
-    'Nationality',
+    {
+      title: 'Avatar',
+      key: 'avatar',
+    },
+    {
+      title: 'Full name',
+      key: 'fullName',
+      render: (options, flagSort) =>
+        options.sort(([, first], [, second]) =>
+          flagSort === 'asc'
+            ? second.sort.localeCompare(first.sort)
+            : first.sort.localeCompare(second.sort),
+        ),
+    },
+    {
+      title: 'Birthday',
+      key: 'birthday',
+    },
+    {
+      title: 'Email',
+      key: 'email',
+    },
+    {
+      title: 'Phone',
+      key: 'phone',
+    },
+    {
+      title: 'Location',
+      key: 'location',
+    },
+    {
+      title: 'Nationality',
+      key: 'nat',
+    },
   ];
 
   if (contacts[0] === 'No data') {
@@ -73,7 +122,7 @@ export default function Main({ contacts }) {
     );
   }
 
-  return <Table columns={tableColumns} options={renderContacts(false)} />;
+  return <Table columns={tableColumns} options={renderContacts()} />;
 }
 
 Main.propTypes = {

@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 import apiUser from '../../api/apiUser';
 
 export const GET_CONTACTS_FETCHING = 'GET_CONTACTS/FETCHING';
@@ -23,9 +24,7 @@ export const getContacts =
     dispatch(contactsFetching());
 
     try {
-      const {
-        myProfile: { authKey },
-      } = getState();
+      const authKey = createSelector(getState, (store) => store.authKey);
       const {
         data: { results },
       } = await apiUser.get('/', {

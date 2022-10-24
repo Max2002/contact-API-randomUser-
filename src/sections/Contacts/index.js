@@ -8,10 +8,10 @@ import { Button, Container } from '../../components';
 import Filters from './Filters';
 import Statistic from '../Statistic';
 import Main from './Main';
-import Switcher from './Switcher';
+import SelectorPage from './SelectorPage';
 import { PlateSvg, ReloadSvg, TableSvg } from '../../assets/icons';
-import st from './styles.module.scss';
 import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
+import st from './styles.module.scss';
 
 export default function Contacts() {
   const [viewContacts, setViewContacts] = useState(false);
@@ -163,7 +163,7 @@ export default function Contacts() {
       <Main contacts={resContacts} />
       <Statistic contacts={filterOrNotContacts} />
       {deviceWidth > 992 && (
-        <Switcher
+        <SelectorPage
           handleCurrentPage={handleCurrentPage}
           onClickListItem={onClickListItem}
           handleContactsOnPage={handleContactsOnPage}

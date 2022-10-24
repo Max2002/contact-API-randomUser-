@@ -58,12 +58,6 @@ export default function Header() {
       link: PROFILE,
     },
     {
-      title: 'Home',
-      icon: <HomeSvg />,
-      link: HOME,
-      hide: deviceWidth > 768,
-    },
-    {
       title: 'Contacts',
       icon: <ContactsSvg />,
       link: CONTACTS,
@@ -83,9 +77,6 @@ export default function Header() {
         <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
           {authKey && deviceWidth > 768 && (
             <ul className={st.menuNav}>
-              <Link to={HOME} className={st.menuNavItem}>
-                Home
-              </Link>
               <Link to={CONTACTS} className={st.menuNavItem}>
                 Contacts
               </Link>
