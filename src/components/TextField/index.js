@@ -7,7 +7,7 @@ import { HidePassSvg, IconErrorSvg, VisiblePassSvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
 export default function TextField(props) {
-  const { name, type, placeholder, prefix } = props;
+  const { name, type, placeholder, prefix, suffix, className } = props;
   const [isVisiblePass, setIsVisiblePass] = useState(false);
   const [field, meta] = useField(name);
   const { touched, error } = meta;
@@ -25,18 +25,20 @@ export default function TextField(props) {
   return (
     <div className={st.wrapper}>
       <div className={st.wrapperField}>
-        <div className={st.wrapperPrefix}>{prefix}</div>
+        {prefix && <div className={st.wrapperPrefix}>{prefix}</div>}
         <FormControl
           {...field}
-          className={clsx(st.field, { [st.errorField]: isError })}
+          className={clsx(st.field, className, { [st.errorField]: isError })}
           type={isVisiblePass ? 'text' : type}
           name={name}
           placeholder={placeholder}
         />
-        <div className={st.wrapperIcons}>
-          {type === 'password' && renderEye()}
-          {isError && <IconErrorSvg className={st.iconError} />}
-        </div>
+        {suffix && (
+          <div className={st.wrapperIcons}>
+            {type === 'password' && renderEye()}
+            {isError && <IconErrorSvg className={st.iconError} />}
+          </div>
+        )}
       </div>
       <ErrorMessage
         name={name}
@@ -50,6 +52,8 @@ export default function TextField(props) {
 TextField.defaultProps = {
   placeholder: '',
   prefix: null,
+  suffix: true,
+  className: '',
 };
 
 TextField.propTypes = {
@@ -57,4 +61,6 @@ TextField.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   prefix: PropTypes.node,
+  suffix: PropTypes.bool,
+  className: PropTypes.string,
 };

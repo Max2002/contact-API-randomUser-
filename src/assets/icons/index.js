@@ -24,5 +24,4 @@ export { ReactComponent as ClearFilterSvg } from './clearFilter.svg';
 export { ReactComponent as NoDataSvg } from './noData.svg';
 export { ReactComponent as ArrowNextSvg } from './arrowNext.svg';
 export { ReactComponent as ArrowPrevSvg } from './arrowPrev.svg';
-export { ReactComponent as DoubleArrowSvg } from './doubleArrow.svg';
 export { ReactComponent as ArrowBackSvg } from './arrowBack.svg';

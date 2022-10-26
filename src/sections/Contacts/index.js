@@ -8,7 +8,7 @@ import { Button, Container } from '../../components';
 import Filters from './Filters';
 import Statistic from '../Statistic';
 import Main from './Main';
-import SelectorPage from './SelectorPage';
+import Pagination from './Pagination';
 import { PlateSvg, ReloadSvg, TableSvg } from '../../assets/icons';
 import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
 import st from './styles.module.scss';
@@ -16,8 +16,7 @@ import st from './styles.module.scss';
 export default function Contacts() {
   const [viewContacts, setViewContacts] = useState(false);
   const [filteredContacts, setFilterContacts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [contactsOnPage, setContactsOnPage] = useState(10);
+  const [sliceContacts, setSliceContacts] = useState({ from: 0, to: 10 });
   const dispatch = useDispatch();
   const deviceWidth = useDeviceWidth();
   const contacts = useSelector(dataSelector);
@@ -36,37 +35,12 @@ export default function Contacts() {
   const filterOrNotContacts =
     filteredContacts.length === 0 ? contacts : filteredContacts;
   const resContacts = filterOrNotContacts.slice(
-    currentPage - 1 === 0 ? 0 : (currentPage - 1) * contactsOnPage,
-    currentPage * contactsOnPage,
+    sliceContacts.from,
+    sliceContacts.to,
   );
 
-  const handleCurrentPage = (next) => {
-    const amountPage = filterOrNotContacts.length / 10;
-
-    if (next) {
-      const nextPage = currentPage + 1;
-
-      if (nextPage > amountPage) {
-        setCurrentPage(amountPage);
-      } else {
-        setCurrentPage(nextPage);
-      }
-    } else {
-      const prevPage = currentPage - 1;
-
-      if (prevPage < 1) {
-        setCurrentPage(1);
-      } else {
-        setCurrentPage(prevPage);
-      }
-    }
-  };
-
-  const onClickListItem = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
-  const handleContactsOnPage = (amount) => setContactsOnPage(amount);
+  const setNoData = (resFilter) =>
+    setFilterContacts(resFilter.length === 0 ? ['No data'] : resFilter);
 
   const filterByFullName = (value) => {
     const contactsForFilter =
@@ -85,26 +59,18 @@ export default function Contacts() {
       .filter((contact) => contact);
 
     if (value) {
-      setFilterContacts(
-        filterContacts.length === 0 ? ['No data'] : filterContacts,
-      );
+      setNoData(filterContacts);
     } else {
       setFilterContacts([]);
     }
   };
 
   const filterGender = (gender) => {
-    if (gender === 'gender') {
-      setFilterContacts([]);
-    } else {
-      const filterContacts = contacts
-        .slice()
-        .filter((contact) => contact.gender === gender.toLowerCase());
+    const filterContacts = contacts
+      .slice()
+      .filter((contact) => contact.gender === gender.toLowerCase());
 
-      setFilterContacts(
-        filterContacts.length === 0 ? ['No data'] : filterContacts,
-      );
-    }
+    setNoData(filterContacts);
   };
 
   const filterNat = (nat) => {
@@ -116,9 +82,7 @@ export default function Contacts() {
         .slice()
         .filter((contact) => nats.includes(contact.nat));
 
-      setFilterContacts(
-        filterContacts.length === 0 ? ['No data'] : filterContacts,
-      );
+      setNoData(filterContacts);
     }
   };
 
@@ -160,17 +124,9 @@ export default function Contacts() {
         filterNat={filterNat}
         nationalities={nationalities}
       />
+      <Pagination total={contacts.length} setSlices={setSliceContacts} />
       <Main contacts={resContacts} />
       <Statistic contacts={filterOrNotContacts} />
-      {deviceWidth > 992 && (
-        <SelectorPage
-          handleCurrentPage={handleCurrentPage}
-          onClickListItem={onClickListItem}
-          handleContactsOnPage={handleContactsOnPage}
-          currentPage={currentPage}
-          amountPage={filterOrNotContacts.length / contactsOnPage}
-        />
-      )}
     </Container>
   );
 }

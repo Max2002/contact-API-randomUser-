@@ -60,10 +60,17 @@
 }
 
 .filters {
-  @include flex(space-between, center);
   background: $white;
   padding: 20px;
   color: $primaryText;
+}
+
+.form {
+  @include flex(space-between, center);
+
+  div {
+    height: unset;
+  }
 
   @include media-max(lg) {
     flex-direction: column;
@@ -76,17 +83,17 @@
   width: 450px;
   border-radius: 5px;
 
-  &:focus-within {
-    border: 1px solid $primary;
-    box-shadow: 0 0 3px $primary;
+  div:not(.searchIcon) {
+    width: 95%;
   }
 
   &:hover {
-    border: 1px solid $primary;
+    border-color: $primary;
   }
 
-  &::placeholder {
-    color: $placeholder;
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 3px $primary;
   }
 
   @include media-max(xl) {
@@ -98,20 +105,23 @@
   }
 }
 
-.fieldFilter {
-  @include flex(space-between, centre);
-  width: 90%;
-}
-
 .field {
   border: none;
   font-size: $fontSizeLarge;
-  margin-left: 10px;
-  width: 95%;
+  padding: 8px 0 8px 10px;
+
+  &:hover {
+    border: unset;
+  }
+
+  &:focus {
+    border: unset;
+    box-shadow: unset;
+  }
 }
 
 .fieldBtn {
-  margin-top: 5px;
+  margin: 5px 10px 0 0;
   font-size: $fontSizeM;
   color: $placeholder;
 
@@ -122,8 +132,8 @@
 
 .searchIcon {
   border-left: 1px solid $borderInput;
-  padding: 10px;
   color: $messageInput;
+  padding: 10px;
 }
 
 .gender {
@@ -237,6 +247,7 @@
 
 .arrowSwitch {
   color: $primaryText;
+  margin-top: 5px;
 
   &:disabled {
     color: $gray;
@@ -265,6 +276,17 @@
 
 .dots {
   width: 18px;
+  height: 18px;
+  background: url("../../assets/images/dots.png") no-repeat center center;
+  background-size: cover;
+  margin-top: 5px;
+  transition: all .3s;
+
+  &:hover {
+    background: url("../../assets/images/doubleArrow.png") no-repeat center center;
+    background-size: cover;
+    margin-top: unset;
+  }
 }
 
 .nextArrow {
