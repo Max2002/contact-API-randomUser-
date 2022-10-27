@@ -124,9 +124,9 @@ export default function Contacts() {
         filterNat={filterNat}
         nationalities={nationalities}
       />
-      <Pagination total={contacts.length} setSlices={setSliceContacts} />
       <Main contacts={resContacts} />
       <Statistic contacts={filterOrNotContacts} />
+      <Pagination total={contacts.length} setSlices={setSliceContacts} />
     </Container>
   );
 }

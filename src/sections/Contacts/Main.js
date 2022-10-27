@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { CopyElement, Table } from '../../components';
 import { getContact } from '../../redux/actionCreator/getViewContact';
+import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { NoDataSvg } from '../../assets/icons';
 import { CONTACTS } from '../../constans/routes';
 import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
@@ -12,6 +13,7 @@ import st from './styles.module.scss';
 export default function Main({ contacts }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const widthDevice = useDeviceWidth();
 
   const contactView = (index, id) => {
     navigate(`${CONTACTS}/${index + 1}`);
@@ -122,7 +124,11 @@ export default function Main({ contacts }) {
     );
   }
 
-  return <Table columns={tableColumns} options={renderContacts()} />;
+  return widthDevice > 992 ? (
+    <Table columns={tableColumns} options={renderContacts()} />
+  ) : (
+    <div>Cards</div>
+  );
 }
 
 Main.propTypes = {
