@@ -65,7 +65,7 @@ export default function Pagination({ total, setSlices }) {
       >
         <ArrowPrevSvg />
       </Button>
-      <uL className={st.listNumber}>
+      <ul className={st.listNumber}>
         <li
           className={clsx(st.item, {
             [st.activeItem]: currentPage === 1,
@@ -95,7 +95,7 @@ export default function Pagination({ total, setSlices }) {
         >
           {amountPages}
         </li>
-      </uL>
+      </ul>
       <Button
         type="button"
         className={clsx(st.arrowSwitch, st.btnNext)}
