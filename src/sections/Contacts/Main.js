@@ -9,27 +9,50 @@ import { NoDataSvg } from '../../assets/icons';
 import { CONTACTS } from '../../constans/routes';
 import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
 import st from './styles.module.scss';
+import ContactCard from '../../components/ContactCard';
 
-export default function Main({ contacts }) {
+export default function Main({ contacts, flagView }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const widthDevice = useDeviceWidth();
 
-  const contactView = (index, id) => {
-    navigate(`${CONTACTS}/${index + 1}`);
+  const contactView = (id) => {
+    navigate(`${CONTACTS}/${id}`);
     localStorage.setItem('contactView', id);
     dispatch(getContact(id, AMOUNT_PAGES, AMOUNT_CONTACTS));
   };
 
   const renderContacts = () => {
-    return contacts.map((contact, index) => {
+    return contacts.map((contact) => {
       const { picture, name, dob, email, phone, location, nat, login } =
         contact;
       const { title, first, last } = name;
       const { date, age } = dob;
       const { country, street, city, state, postcode } = location;
+      const { uuid } = login;
       const address = `/${country}/ ${street.number} ${street.name}, ${city}, ${state} ${postcode}`;
       const dateFormat = moment(date).format('dddd, MM/DD/yyyy, h:MM:ss A');
+
+      if (flagView) {
+        const personalInfoContact = {
+          avatar: picture.large,
+          fullName: `${title}. ${first} ${last}`,
+          age,
+          email,
+          phone,
+          address,
+          nat,
+        };
+
+        return (
+          <ContactCard
+            key={uuid}
+            contact={personalInfoContact}
+            contactView={contactView}
+            id={uuid}
+          />
+        );
+      }
 
       return [
         {
@@ -39,7 +62,7 @@ export default function Main({ contacts }) {
               className={st.avatar}
               src={picture.thumbnail}
               alt={`${first}${last}`}
-              onClick={() => contactView(index, login.uuid)}
+              onClick={() => contactView(uuid)}
             />
           ),
         },
@@ -124,13 +147,14 @@ export default function Main({ contacts }) {
     );
   }
 
-  return widthDevice > 992 ? (
-    <Table columns={tableColumns} options={renderContacts()} />
+  return widthDevice < 992 || flagView ? (
+    <div className={st.blocksView}>{renderContacts()}</div>
   ) : (
-    <div>Cards</div>
+    <Table columns={tableColumns} options={renderContacts()} />
   );
 }
 
 Main.propTypes = {
   contacts: PropTypes.array.isRequired,
+  flagView: PropTypes.bool.isRequired,
 };
