@@ -1,15 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { getMyProfile } from './redux/actionCreator/getMyProfile';
 import Header from './sections/Header';
 import Home from './sections/Home';
 import Profile from './sections/Profile';
+import Contact from './sections/Contact';
 import Contacts from './sections/Contacts';
 import Page404 from './sections/404';
 import Footer from './sections/Footer';
 import { authSelector } from './redux/selectors/getMyProfile';
-import { CONTACTS, PROFILE } from './constans/routes';
+import { HOME, CONTACTS, PROFILE, CONTACT_VIEW } from './constans/routes';
 import st from './app.module.scss';
 import './assets/styles/general.scss';
 
@@ -23,16 +25,29 @@ export default function App() {
     }
   }, [authKey]);
 
+  const renderRoutes = () => {
+    if (authKey) {
+      return (
+        <>
+          <Route path={PROFILE} element={<Profile />} />
+          <Route path={CONTACTS} element={<Contacts />} />
+          <Route path={CONTACT_VIEW} element={<Contact />} />
+        </>
+      );
+    }
+
+    return <Route path={HOME} element={<Home />} />;
+  };
+
   return (
     <div className={st.wrapperApp}>
       <Header />
       <Routes>
-        <Route index element={<Home />} />
-        {authKey && <Route path={PROFILE} element={<Profile />} />}
-        <Route path={CONTACTS} element={<Contacts />} />
-        <Route path="*" element={<Page404 />} />
+        {renderRoutes()}
+        <Route path="*" element={<Page404 link={authKey ? PROFILE : HOME} />} />
       </Routes>
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }

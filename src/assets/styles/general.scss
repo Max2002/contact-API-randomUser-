@@ -14,7 +14,7 @@ body {
   font-size: $fontSizePrimary;
 
   @include media-max(md) {
-    font-size: $fontSizeSmall;
+    font-size: $fontSizeS;
   }
 }
 

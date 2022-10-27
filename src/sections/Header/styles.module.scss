@@ -2,13 +2,16 @@
 @import '../../assets/styles/mixins';
 
 .header {
-  @include flex(space-between, center);
   position: sticky;
   top: 0;
-  padding: 0 40px;
-  height: 65px;
   background: $white;
   box-shadow: 0 0 10px 0 $primaryShadow;
+  z-index: 999;
+}
+
+.containerHeader {
+  @include flex(space-between, center);
+  height: 65px;
 }
 
 .menu {

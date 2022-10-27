@@ -1,6 +1,6 @@
 $fontSegoeUi: "Segoe UI";
-$fontSizeSmall: 10px;
-$fontSizeMessage: 12px;
+$fontSizeS: 10px;
+$fontSizeM: 12px;
 $fontSizePrimary: 14px;
 $fontSizeLarge: 16px;
 $fontSizeXL: 24px;
@@ -9,6 +9,7 @@ $fontSizeTitle: 32px;
 
 $white: #fff;
 $black: #000;
+$gray: #808080;
 $primary: #1890ff;
 $error: #ff4d4f;
 $errorMessage404: #333;
@@ -16,14 +17,15 @@ $primaryLineBorder: #f0f0f0;
 $primaryText: rgba(0, 0, 0, .65);
 $primaryShadow: rgba(51, 51, 51, .33%);
 $dashedLine: rgba(0, 0, 0, .2);
+$title: rgba(0, 0, 0, .85);
+$primaryBack: #fafafa;
 $backHint: rgba(0, 0, 0, .75);
 
 /* Model Window (SignIn) */
-$modelWindowTitle: rgba(0, 0, 0, .85);
 $cLose: #db402c;
 $borderInput: #d9d9d9;
 $svgInput: #595959;
-$placeholder: #c4c4c4;
+$placeholder: #888585;
 $messageInput: rgba(0, 0, 0, .45);
 
 /* Footer */
@@ -32,3 +34,13 @@ $backgroundFooter: #f1f1f1;
 /* Profile */
 $copied: #52c41a;
 $backNationality: #9e1068;
+
+/* Contacts */
+$firstRow: #f5f5f5;
+$dominate: #ffe58f;
+$shadowStatistic: #6666661a;
+$backHeadTable: #e8e1e1;
+$selectItem: #e1d5d5;
+
+/* Filters */
+$clearButton: #656262;

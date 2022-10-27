@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import clsx from 'clsx';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
-import { Portal, Menu, Button } from '../../components';
+import { Portal, Menu, Button, Container } from '../../components';
 import SignIn from '../SignIn';
 import { HOME, CONTACTS, PROFILE } from '../../constans/routes';
 import {
@@ -58,12 +58,6 @@ export default function Header() {
       link: PROFILE,
     },
     {
-      title: 'Home',
-      icon: <HomeSvg />,
-      link: HOME,
-      hide: deviceWidth > 768,
-    },
-    {
       title: 'Contacts',
       icon: <ContactsSvg />,
       link: CONTACTS,
@@ -78,40 +72,42 @@ export default function Header() {
 
   return (
     <header className={st.header}>
-      <LogoSvg />
-      <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
-        {authKey && deviceWidth > 768 && (
-          <ul className={st.menuNav}>
-            <Link to={HOME} className={st.menuNavItem}>
-              Home
-            </Link>
-            <Link to={CONTACTS} className={st.menuNavItem}>
-              Contacts
-            </Link>
-          </ul>
-        )}
-        {authKey ? (
-          <Menu
-            label={fullName}
-            avatarUrl={picture.thumbnail}
-            loading={loading}
-            options={options}
-          />
-        ) : (
-          <Button type="button" className={st.signInBtn} onClick={handleSignIn}>
-            <SignInSvg />
-            <span>Sign In</span>
-          </Button>
-        )}
-      </div>
-      <div
-        className={clsx(st.blurBlock, { [st.isBlur]: isActiveModal })}
-        onClick={handleSignIn}
-      />
-      <Portal>
-        {isActiveModal && <SignIn notify={notify} onSignIn={handleSignIn} />}
-      </Portal>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <Container className={st.containerHeader}>
+        <LogoSvg />
+        <div className={clsx(st.menu, { [st.menuIsAuth]: !authKey })}>
+          {authKey && deviceWidth > 768 && (
+            <ul className={st.menuNav}>
+              <Link to={CONTACTS} className={st.menuNavItem}>
+                Contacts
+              </Link>
+            </ul>
+          )}
+          {authKey ? (
+            <Menu
+              label={fullName}
+              avatarUrl={picture.thumbnail}
+              loading={loading}
+              options={options}
+            />
+          ) : (
+            <Button
+              type="button"
+              className={st.signInBtn}
+              onClick={handleSignIn}
+            >
+              <SignInSvg />
+              <span>Sign In</span>
+            </Button>
+          )}
+        </div>
+        <div
+          className={clsx(st.blurBlock, { [st.isBlur]: isActiveModal })}
+          onClick={handleSignIn}
+        />
+        <Portal>
+          {isActiveModal && <SignIn notify={notify} onSignIn={handleSignIn} />}
+        </Portal>
+      </Container>
     </header>
   );
 }

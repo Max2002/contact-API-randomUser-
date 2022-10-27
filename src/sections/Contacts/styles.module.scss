@@ -1,0 +1,368 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.contacts {
+  flex: auto;
+}
+
+.head {
+  @include flex(space-between, center);
+}
+
+.title {
+  margin: 20px 0;
+  font-weight: 600;
+  color: $primaryText;
+  font-size: $fontSizeTitle;
+}
+
+.switchView {
+  @include flex(space-between, center);
+}
+
+.reload, .switchBtn {
+  @include flex(center, center);
+  width: 32px;
+  height: 32px;
+}
+
+.reload {
+  background: $white;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 0, 0, .2);
+  margin-right: 10px;
+
+  &:hover {
+    color: $primary;
+    border: 1px dashed $primary;
+  }
+}
+
+.switchBtn {
+  background: $white;
+  border: 2px solid $primaryLineBorder;
+
+  &:hover:not(.activeSwitchBtn) {
+    color: $primary;
+    border: 2px solid $primary;
+  }
+}
+
+.activeSwitchBtn {
+  color: $white;
+  background: $primary;
+}
+
+.wrapperFilters {
+  padding: 15px;
+  background: $primaryBack;
+  margin-bottom: 30px;
+}
+
+.filters {
+  background: $white;
+  padding: 20px;
+  color: $primaryText;
+}
+
+.form {
+  @include flex(space-between, center);
+
+  div {
+    height: unset;
+  }
+
+  @include media-max(lg) {
+    flex-direction: column;
+  }
+}
+
+.filterByName {
+  @include flex(space-between, center);
+  border: 1px solid $borderInput;
+  width: 450px;
+  border-radius: 5px;
+
+  div:not(.searchIcon) {
+    width: 95%;
+  }
+
+  &:hover {
+    border-color: $primary;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 3px $primary;
+  }
+
+  @include media-max(xl) {
+    width: 350px;
+  }
+
+  @include media-max(lg) {
+    width: 100%;
+  }
+}
+
+.field {
+  border: none;
+  font-size: $fontSizeLarge;
+  padding: 8px 0 8px 10px;
+
+  &:hover {
+    border: unset;
+  }
+
+  &:focus {
+    border: unset;
+    box-shadow: unset;
+  }
+}
+
+.fieldBtn {
+  margin: 5px 10px 0 0;
+  font-size: $fontSizeM;
+  color: $placeholder;
+
+  &:hover {
+    color: $clearButton;
+  }
+}
+
+.searchIcon {
+  border-left: 1px solid $borderInput;
+  color: $messageInput;
+  padding: 10px;
+}
+
+.gender {
+  padding: 11px;
+  width: 200px;
+  font-size: $fontSizePrimary;
+
+  @include media-max(lg) {
+    width: 100%;
+    padding: unset;
+    margin: 20px 0;
+  }
+}
+
+.selectNat {
+  padding: 11px;
+  width: 250px;
+  font-size: $fontSizePrimary;
+
+  @include media-max(lg) {
+    width: 100%;
+    padding: unset;
+  }
+}
+
+.clear {
+  @include flex(space-between, center);
+  color: $primary;
+  cursor: pointer;
+
+  @include media-max(lg) {
+    margin-top: 20px;
+  }
+}
+
+.clearBtn {
+  margin: -2.5px 0 0 15px;
+  color: $primary;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+}
+
+.dob {
+  line-height: 2;
+}
+
+.fullName, .email, .phone {
+  color: $primary;
+}
+
+.email {
+  a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+  }
+}
+
+.address {
+  width: 250px;
+}
+
+.nat {
+  color: $white;
+  background: $backNationality;
+  padding: 2px 7px;
+}
+
+.blocksView {
+  @include flex(space-between, center);
+  flex-wrap: wrap;
+
+  @include media-max(lg) {
+    @include flex(center, center);
+    flex-direction: column;
+  }
+
+  @include media-max(xl) {
+    @include flex(space-around, center);
+  }
+}
+
+.dashedLine {
+  border-bottom: 1px dashed $dashedLine;
+  width: 100%;
+}
+
+.noData {
+  @include flex(center, center);
+  flex-direction: column;
+  background: $white;
+  color: $primaryText;
+  padding: 50px 0;
+  border-radius: 2px;
+  box-shadow: 0 0 10px $primaryShadow;
+}
+
+.noDataSvg {
+  height: 50px;
+}
+
+.switcher {
+  @include flex(end, center);
+  margin: 20px 0;
+}
+
+.arrowSwitch {
+  color: $primaryText;
+  margin-top: 5px;
+
+  &:disabled {
+    color: $gray;
+    cursor: no-drop;
+  }
+}
+
+.btnNext {
+  margin-right: 20px;
+}
+
+.listNumber {
+  @include flex(space-between, center);
+}
+
+.item {
+  margin: 0 10px;
+  cursor: pointer;
+  color: $primaryText;
+  font-weight: 500;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.dots {
+  width: 18px;
+  height: 18px;
+  background: url("../../assets/images/dots.png") no-repeat center center;
+  background-size: cover;
+  margin-top: 5px;
+  transition: all .3s;
+
+  &:hover {
+    background: url("../../assets/images/doubleArrow.png") no-repeat center center;
+    background-size: cover;
+    margin-top: unset;
+  }
+}
+
+.nextArrow {
+  rotate: 180deg;
+}
+
+.activeItem {
+  border: 1px solid $primary;
+  margin: unset;
+  padding: 5px 10px;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.selectField {
+  position: relative;
+  width: 120px;
+  color: $primaryText;
+  border: 1px solid $borderInput;
+  padding: 3px 5px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $primary;
+  }
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 3px $primary;
+  }
+
+}
+
+.select {
+  position: relative;
+}
+
+.dropDownSvg {
+  position: absolute;
+  color: $primaryText;
+  z-index: 20;
+  width: 10px;
+  @include position-vertical-svg;
+  right: 10%;
+  transition: all .5s;
+}
+
+.activeDropSvg {
+  rotate: 180deg;
+  top: 0;
+}
+
+.dropDownSelect {
+  position: absolute;
+  bottom: 100%;
+  @include flex(center, start);
+  flex-direction: column;
+  background: $white;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  transition: all .5s;
+}
+
+.activeSelect {
+  height: 120px;
+}
+
+.selectItem {
+  padding: 5px 10px;
+  width: 100%;
+  color: $primaryText;
+  cursor: pointer;
+
+  &:hover {
+    background: $selectItem;
+  }
+}

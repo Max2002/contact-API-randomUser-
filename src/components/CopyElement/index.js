@@ -5,7 +5,7 @@ import Hint from '../Hint';
 import { CopiedSvg, CopySvg } from '../../assets/icons';
 import st from './styles.module.scss';
 
-export default function CopyElement({ content, link }) {
+export default function CopyElement({ content, link, className }) {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = () => {
@@ -26,7 +26,7 @@ export default function CopyElement({ content, link }) {
   }, [isCopied]);
 
   return (
-    <div className={st.contact}>
+    <div className={clsx(st.contact, className)}>
       <Hint label={isCopied ? 'Copied' : 'Copy'}>
         {isCopied ? (
           <CopiedSvg className={clsx(st.copiesSvg, st.copied)} />
@@ -48,9 +48,11 @@ export default function CopyElement({ content, link }) {
 CopyElement.defaultProps = {
   content: '',
   link: '',
+  className: '',
 };
 
 CopyElement.propTypes = {
   content: PropTypes.string,
   link: PropTypes.string,
+  className: PropTypes.string,
 };

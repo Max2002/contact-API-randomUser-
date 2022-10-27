@@ -29,13 +29,13 @@ const myProfile = (state = initialState, { type, payload }) => {
       };
     }
     case GET_MY_PROFILE_ERROR: {
-      return { ...state, payload, loading: true };
+      return { ...state, error: payload, loading: true };
     }
     case MY_PROFILE_LOG_OUT: {
       return { ...initialState, authKey: null };
     }
     default:
-      return initialState;
+      return state;
   }
 };
 
