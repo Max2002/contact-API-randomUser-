@@ -366,3 +366,26 @@
     background: $selectItem;
   }
 }
+
+/* Card contacts */
+.cardContent {
+  @include flex(center, start);
+  flex-direction: column;
+  padding: 0 30px 30px 30px;
+}
+
+.fullNameCard {
+  font-weight: 500;
+  color: $primary;
+  padding-bottom: 15px;
+  font-size: $fontSizePrimary;
+  cursor: pointer;
+
+  span {
+    color: $messageInput;
+  }
+}
+
+.natCard {
+  margin-top: 20px;
+}

@@ -13,7 +13,6 @@ import {
   ManIconSvg,
   SignInSvg,
   LogOutSvg,
-  HomeSvg,
   ContactsSvg,
 } from '../../assets/icons';
 import {

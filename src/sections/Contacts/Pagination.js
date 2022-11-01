@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
+import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { Button } from '../../components';
 import { ArrowNextSvg, ArrowPrevSvg, DropDownSvg } from '../../assets/icons';
 import st from './styles.module.scss';
@@ -9,6 +10,7 @@ export default function Pagination({ total, setSlices }) {
   const [contactsOnPage, setContactsOnPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeDropDown, setActiveDropDown] = useState(false);
+  const widthDevice = useDeviceWidth();
   const refSelect = useRef(null);
   const amountPages = total / contactsOnPage;
   const pages = Array.from({ length: amountPages - 2 }, (_, k) => k + 2);
@@ -104,45 +106,56 @@ export default function Pagination({ total, setSlices }) {
       >
         <ArrowNextSvg />
       </Button>
-      <div className={st.selectWrapper}>
-        <div
-          className={clsx(st.dropDownSelect, {
-            [st.activeSelect]: activeDropDown,
-          })}
-        >
-          <span className={st.selectItem} onClick={() => setContactsOnPage(10)}>
-            10 / page
-          </span>
-          <span className={st.selectItem} onClick={() => setContactsOnPage(20)}>
-            20 / page
-          </span>
-          <span className={st.selectItem} onClick={() => setContactsOnPage(50)}>
-            50 / page
-          </span>
-          <span
-            className={st.selectItem}
-            onClick={() => setContactsOnPage(100)}
-          >
-            100 / page
-          </span>
-        </div>
-        <div className={st.select}>
-          <DropDownSvg
-            className={clsx(st.dropDownSvg, {
-              [st.activeDropSvg]: activeDropDown,
+      {widthDevice > 568 && (
+        <div className={st.selectWrapper}>
+          <div
+            className={clsx(st.dropDownSelect, {
+              [st.activeSelect]: activeDropDown,
             })}
-          />
-          <input
-            className={st.selectField}
-            ref={refSelect}
-            type="text"
-            name="selectPage"
-            value={`${contactsOnPage} / page`}
-            readOnly
-            onClick={handleActiveDropDown}
-          />
+          >
+            <span
+              className={st.selectItem}
+              onClick={() => setContactsOnPage(10)}
+            >
+              10 / page
+            </span>
+            <span
+              className={st.selectItem}
+              onClick={() => setContactsOnPage(20)}
+            >
+              20 / page
+            </span>
+            <span
+              className={st.selectItem}
+              onClick={() => setContactsOnPage(50)}
+            >
+              50 / page
+            </span>
+            <span
+              className={st.selectItem}
+              onClick={() => setContactsOnPage(100)}
+            >
+              100 / page
+            </span>
+          </div>
+          <div className={st.select}>
+            <DropDownSvg
+              className={clsx(st.dropDownSvg, {
+                [st.activeDropSvg]: activeDropDown,
+              })}
+            />
+            <input
+              className={st.selectField}
+              ref={refSelect}
+              type="text"
+              name="selectPage"
+              value={`${contactsOnPage} / page`}
+              readOnly
+              onClick={handleActiveDropDown}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

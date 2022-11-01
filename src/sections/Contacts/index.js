@@ -26,7 +26,11 @@ export default function Contacts() {
     dispatch(getContacts(AMOUNT_PAGES, AMOUNT_CONTACTS));
 
   const handleViewContacts = () => setViewContacts(!viewContacts);
-  const updateContacts = () => dispatchContacts();
+  const updateContacts = () => {
+    dispatchContacts();
+    setSliceContacts({ from: 0, to: 10 });
+    setFilterContacts([]);
+  };
 
   useEffect(() => {
     dispatchContacts();
@@ -124,7 +128,7 @@ export default function Contacts() {
         filterNat={filterNat}
         nationalities={nationalities}
       />
-      <Main contacts={resContacts} />
+      <Main contacts={resContacts} flagView={viewContacts} />
       <Statistic contacts={filterOrNotContacts} />
       <Pagination total={contacts.length} setSlices={setSliceContacts} />
     </Container>
