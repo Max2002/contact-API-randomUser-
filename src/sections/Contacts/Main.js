@@ -1,15 +1,15 @@
 import moment from 'moment';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { CopyElement, Table } from '../../components';
+import { CopyElement, Table, ContactCard } from '../../components';
 import { getContact } from '../../redux/actionCreator/getViewContact';
 import { useDeviceWidth } from '../../hooks/useDeviceWidth';
 import { NoDataSvg } from '../../assets/icons';
 import { CONTACTS } from '../../constans/routes';
 import { AMOUNT_CONTACTS, AMOUNT_PAGES } from '../../constans/amountContacts';
 import st from './styles.module.scss';
-import ContactCard from '../../components/ContactCard';
 
 export default function Main({ contacts, flagView }) {
   const navigate = useNavigate();
@@ -34,23 +34,26 @@ export default function Main({ contacts, flagView }) {
       const dateFormat = moment(date).format('dddd, MM/DD/yyyy, h:MM:ss A');
 
       if (flagView) {
-        const personalInfoContact = {
-          avatar: picture.large,
-          fullName: `${title}. ${first} ${last}`,
-          age,
-          email,
-          phone,
-          address,
-          nat,
-        };
-
         return (
           <ContactCard
             key={uuid}
-            contact={personalInfoContact}
+            img={picture.large}
             contactView={contactView}
             id={uuid}
-          />
+          >
+            <div className={st.cardContent}>
+              <p
+                className={clsx(st.fullNameCard, st.dashedLine)}
+                onClick={() => contactView(uuid)}
+              >
+                {title}. {first} {last} <span>({age} years)</span>
+              </p>
+              <CopyElement content={email} link={`mailto:${email}`} />
+              <CopyElement content={phone} link={`tel:${phone}`} />
+              <CopyElement content={address} />
+              <p className={clsx(st.nat, st.natCard)}>{nat}</p>
+            </div>
+          </ContactCard>
         );
       }
 
@@ -75,9 +78,7 @@ export default function Main({ contacts, flagView }) {
           key: 'birthday',
           content: (
             <span>
-              {dateFormat}
-              <br />
-              {age} years
+              {dateFormat} <br /> {age} years
             </span>
           ),
         },
@@ -102,10 +103,7 @@ export default function Main({ contacts, flagView }) {
   };
 
   const tableColumns = [
-    {
-      title: 'Avatar',
-      key: 'avatar',
-    },
+    { title: 'Avatar', key: 'avatar' },
     {
       title: 'Full name',
       key: 'fullName',
@@ -116,26 +114,11 @@ export default function Main({ contacts, flagView }) {
             : first.sort.localeCompare(second.sort),
         ),
     },
-    {
-      title: 'Birthday',
-      key: 'birthday',
-    },
-    {
-      title: 'Email',
-      key: 'email',
-    },
-    {
-      title: 'Phone',
-      key: 'phone',
-    },
-    {
-      title: 'Location',
-      key: 'location',
-    },
-    {
-      title: 'Nationality',
-      key: 'nat',
-    },
+    { title: 'Birthday', key: 'birthday' },
+    { title: 'Email', key: 'email' },
+    { title: 'Phone', key: 'phone' },
+    { title: 'Location', key: 'location' },
+    { title: 'Nationality', key: 'nat' },
   ];
 
   if (contacts[0] === 'No data') {

@@ -1,49 +1,33 @@
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import CopyElement from '../CopyElement';
 import st from './styles.module.scss';
 
-export default function ContactCard({ contact, contactView, id }) {
-  const { avatar, fullName, age, email, phone, address, nat } = contact;
-
+export default function ContactCard({ img, contactView, id, children }) {
   return (
     <div className={st.contact}>
-      <img
-        className={st.blocksAvatar}
-        src={avatar}
-        alt={fullName}
-        onClick={() => contactView(id)}
-      />
-      <div className={st.personalInfo}>
-        <p
-          className={clsx(st.fullNameBlockView, st.dashedLine)}
+      {img && (
+        <img
+          className={st.blocksAvatar}
+          src={img}
+          alt={img}
           onClick={() => contactView(id)}
-        >
-          {fullName} <span>({age} years)</span>
-        </p>
-        <CopyElement content={email} link={`mailto:${email}`} />
-        <CopyElement content={phone} link={`tel:${phone}`} />
-        <CopyElement content={address} />
-        <p className={clsx(st.nat, st.natBlocksView)}>{nat}</p>
-      </div>
+        />
+      )}
+      {children}
     </div>
   );
 }
 
 ContactCard.defaultProps = {
   id: null,
+  img: null,
 };
 
 ContactCard.propTypes = {
   contactView: PropTypes.func.isRequired,
   id: PropTypes.string,
-  contact: PropTypes.shape({
-    avatar: PropTypes.string,
-    fullName: PropTypes.string,
-    age: PropTypes.number,
-    email: PropTypes.string,
-    phone: PropTypes.string,
-    address: PropTypes.string,
-    nat: PropTypes.string,
-  }).isRequired,
+  img: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
 };

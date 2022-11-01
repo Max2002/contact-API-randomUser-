@@ -6,3 +6,4 @@ export { default as CopyElement } from './CopyElement';
 export { default as Table } from './Table';
 export { default as Container } from './Container';
 export { default as LoadingElement } from './LoadingElement';
+export { default as ContactCard } from './ContactCard';
