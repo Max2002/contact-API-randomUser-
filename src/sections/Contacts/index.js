@@ -26,7 +26,11 @@ export default function Contacts() {
     dispatch(getContacts(AMOUNT_PAGES, AMOUNT_CONTACTS));
 
   const handleViewContacts = () => setViewContacts(!viewContacts);
-  const updateContacts = () => dispatchContacts();
+  const updateContacts = () => {
+    dispatchContacts();
+    setSliceContacts({ from: 0, to: 10 });
+    setFilterContacts([]);
+  };
 
   useEffect(() => {
     dispatchContacts();
