@@ -26,8 +26,5 @@ ContactCard.propTypes = {
   contactView: PropTypes.func.isRequired,
   id: PropTypes.string,
   img: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.node),
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };

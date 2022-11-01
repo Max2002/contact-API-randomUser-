@@ -33,7 +33,7 @@ export default function Main({ contacts, flagView }) {
       const address = `/${country}/ ${street.number} ${street.name}, ${city}, ${state} ${postcode}`;
       const dateFormat = moment(date).format('dddd, MM/DD/yyyy, h:MM:ss A');
 
-      if (flagView) {
+      if (widthDevice < 992 || flagView) {
         return (
           <ContactCard
             key={uuid}
